@@ -244,7 +244,7 @@ def process(msg, allowed, code):
 def acknowledge(result=None, error=None, to=None, subject=""):
     host = os.environ.get("CARNETS_SMTP_HOST")
     user = os.environ.get("CARNETS_SMTP_USER") or os.environ.get("CARNETS_IMAP_USER")
-    password = os.environ.get("CARNETS_SMTP_PASSWORD") or os.environ.get("CARNETS_IMAP_PASSWORD")
+    password = re.sub(r"\s+", "", os.environ.get("CARNETS_SMTP_PASSWORD") or os.environ.get("CARNETS_IMAP_PASSWORD") or "")
     if not (host and user and password and to):
         return
     ack = EmailMessage()
@@ -271,6 +271,9 @@ def fetch_imap(allowed):
     user = os.environ.get("CARNETS_IMAP_USER")
     password = os.environ.get("CARNETS_IMAP_PASSWORD")
     to = os.environ.get("CARNETS_TO", "").strip()
+    if password:
+        # Google affiche ses mots de passe d'application en blocs séparés par des espaces
+        password = re.sub(r"\s+", "", password)
     if not (host and user and password and allowed):
         print("Boîte des Carnets non configurée : rien à faire.")
         return
