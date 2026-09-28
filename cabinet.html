@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Le cabinet — Maître Essra Siam, avocate au Barreau de Paris</title>
+  <title data-i18n="t.cabinet">Le cabinet — Maître Essra Siam, avocate au Barreau de Paris</title>
   <meta name="description" content="Quatre années au Sénat, la justice pénale vue de l'intérieur, un cabinet ouvert en 2025 : le parcours et les convictions de Maître Essra Siam, avocate au Barreau de Paris.">
   <!-- VERSION DÉMO : retirer la balise robots ci-dessous lors de la mise en ligne sur siamavocat.fr -->
   <meta name="robots" content="noindex, nofollow">
@@ -18,9 +18,10 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=Jost:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>(function(d){d.classList.add("js");try{var q=new URLSearchParams(location.search).get("lang"),l=q||localStorage.getItem("lang");if(l==="en"||l==="ar"){d.classList.add("i18n-wait");d.lang=l;d.dir=l==="ar"?"rtl":"ltr";setTimeout(function(){d.classList.remove("i18n-wait")},2500);}}catch(e){}})(document.documentElement);</script>
+  <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -34,22 +35,26 @@
   <symbol id="i-balance" viewBox="0 0 48 48"><path d="M24 11v29M15 41h18M9 13h30"/><circle cx="24" cy="9" r="2"/><path d="M9 13L3.5 26.5M9 13l5.5 13.5M3 26.5a6 6 0 0 0 12 0z"/><path d="M39 13l-5.5 13.5M39 13l5.5 13.5M33 26.5a6 6 0 0 0 12 0z"/></symbol>
 </svg>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
+<a class="skip-link" href="#contenu" data-i18n="c.skip">Aller au contenu</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil">
+    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil" data-i18n-attr="aria-label:c.brandAria">
       <img src="assets/img/embleme.png" alt="" width="270" height="360">
-      <span class="brand-text"><span class="brand-name">ESSRA SIAM</span><span class="brand-sub">Avocate à la Cour</span></span>
+      <span class="brand-text"><span class="brand-name" data-i18n="c.brandName">ESSRA SIAM</span><span class="brand-sub" data-i18n="c.brandSub">Avocate à la Cour</span></span>
     </a>
-    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="cabinet.html" aria-current="page">Le cabinet</a>
-      <a href="domaines.html">Domaines d'intervention</a>
-      <a class="nav-ar" href="index.html#ar" lang="ar">العربية</a>
-      <a class="btn btn--solid" href="index.html#rendez-vous">Prendre rendez-vous</a>
-      <div class="nav-contact"><a href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr">E-mail</a></div>
+    <nav class="nav" id="nav" aria-label="Navigation principale" data-i18n-attr="aria-label:c.navAria">
+      <a href="cabinet.html" aria-current="page" data-i18n="c.nav.cabinet">Le cabinet</a>
+      <a href="domaines.html" data-i18n="c.nav.domaines">Domaines d'intervention</a>
+      <a class="btn btn--solid" href="index.html#rendez-vous" data-i18n="c.nav.rdv">Prendre rendez-vous</a>
+      <div class="nav-contact"><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr" data-i18n="c.nav.email">E-mail</a></div>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Langue · Language · اللغة">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -58,13 +63,13 @@
   <section class="page-hero page-hero--split">
     <div class="wrap">
       <div>
-        <p class="breadcrumb reveal"><a href="index.html">Accueil</a> &nbsp;/&nbsp; Le cabinet</p>
-        <p class="eyebrow reveal">À propos</p>
-        <h1 class="reveal reveal-d1">Je n'ai pas choisi la profession d'avocat <em>par hasard.</em></h1>
-        <p class="lead reveal reveal-d2">Mon parcours m'a d'abord conduite là où le droit se pense, se discute et se construit.</p>
+        <p class="breadcrumb reveal" data-i18n="cb.bc"><a href="index.html">Accueil</a> &nbsp;/&nbsp; Le cabinet</p>
+        <p class="eyebrow reveal" data-i18n="cb.eyebrow">À propos</p>
+        <h1 class="reveal reveal-d1" data-i18n="cb.h1">Je n'ai pas choisi la profession d'avocat <em>par hasard.</em></h1>
+        <p class="lead reveal reveal-d2" data-i18n="cb.lead">Mon parcours m'a d'abord conduite là où le droit se pense, se discute et se construit.</p>
       </div>
       <div class="reveal reveal-d1">
-        <div class="frame"><img src="assets/img/portrait-studio.jpg" alt="Portrait de Maître Essra Siam" width="800" height="800" fetchpriority="high"></div>
+        <div class="frame"><img src="assets/img/portrait-studio.jpg" alt="Portrait de Maître Essra Siam" data-i18n-attr="alt:c.altPortrait" width="800" height="800" fetchpriority="high"></div>
       </div>
     </div>
   </section>
@@ -73,50 +78,50 @@
     <div class="wrap wrap--narrow">
 
       <section class="chapter reveal">
-        <div class="chapter-head"><span class="chapter-num">I</span><h2>Là où la loi se fabrique</h2></div>
-        <p class="dropcap">J'ai travaillé pendant quatre années au Sénat en qualité de collaboratrice parlementaire. J'y ai découvert la fabrication de la loi de l'intérieur : le travail avec les parlementaires, le gouvernement, les débats, les amendements, les arbitrages, mais aussi tout ce qui précède l'adoption d'un texte et sa concrétisation politique.</p>
-        <blockquote><p>Derrière une règle, il y a toujours une orientation, un choix de société, une volonté politique et, au bout de la chaîne, des personnes auxquelles cette règle va s'appliquer.</p></blockquote>
+        <div class="chapter-head"><span class="chapter-num">I</span><h2 data-i18n="cb.c1h">Là où la loi se fabrique</h2></div>
+        <p class="dropcap" data-i18n="cb.c1p">J'ai travaillé pendant quatre années au Sénat en qualité de collaboratrice parlementaire. J'y ai découvert la fabrication de la loi de l'intérieur : le travail avec les parlementaires, le gouvernement, les débats, les amendements, les arbitrages, mais aussi tout ce qui précède l'adoption d'un texte et sa concrétisation politique.</p>
+        <blockquote><p data-i18n="cb.c1q">Derrière une règle, il y a toujours une orientation, un choix de société, une volonté politique et, au bout de la chaîne, des personnes auxquelles cette règle va s'appliquer.</p></blockquote>
       </section>
 
       <section class="chapter reveal">
-        <div class="chapter-head"><span class="chapter-num">II</span><h2>De l'autre côté de la porte</h2></div>
-        <p>C'est aussi à cette période que j'ai commencé à m'intéresser de très près aux questions pénitentiaires et à la justice pénale. J'ai eu l'occasion d'entrer dans de nombreux établissements pénitentiaires et de rencontrer ceux qui vivent la justice depuis l'autre côté de la porte. Cela a profondément marqué ma manière de regarder le droit et, plus tard, ma manière d'exercer.</p>
-        <p>À l'École des avocats, j'ai voulu poursuivre cette approche très concrète de la profession. J'ai choisi d'effectuer un stage d'immersion à la maison d'arrêt de La Santé. Je voulais comprendre la détention autrement que dans les manuels, la presse, les faits sordides, voir ce que devient une décision de justice une fois prononcée et comprendre ce que représente, dans la réalité, la privation de liberté.</p>
+        <div class="chapter-head"><span class="chapter-num">II</span><h2 data-i18n="cb.c2h">De l'autre côté de la porte</h2></div>
+        <p data-i18n="cb.c2p1">C'est aussi à cette période que j'ai commencé à m'intéresser de très près aux questions pénitentiaires et à la justice pénale. J'ai eu l'occasion d'entrer dans de nombreux établissements pénitentiaires et de rencontrer ceux qui vivent la justice depuis l'autre côté de la porte. Cela a profondément marqué ma manière de regarder le droit et, plus tard, ma manière d'exercer.</p>
+        <p data-i18n="cb.c2p2">À l'École des avocats, j'ai voulu poursuivre cette approche très concrète de la profession. J'ai choisi d'effectuer un stage d'immersion à la maison d'arrêt de La Santé. Je voulais comprendre la détention autrement que dans les manuels, la presse, les faits sordides, voir ce que devient une décision de justice une fois prononcée et comprendre ce que représente, dans la réalité, la privation de liberté.</p>
         <figure class="tall">
-          <img src="assets/img/marches-palais.jpg" alt="Maître Siam, de dos, descendant les marches du Palais de justice" width="675" height="1200" loading="lazy">
-          <figcaption>Palais de justice, Paris.</figcaption>
+          <img src="assets/img/marches-palais.jpg" alt="Maître Siam, de dos, descendant les marches du Palais de justice" data-i18n-attr="alt:cb.c2alt" width="675" height="1200" loading="lazy">
+          <figcaption data-i18n="cb.c2cap">Palais de justice, Paris.</figcaption>
         </figure>
       </section>
 
       <section class="chapter reveal">
-        <div class="chapter-head"><span class="chapter-num">III</span><h2>Comprendre le juge</h2></div>
-        <p>J'ai ensuite travaillé plusieurs mois auprès des magistrats de la Direction des affaires criminelles et des grâces du ministère de la Justice. Cette expérience a été enrichissante. Elle m'a permis de mieux comprendre le raisonnement des juges, leurs contraintes, leur manière d'appréhender un dossier et, surtout, de mesurer à quel point le dialogue avec eux est essentiel.</p>
-        <blockquote><p>J'en ai gardé une conviction très simple : un avocat ne défend pas mieux son client en parlant plus fort. Il le défend mieux lorsqu'il connaît parfaitement son dossier, lorsqu'il comprend son interlocuteur et lorsqu'il sait faire entendre, au bon moment, ce que le dossier ne dit pas toujours de lui-même.</p></blockquote>
+        <div class="chapter-head"><span class="chapter-num">III</span><h2 data-i18n="cb.c3h">Comprendre le juge</h2></div>
+        <p data-i18n="cb.c3p">J'ai ensuite travaillé plusieurs mois auprès des magistrats de la Direction des affaires criminelles et des grâces du ministère de la Justice. Cette expérience a été enrichissante. Elle m'a permis de mieux comprendre le raisonnement des juges, leurs contraintes, leur manière d'appréhender un dossier et, surtout, de mesurer à quel point le dialogue avec eux est essentiel.</p>
+        <blockquote><p data-i18n="cb.c3q">J'en ai gardé une conviction très simple : un avocat ne défend pas mieux son client en parlant plus fort. Il le défend mieux lorsqu'il connaît parfaitement son dossier, lorsqu'il comprend son interlocuteur et lorsqu'il sait faire entendre, au bon moment, ce que le dossier ne dit pas toujours de lui-même.</p></blockquote>
       </section>
 
       <section class="chapter reveal">
-        <div class="chapter-head"><span class="chapter-num">IV</span><h2>Un cabinet à mon image</h2></div>
-        <p>En novembre 2025, j'ai fait le choix d'ouvrir mon propre cabinet et d'exercer à titre individuel. Je voulais construire ma pratique comme je l'entendais : choisir mes dossiers, connaître réellement mes clients, rester accessible et ne jamais transformer la relation entre l'avocat et celui qu'il défend en simple numéro de dossier.</p>
-        <p>J'exerce aujourd'hui principalement en <a href="domaines.html#penal">défense pénale</a>, <a href="domaines.html#etrangers">droit des étrangers</a>, <a href="domaines.html#travail">droit du travail</a> et <a href="domaines.html#famille">droit de la famille</a>.</p>
-        <p>Je suis avocate, mais je suis aussi une mère, une épouse, une amie. Je connais les contraintes d'une vie qui ne s'arrête pas lorsque surgit une procédure, une audience ou une difficulté administrative. Je sais qu'une affaire judiciaire n'arrive jamais seule : autour, il y a un travail, une famille, des enfants, des peurs, parfois des années de vie qui peuvent être bouleversées par une décision.</p>
+        <div class="chapter-head"><span class="chapter-num">IV</span><h2 data-i18n="cb.c4h">Un cabinet à mon image</h2></div>
+        <p data-i18n="cb.c4p1">En novembre 2025, j'ai fait le choix d'ouvrir mon propre cabinet et d'exercer à titre individuel. Je voulais construire ma pratique comme je l'entendais : choisir mes dossiers, connaître réellement mes clients, rester accessible et ne jamais transformer la relation entre l'avocat et celui qu'il défend en simple numéro de dossier.</p>
+        <p data-i18n="cb.c4p2">J'exerce aujourd'hui principalement en <a href="domaines.html#penal">défense pénale</a>, <a href="domaines.html#etrangers">droit des étrangers</a>, <a href="domaines.html#travail">droit du travail</a> et <a href="domaines.html#famille">droit de la famille</a>.</p>
+        <p data-i18n="cb.c4p3">Je suis avocate, mais je suis aussi une mère, une épouse, une amie. Je connais les contraintes d'une vie qui ne s'arrête pas lorsque surgit une procédure, une audience ou une difficulté administrative. Je sais qu'une affaire judiciaire n'arrive jamais seule : autour, il y a un travail, une famille, des enfants, des peurs, parfois des années de vie qui peuvent être bouleversées par une décision.</p>
         <figure class="tall">
-          <img src="assets/img/pas-a-pas.jpg" alt="Deux avocates en robe gravissant les marches du Palais en tenant la main d'une petite fille" width="900" height="1200" loading="lazy">
-          <figcaption>Pas à pas.</figcaption>
+          <img src="assets/img/pas-a-pas.jpg" alt="Deux avocates en robe gravissant les marches du Palais en tenant la main d'une petite fille" data-i18n-attr="alt:cb.c4alt" width="900" height="1200" loading="lazy">
+          <figcaption data-i18n="cb.c4cap">Pas à pas.</figcaption>
         </figure>
-        <p>Je suis une avocate engagée dans les dossiers que j'accepte, disponible pour mes clients et attachée à une certaine idée de la défense : dire les choses avec franchise, ne jamais promettre ce que le droit ne permet pas de promettre, chercher une solution lorsqu'elle existe et se battre lorsqu'il faut se battre.</p>
-        <p class="closing">J'ai voulu mon cabinet à cette image. Un cabinet où l'on connaît le droit, évidemment. Mais surtout où l'on n'oublie jamais à qui il s'applique.</p>
-        <p class="signature">Essra Siam</p>
+        <p data-i18n="cb.c4p4">Je suis une avocate engagée dans les dossiers que j'accepte, disponible pour mes clients et attachée à une certaine idée de la défense : dire les choses avec franchise, ne jamais promettre ce que le droit ne permet pas de promettre, chercher une solution lorsqu'elle existe et se battre lorsqu'il faut se battre.</p>
+        <p class="closing" data-i18n="cb.closing">J'ai voulu mon cabinet à cette image. Un cabinet où l'on connaît le droit, évidemment. Mais surtout où l'on n'oublie jamais à qui il s'applique.</p>
+        <p class="signature" data-i18n="cb.sign">Essra Siam</p>
       </section>
 
     </div>
   </article>
 
-  <section class="section quote-light" aria-label="Citation">
+  <section class="section quote-light">
     <div class="wrap reveal">
       <span class="mark" aria-hidden="true">“</span>
       <blockquote>
-        <p>Si parfois nous semblions préférer la justice à notre pays, c'est que nous voulions seulement aimer notre pays dans la justice, comme nous voulions l'aimer dans la vérité et dans l'espoir. C'est en cela que nous nous séparions de vous, nous avions de l'exigence. Vous vous contentiez de servir la puissance de votre nation et nous rêvions de donner à la nôtre sa vérité.</p>
-        <cite>Albert Camus — <em>Lettres à un ami allemand</em></cite>
+        <p class="keep-italic" lang="fr" dir="ltr">Si parfois nous semblions préférer la justice à notre pays, c'est que nous voulions seulement aimer notre pays dans la justice, comme nous voulions l'aimer dans la vérité et dans l'espoir. C'est en cela que nous nous séparions de vous, nous avions de l'exigence. Vous vous contentiez de servir la puissance de votre nation et nous rêvions de donner à la nôtre sa vérité.</p>
+        <cite data-i18n="cb.camus">Albert Camus — <em>Lettres à un ami allemand</em></cite>
       </blockquote>
     </div>
   </section>
@@ -126,15 +131,15 @@
       <div class="pillars2">
         <div class="pillar-card reveal">
           <svg class="icon" aria-hidden="true"><use href="#i-columns"/></svg>
-          <h3>Expérience au Sénat</h3>
-          <p>Ancienne collaboratrice parlementaire au Sénat, Essra Siam a travaillé au plus près du processus législatif et de l'élaboration de textes. Cette expérience lui a donné une compréhension fine de la fabrication de la loi et de ses enjeux concrets.</p>
-          <p>Elle a choisi de devenir avocate pour être, désormais, de celles et ceux qui font vivre le droit au service des justiciables, sur le terrain, dans la réalité des dossiers.</p>
+          <h3 data-i18n="cb.senatH">Expérience au Sénat</h3>
+          <p data-i18n="cb.senatP1">Ancienne collaboratrice parlementaire au Sénat, Essra Siam a travaillé au plus près du processus législatif et de l'élaboration de textes. Cette expérience lui a donné une compréhension fine de la fabrication de la loi et de ses enjeux concrets.</p>
+          <p data-i18n="cb.senatP2">Elle a choisi de devenir avocate pour être, désormais, de celles et ceux qui font vivre le droit au service des justiciables, sur le terrain, dans la réalité des dossiers.</p>
         </div>
         <div class="pillar-card reveal reveal-d1">
           <svg class="icon" aria-hidden="true"><use href="#i-balance"/></svg>
-          <h3>Valeurs du cabinet</h3>
-          <p>Son travail se distingue par une attention particulière portée à la clarté, à la compréhension, et à la relation de confiance qu'elle entretient avec ses clients.</p>
-          <p class="lead" style="margin-top:26px">Clarté · Compréhension · Confiance</p>
+          <h3 data-i18n="cb.valH">Valeurs du cabinet</h3>
+          <p data-i18n="cb.valP">Son travail se distingue par une attention particulière portée à la clarté, à la compréhension, et à la relation de confiance qu'elle entretient avec ses clients.</p>
+          <p class="lead values" data-i18n="cb.valWords">Clarté · Compréhension · Confiance</p>
         </div>
       </div>
     </div>
@@ -143,44 +148,44 @@
   <section class="section section--deep" id="parcours">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="eyebrow">Parcours</p>
-        <h2>Du Sénat <em>au prétoire.</em></h2>
+        <p class="eyebrow" data-i18n="cb.pEyebrow">Parcours</p>
+        <h2 data-i18n="cb.pTitle">Du Sénat <em>au prétoire.</em></h2>
       </div>
       <div class="path-grid">
         <ol class="timeline">
           <li class="tl-item is-key reveal">
-            <span class="tl-year">Nov. 2025</span>
-            <div class="tl-body"><h3>Ouverture du cabinet</h3><p>Avocate au Barreau de Paris, exercice à titre individuel — Paris 16<sup>e</sup>.</p></div>
+            <span class="tl-year" data-i18n="tl1y">Nov. 2025</span>
+            <div class="tl-body"><h3 data-i18n="tl1h">Ouverture du cabinet</h3><p data-i18n="tl1p">Avocate au Barreau de Paris, exercice à titre individuel — Paris 16<sup>e</sup>.</p></div>
           </li>
           <li class="tl-item reveal">
             <span class="tl-year">2024 – 2025</span>
-            <div class="tl-body"><h3>École des avocats — HEDAC</h3><p>Stage d'immersion à la maison d'arrêt de La Santé. Plusieurs mois auprès des magistrats de la Direction des affaires criminelles et des grâces, ministère de la Justice.</p></div>
+            <div class="tl-body"><h3 data-i18n="tl2h">École des avocats — HEDAC</h3><p data-i18n="tl2p">Stage d'immersion à la maison d'arrêt de La Santé. Plusieurs mois auprès des magistrats de la Direction des affaires criminelles et des grâces, ministère de la Justice.</p></div>
           </li>
           <li class="tl-item reveal">
             <span class="tl-year">2025</span>
-            <div class="tl-body"><h3>KHIASMA Avocats · Grands Champs Ormillien &amp; Money</h3><p>Élève-avocate : stage final chez KHIASMA Avocats, puis au sein du cabinet Grands Champs Ormillien &amp; Money.</p></div>
+            <div class="tl-body"><h3>KHIASMA Avocats · Grands Champs Ormillien &amp; Money</h3><p data-i18n="tl3p">Élève-avocate : stage final chez KHIASMA Avocats, puis au sein du cabinet Grands Champs Ormillien &amp; Money.</p></div>
           </li>
           <li class="tl-item reveal">
             <span class="tl-year">2020 – 2024</span>
-            <div class="tl-body"><h3>Sénat</h3><p>Collaboratrice parlementaire : Commission des lois, travail législatif d'un sénateur.</p></div>
+            <div class="tl-body"><h3 data-i18n="tl4h">Sénat</h3><p data-i18n="tl4p">Collaboratrice parlementaire : Commission des lois, travail législatif d'un sénateur.</p></div>
           </li>
           <li class="tl-item reveal">
             <span class="tl-year">2017 – 2020</span>
-            <div class="tl-body"><h3>Cabinet de Maître Marcel Ceccaldi</h3><p>Stagiaire : droit international public, droit public, droit des affaires.</p></div>
+            <div class="tl-body"><h3 data-i18n="tl5h">Cabinet de Maître Marcel Ceccaldi</h3><p data-i18n="tl5p">Stagiaire : droit international public, droit public, droit des affaires.</p></div>
           </li>
           <li class="tl-item reveal">
-            <span class="tl-year">Formation</span>
-            <div class="tl-body"><h3>Université Paris Nanterre</h3><p>Master Droit international et contentieux européen. Institut de préparation à l'administration générale.</p></div>
+            <span class="tl-year" data-i18n="tl6y">Formation</span>
+            <div class="tl-body"><h3 data-i18n="tl6h">Université Paris Nanterre</h3><p data-i18n="tl6p">Master Droit international et contentieux européen. Institut de préparation à l'administration générale.</p></div>
           </li>
         </ol>
         <aside class="honors reveal reveal-d1">
-          <h3>Au-delà du droit</h3>
+          <h3 data-i18n="cb.honH">Au-delà du droit</h3>
           <ul>
-            <li><small>Parole</small>Formatrice en art oratoire, prise de parole en public et rédaction de discours</li>
-            <li><small>Lettres</small>Jurée du Prix du Roman des Étudiants France Culture – Télérama</li>
-            <li><small>Cinéma</small>Jurée du Prix Cinéma des Étudiants France Culture</li>
-            <li><small>Culture</small>Relations publiques du Prix Littéraire des Grandes Écoles, 2017 – 2023</li>
-            <li><small>Dialogue</small>Engagement associatif au sein de Coexister et des Ambassadeurs de la Jeunesse</li>
+            <li data-i18n="hon1"><small>Parole</small>Formatrice en art oratoire, prise de parole en public et rédaction de discours</li>
+            <li data-i18n="hon2"><small>Lettres</small>Jurée du Prix du Roman des Étudiants France Culture – Télérama</li>
+            <li data-i18n="hon3"><small>Cinéma</small>Jurée du Prix Cinéma des Étudiants France Culture</li>
+            <li data-i18n="hon4"><small>Culture</small>Relations publiques du Prix Littéraire des Grandes Écoles, 2017 – 2023</li>
+            <li data-i18n="hon5"><small>Dialogue</small>Engagement associatif au sein de Coexister et des Ambassadeurs de la Jeunesse</li>
           </ul>
         </aside>
       </div>
@@ -190,14 +195,14 @@
   <section class="contact-band on-dark">
     <div class="wrap">
       <div class="reveal">
-        <p class="eyebrow">Rendez-vous</p>
-        <h2>Parlons de <em>votre situation.</em></h2>
-        <p>Par téléphone, par WhatsApp ou par e-mail : choisissez ce qui vous est le plus simple.</p>
+        <p class="eyebrow" data-i18n="c.band.eyebrow">Rendez-vous</p>
+        <h2 data-i18n="c.band.title">Parlons de <em>votre situation.</em></h2>
+        <p data-i18n="c.band.text">Par téléphone, par WhatsApp ou par e-mail : choisissez ce qui vous est le plus simple.</p>
       </div>
       <div class="actions reveal reveal-d1">
-        <a class="btn btn--gold" href="index.html#rendez-vous">Préparer ma demande <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a class="btn" href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-        <a class="btn" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
+        <a class="btn btn--gold" href="index.html#rendez-vous"><span data-i18n="c.band.prepare">Préparer ma demande</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." data-i18n-attr="data-wa:c.wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.mb.wa">WhatsApp</span></a>
+        <a class="btn" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
       </div>
     </div>
   </section>
@@ -210,39 +215,39 @@
       <div>
         <div class="footer-brand">
           <img src="assets/img/embleme-or.png" alt="" width="270" height="360" loading="lazy">
-          <div><span class="footer-name">ESSRA SIAM</span><small>Avocate au Barreau de Paris</small></div>
+          <div><span class="footer-name" data-i18n="c.brandName">ESSRA SIAM</span><small data-i18n="c.footer.sub">Avocate au Barreau de Paris</small></div>
         </div>
         <p class="footer-ar" lang="ar" dir="rtl">مكتب المحامية إسراء صيام للمحاماة والاستشارات القانونية في خدمتكم</p>
       </div>
       <div>
-        <h4>Cabinet</h4>
+        <h4 data-i18n="r.office">Cabinet</h4>
         <ul>
-          <li>20 rue de Longchamp, 75116 Paris</li>
-          <li><a href="tel:+33743627900">07 43 62 79 00</a></li>
-          <li><a href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></li>
+          <li><span class="ltr">20 rue de Longchamp, 75116 Paris</span></li>
+          <li><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a></li>
+          <li><a class="ltr" href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></li>
         </ul>
       </div>
       <div>
-        <h4>Le site</h4>
+        <h4 data-i18n="c.footer.site">Le site</h4>
         <ul>
-          <li><a href="cabinet.html">Le cabinet</a></li>
-          <li><a href="domaines.html">Domaines d'intervention</a></li>
-          <li><a href="index.html#rendez-vous">Prendre rendez-vous</a></li>
-          <li><a href="index.html#ar" lang="ar">العربية</a></li>
+          <li><a href="cabinet.html" data-i18n="c.nav.cabinet">Le cabinet</a></li>
+          <li><a href="domaines.html" data-i18n="c.nav.domaines">Domaines d'intervention</a></li>
+          <li><a href="index.html#rendez-vous" data-i18n="c.nav.rdv">Prendre rendez-vous</a></li>
+          <li><a href="mentions-legales.html" data-i18n="c.footer.legal">Mentions légales</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span data-year>2026</span> Essra Siam — Avocate au Barreau de Paris</span>
-      <nav aria-label="Informations légales"><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#donnees">Données personnelles</a></nav>
+      <span>© <span data-year>2026</span> <span data-i18n="c.footer.copy">Essra Siam — Avocate au Barreau de Paris</span></span>
+      <nav aria-label="Informations légales" data-i18n-attr="aria-label:c.footer.legal"><a href="mentions-legales.html" data-i18n="c.footer.legal">Mentions légales</a><a href="mentions-legales.html#donnees" data-i18n="c.footer.privacy">Données personnelles</a></nav>
     </div>
   </div>
 </footer>
 
-<nav class="mobile-bar" aria-label="Contact rapide">
-  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
-  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement,"><svg aria-hidden="true"><use href="#i-mail"/></svg>E-mail</a>
+<nav class="mobile-bar" aria-label="Contact rapide" data-i18n-attr="aria-label:c.mb.aria">
+  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
+  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." data-i18n-attr="data-wa:c.wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.mb.wa">WhatsApp</span></a>
+  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement," data-i18n-attr="data-mail-subject:msg.subject; data-mail-body:c.mailBody"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="c.mb.mail">E-mail</span></a>
 </nav>
 
 </body>

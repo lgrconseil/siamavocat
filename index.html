@@ -1,15 +1,17 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Maître Essra Siam — Avocate au Barreau de Paris · Défense pénale, droit des étrangers</title>
+  <title data-i18n="t.home">Maître Essra Siam — Avocate au Barreau de Paris · Défense pénale, droit des étrangers</title>
   <meta name="description" content="Maître Essra Siam, avocate au Barreau de Paris (16e) : défense pénale, droit des étrangers, droit du travail et droit de la famille. Consultations en français, en arabe et en anglais. Rendez-vous par téléphone, WhatsApp ou e-mail.">
   <!-- VERSION DÉMO : retirer la balise robots ci-dessous lors de la mise en ligne sur siamavocat.fr -->
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://www.siamavocat.fr/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:locale:alternate" content="ar_AR">
   <meta property="og:title" content="Maître Essra Siam — Avocate à la Cour">
   <meta property="og:description" content="Défense pénale, droit des étrangers, droit du travail, droit de la famille. Paris 16e.">
   <meta property="og:image" content="https://lgrconseil.github.io/siamavocat/assets/img/og-image.jpg">
@@ -18,9 +20,10 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=Jost:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>(function(d){d.classList.add("js");try{var q=new URLSearchParams(location.search).get("lang"),l=q||localStorage.getItem("lang");if(l==="en"||l==="ar"){d.classList.add("i18n-wait");d.lang=l;d.dir=l==="ar"?"rtl":"ltr";setTimeout(function(){d.classList.remove("i18n-wait")},2500);}}catch(e){}})(document.documentElement);</script>
+  <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script type="application/ld+json">
   {
@@ -65,22 +68,26 @@
   <symbol id="i-equal" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M15.5 20h17M15.5 28h17"/></symbol>
 </svg>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
+<a class="skip-link" href="#contenu" data-i18n="c.skip">Aller au contenu</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil">
+    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil" data-i18n-attr="aria-label:c.brandAria">
       <img src="assets/img/embleme.png" alt="" width="270" height="360">
-      <span class="brand-text"><span class="brand-name">ESSRA SIAM</span><span class="brand-sub">Avocate à la Cour</span></span>
+      <span class="brand-text"><span class="brand-name" data-i18n="c.brandName">ESSRA SIAM</span><span class="brand-sub" data-i18n="c.brandSub">Avocate à la Cour</span></span>
     </a>
-    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="cabinet.html">Le cabinet</a>
-      <a href="domaines.html">Domaines d'intervention</a>
-      <a class="nav-ar" href="#ar" lang="ar">العربية</a>
-      <a class="btn btn--solid" href="#rendez-vous">Prendre rendez-vous</a>
-      <div class="nav-contact"><a href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr">E-mail</a></div>
+    <nav class="nav" id="nav" aria-label="Navigation principale" data-i18n-attr="aria-label:c.navAria">
+      <a href="cabinet.html" data-i18n="c.nav.cabinet">Le cabinet</a>
+      <a href="domaines.html" data-i18n="c.nav.domaines">Domaines d'intervention</a>
+      <a class="btn btn--solid" href="#rendez-vous" data-i18n="c.nav.rdv">Prendre rendez-vous</a>
+      <div class="nav-contact"><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr" data-i18n="c.nav.email">E-mail</a></div>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Langue · Language · اللغة">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -90,21 +97,21 @@
   <section class="hero">
     <div class="wrap">
       <div>
-        <p class="eyebrow reveal">Avocate au Barreau de Paris</p>
-        <h1 class="hero-name reveal reveal-d1"><span class="hero-maitre">Maître</span>Essra<br>Siam</h1>
-        <p class="hero-title reveal reveal-d1">AVOCATE À LA COUR</p>
+        <p class="eyebrow reveal" data-i18n="h.eyebrow">Avocate au Barreau de Paris</p>
+        <h1 class="hero-name reveal reveal-d1"><span class="hero-maitre" data-i18n="h.maitre">Maître</span><span data-i18n="h.name">Essra<br>Siam</span></h1>
+        <p class="hero-title reveal reveal-d1" data-i18n="h.title">AVOCATE À LA COUR</p>
         <hr class="rule reveal reveal-d2">
-        <p class="lead reveal reveal-d2">Votre partenaire juridique de confiance.</p>
-        <p class="hero-text reveal reveal-d2">Défense pénale, droit des étrangers, droit du travail et droit de la famille. Un cabinet où l'on connaît le droit, évidemment. Mais surtout où l'on n'oublie jamais à qui il s'applique.</p>
+        <p class="lead reveal reveal-d2" data-i18n="h.lead">Votre partenaire juridique de confiance.</p>
+        <p class="hero-text reveal reveal-d2" data-i18n="h.text">Défense pénale, droit des étrangers, droit du travail et droit de la famille. Un cabinet où l'on connaît le droit, évidemment. Mais surtout où l'on n'oublie jamais à qui il s'applique.</p>
         <div class="hero-actions reveal reveal-d3">
-          <a class="btn btn--solid" href="#rendez-vous">Prendre rendez-vous <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>07 43 62 79 00</a>
+          <a class="btn btn--solid" href="#rendez-vous"><span data-i18n="c.nav.rdv">Prendre rendez-vous</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost ltr" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>07 43 62 79 00</a>
         </div>
         <p class="hero-ar reveal reveal-d3" lang="ar" dir="rtl">مكتب المحامية إسراء صيام للمحاماة والاستشارات القانونية في خدمتكم</p>
       </div>
       <div class="hero-media reveal reveal-d1">
         <div class="arch">
-          <div class="arch-inner"><img src="assets/img/portrait-robe.jpg" alt="Maître Essra Siam en robe d'avocate" width="1050" height="1400" fetchpriority="high"></div>
+          <div class="arch-inner"><img src="assets/img/portrait-robe.jpg" alt="Maître Essra Siam en robe d'avocate" data-i18n-attr="alt:h.altRobe" width="1050" height="1400" fetchpriority="high"></div>
           <div class="seal"><img src="assets/img/embleme.png" alt="" width="270" height="360"></div>
         </div>
       </div>
@@ -112,12 +119,12 @@
   </section>
 
   <!-- Repères -->
-  <section class="facts" aria-label="Repères">
+  <section class="facts">
     <ul class="wrap">
-      <li><strong>Barreau de Paris</strong>Avocate à la Cour</li>
-      <li><strong>Quatre années au Sénat</strong>Collaboratrice parlementaire</li>
-      <li><strong>Français · <span lang="ar">العربية</span> · English</strong>Consultations</li>
-      <li><strong>Paris 16<sup>e</sup></strong>Sur rendez-vous</li>
+      <li data-i18n="h.f1"><strong>Barreau de Paris</strong>Avocate à la Cour</li>
+      <li data-i18n="h.f2"><strong>Quatre années au Sénat</strong>Collaboratrice parlementaire</li>
+      <li data-i18n="h.f3"><strong>Français · <span lang="ar">العربية</span> · English</strong>Consultations</li>
+      <li data-i18n="h.f4"><strong>Paris 16<sup>e</sup></strong>Sur rendez-vous</li>
     </ul>
   </section>
 
@@ -125,25 +132,25 @@
   <section class="section">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="eyebrow">La méthode du cabinet</p>
-        <h2>Une défense <em>personnelle</em> et réactive.</h2>
-        <p>Chaque dossier fait l'objet d'une analyse individualisée et d'une stratégie adaptée à la situation du client.</p>
+        <p class="eyebrow" data-i18n="m.eyebrow">La méthode du cabinet</p>
+        <h2 data-i18n="m.title">Une défense <em>personnelle</em> et réactive.</h2>
+        <p data-i18n="m.intro">Chaque dossier fait l'objet d'une analyse individualisée et d'une stratégie adaptée à la situation du client.</p>
       </div>
       <div class="steps">
         <article class="step reveal">
           <span class="step-num">I.</span>
-          <h3>Écouter</h3>
-          <p>Connaître réellement chaque client, rester accessible, et ne jamais réduire la relation entre l'avocat et celui qu'il défend à un simple numéro de dossier.</p>
+          <h3 data-i18n="m.s1h">Écouter</h3>
+          <p data-i18n="m.s1p">Connaître réellement chaque client, rester accessible, et ne jamais réduire la relation entre l'avocat et celui qu'il défend à un simple numéro de dossier.</p>
         </article>
         <article class="step reveal reveal-d1">
           <span class="step-num">II.</span>
-          <h3>Éclairer</h3>
-          <p>Dire les choses avec franchise, et ne jamais promettre ce que le droit ne permet pas de promettre. Vous savez où vous allez, et pourquoi.</p>
+          <h3 data-i18n="m.s2h">Éclairer</h3>
+          <p data-i18n="m.s2p">Dire les choses avec franchise, et ne jamais promettre ce que le droit ne permet pas de promettre. Vous savez où vous allez, et pourquoi.</p>
         </article>
         <article class="step reveal reveal-d2">
           <span class="step-num">III.</span>
-          <h3>Défendre</h3>
-          <p>Le conseil et la négociation, comme la défense devant les juridictions judiciaires et administratives : chercher une solution lorsqu'elle existe, se battre lorsqu'il faut se battre.</p>
+          <h3 data-i18n="m.s3h">Défendre</h3>
+          <p data-i18n="m.s3p">Le conseil et la négociation, comme la défense devant les juridictions judiciaires et administratives : chercher une solution lorsqu'elle existe, se battre lorsqu'il faut se battre.</p>
         </article>
       </div>
     </div>
@@ -154,72 +161,72 @@
     <div class="wrap">
       <div class="section-head section-head--split reveal">
         <div>
-          <p class="eyebrow">Domaines d'intervention</p>
-          <h2>Quatre domaines, <em>une même exigence.</em></h2>
-          <p>« J'exerce aujourd'hui principalement en défense pénale, droit des étrangers, droit du travail et droit de la famille. »</p>
+          <p class="eyebrow" data-i18n="c.nav.domaines">Domaines d'intervention</p>
+          <h2 data-i18n="d.title">Quatre domaines, <em>une même exigence.</em></h2>
+          <p data-i18n="d.quote">« J'exerce aujourd'hui principalement en défense pénale, droit des étrangers, droit du travail et droit de la famille. »</p>
         </div>
-        <a class="link-arrow" href="domaines.html">Tous les domaines <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="link-arrow" href="domaines.html"><span data-i18n="d.all">Tous les domaines</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
 
       <div class="domains">
         <a class="domain reveal" href="domaines.html#penal">
           <span class="domain-num">01</span>
           <svg class="icon" aria-hidden="true"><use href="#i-balance"/></svg>
-          <h3>Défense pénale</h3>
-          <p>De la garde à vue à l'exécution de la peine, une présence à chaque étape de la procédure, aux côtés des personnes mises en cause comme des victimes.</p>
-          <span class="more">Découvrir <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <h3 data-i18n="d1.h">Défense pénale</h3>
+          <p data-i18n="d1.p">De la garde à vue à l'exécution de la peine, une présence à chaque étape de la procédure, aux côtés des personnes mises en cause comme des victimes.</p>
+          <span class="more"><span data-i18n="c.more">Découvrir</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </a>
         <a class="domain reveal reveal-d1" href="domaines.html#etrangers">
           <span class="domain-num">02</span>
           <svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>
-          <h3>Droit des étrangers</h3>
-          <p>Titres de séjour, refus, OQTF, rétention : des procédures aux délais très courts, où chaque jour compte.</p>
-          <span class="more">Découvrir <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <h3 data-i18n="d2.h">Droit des étrangers</h3>
+          <p data-i18n="d2.p">Titres de séjour, refus, OQTF, rétention : des procédures aux délais très courts, où chaque jour compte.</p>
+          <span class="more"><span data-i18n="c.more">Découvrir</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </a>
         <a class="domain reveal reveal-d2" href="domaines.html#travail">
           <span class="domain-num">03</span>
           <svg class="icon" aria-hidden="true"><use href="#i-case"/></svg>
-          <h3>Droit du travail</h3>
-          <p>Licenciement, rupture, harcèlement, discrimination : faire valoir vos droits, par la négociation ou devant le conseil de prud'hommes.</p>
-          <span class="more">Découvrir <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <h3 data-i18n="d3.h">Droit du travail</h3>
+          <p data-i18n="d3.p">Licenciement, rupture, harcèlement, discrimination : faire valoir vos droits, par la négociation ou devant le conseil de prud'hommes.</p>
+          <span class="more"><span data-i18n="c.more">Découvrir</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </a>
         <a class="domain reveal reveal-d3" href="domaines.html#famille">
           <span class="domain-num">04</span>
           <svg class="icon" aria-hidden="true"><use href="#i-family"/></svg>
-          <h3>Droit de la famille</h3>
-          <p>Divorce, séparation, résidence des enfants : un accompagnement attentif lorsque la vie familiale se recompose.</p>
-          <span class="more">Découvrir <svg aria-hidden="true"><use href="#i-arrow"/></svg></span>
+          <h3 data-i18n="d4.h">Droit de la famille</h3>
+          <p data-i18n="d4.p">Divorce, séparation, résidence des enfants : un accompagnement attentif lorsque la vie familiale se recompose.</p>
+          <span class="more"><span data-i18n="c.more">Découvrir</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
         </a>
       </div>
 
-      <p class="services-label reveal">Au-delà du contentieux</p>
+      <p class="services-label reveal" data-i18n="d.beyond">Au-delà du contentieux</p>
       <div class="services reveal">
         <a class="service" href="domaines.html#oratoire">
           <svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg>
-          <span><strong>Art oratoire &amp; rhétorique</strong><small>Prise de parole, discours, formation</small></span>
-          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span data-i18n="d.sv1"><strong>Art oratoire &amp; rhétorique</strong><small>Prise de parole, discours, formation</small></span>
+          <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
         <a class="service" href="domaines.html#communication">
           <svg class="icon" aria-hidden="true"><use href="#i-columns"/></svg>
-          <span><strong>Communication &amp; politique</strong><small>L'expérience du travail législatif</small></span>
-          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span data-i18n="d.sv2"><strong>Communication &amp; politique</strong><small>L'expérience du travail législatif</small></span>
+          <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
         <a class="service" href="domaines.html#discriminations">
           <svg class="icon" aria-hidden="true"><use href="#i-equal"/></svg>
-          <span><strong>Sensibilisation aux discriminations</strong><small>Interventions et formations</small></span>
-          <svg aria-hidden="true"><use href="#i-arrow"/></svg>
+          <span data-i18n="d.sv3"><strong>Sensibilisation aux discriminations</strong><small>Interventions et formations</small></span>
+          <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Citation -->
-  <section class="quote" aria-label="Citation">
+  <section class="quote">
     <div class="wrap reveal">
       <hr class="rule">
       <blockquote>
-        <p>« Tenter, braver, persister, persévérer, être fidèle à soi-même, prendre corps à corps le destin, étonner la catastrophe par le peu de peur qu'elle nous fait, tantôt affronter la puissance injuste, tantôt insulter la victoire ivre, <mark>tenir bon, tenir tête</mark> ; voilà l'exemple dont les peuples ont besoin, et la lumière qui les électrise. »</p>
-        <cite>Victor Hugo</cite>
+        <p data-i18n="q.hugo">« Tenter, braver, persister, persévérer, être fidèle à soi-même, prendre corps à corps le destin, étonner la catastrophe par le peu de peur qu'elle nous fait, tantôt affronter la puissance injuste, tantôt insulter la victoire ivre, <mark>tenir bon, tenir tête</mark> ; voilà l'exemple dont les peuples ont besoin, et la lumière qui les électrise. »</p>
+        <cite data-i18n="q.hugoCite">Victor Hugo</cite>
       </blockquote>
     </div>
   </section>
@@ -228,18 +235,18 @@
   <section class="section about">
     <div class="wrap">
       <div class="about-media reveal">
-        <div class="frame"><img src="assets/img/salle-audience.jpg" alt="Maître Essra Siam en robe, dans une salle d'audience" width="1050" height="1400" loading="lazy"></div>
-        <div class="about-inset"><img src="assets/img/portrait-studio.jpg" alt="Portrait de Maître Essra Siam" width="800" height="800" loading="lazy"></div>
+        <div class="frame"><img src="assets/img/salle-audience.jpg" alt="Maître Essra Siam en robe, dans une salle d'audience" data-i18n-attr="alt:a.altAudience" width="1050" height="1400" loading="lazy"></div>
+        <div class="about-inset"><img src="assets/img/portrait-studio.jpg" alt="Portrait de Maître Essra Siam" data-i18n-attr="alt:c.altPortrait" width="800" height="800" loading="lazy"></div>
       </div>
       <div class="about-text">
-        <p class="eyebrow reveal">Le cabinet</p>
-        <h2 class="reveal">Je n'ai pas choisi la profession d'avocat par hasard.</h2>
-        <p class="reveal">Mon parcours m'a d'abord conduite là où le droit se pense, se discute et se construit : quatre années au Sénat, au cœur de la fabrication de la loi. Puis la justice pénale vue depuis l'autre côté de la porte, jusqu'à un stage d'immersion à la maison d'arrêt de La Santé et plusieurs mois auprès des magistrats du ministère de la Justice.</p>
-        <p class="pull reveal">« Un avocat ne défend pas mieux son client en parlant plus fort. Il le défend mieux lorsqu'il connaît parfaitement son dossier. »</p>
+        <p class="eyebrow reveal" data-i18n="c.nav.cabinet">Le cabinet</p>
+        <h2 class="reveal" data-i18n="a.title">Je n'ai pas choisi la profession d'avocat par hasard.</h2>
+        <p class="reveal" data-i18n="a.p">Mon parcours m'a d'abord conduite là où le droit se pense, se discute et se construit : quatre années au Sénat, au cœur de la fabrication de la loi. Puis la justice pénale vue depuis l'autre côté de la porte, jusqu'à un stage d'immersion à la maison d'arrêt de La Santé et plusieurs mois auprès des magistrats du ministère de la Justice.</p>
+        <p class="pull reveal" data-i18n="a.pull">« Un avocat ne défend pas mieux son client en parlant plus fort. Il le défend mieux lorsqu'il connaît parfaitement son dossier. »</p>
         <div class="langs reveal">
-          <span>Français</span><span lang="ar">العربية</span><span>English</span>
+          <span lang="fr">Français</span><span lang="ar">العربية</span><span lang="en">English</span>
         </div>
-        <a class="link-arrow reveal" href="cabinet.html">Lire son parcours <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="link-arrow reveal" href="cabinet.html"><span data-i18n="a.link">Lire son parcours</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
   </section>
@@ -248,13 +255,13 @@
   <section class="section section--deep">
     <div class="wrap">
       <div class="section-head section-head--center reveal">
-        <p class="eyebrow">Au Palais</p>
-        <h2>Engagée dans les dossiers <em>qu'elle accepte.</em></h2>
+        <p class="eyebrow" data-i18n="g.eyebrow">Au Palais</p>
+        <h2 data-i18n="g.title">Engagée dans les dossiers <em>qu'elle accepte.</em></h2>
       </div>
       <div class="gallery">
-        <figure class="reveal"><img src="assets/img/cour-du-mai.jpg" alt="Maître Siam dans la cour du Palais de justice" width="900" height="1200" loading="lazy"></figure>
-        <figure class="reveal reveal-d1"><img src="assets/img/consoeurs.jpg" alt="Maître Siam et une consœur au Palais" width="900" height="1200" loading="lazy"></figure>
-        <figure class="reveal reveal-d2"><img src="assets/img/escalier.jpg" alt="Maître Siam en robe sur les marches du Palais" width="1050" height="1400" loading="lazy"></figure>
+        <figure class="reveal"><img src="assets/img/cour-du-mai.jpg" alt="Maître Siam dans la cour du Palais de justice" data-i18n-attr="alt:g.alt1" width="900" height="1200" loading="lazy"></figure>
+        <figure class="reveal reveal-d1"><img src="assets/img/consoeurs.jpg" alt="Maître Siam et une consœur au Palais" data-i18n-attr="alt:g.alt2" width="900" height="1200" loading="lazy"></figure>
+        <figure class="reveal reveal-d2"><img src="assets/img/escalier.jpg" alt="Maître Siam en robe sur les marches du Palais" data-i18n-attr="alt:g.alt3" width="1050" height="1400" loading="lazy"></figure>
       </div>
     </div>
   </section>
@@ -266,7 +273,7 @@
       <h2>مكتب المحامية إسراء صيام</h2>
       <p lang="ar">للمحاماة والاستشارات القانونية في خدمتكم</p>
       <p lang="ar">نستقبلكم ونتواصل معكم باللغة العربية في مكتبنا بباريس.</p>
-      <p class="fr" lang="fr" dir="ltr">Consultations en arabe, en français et en anglais</p>
+      <p class="fr" lang="fr" dir="ltr" data-i18n="ar.fr">Consultations en arabe, en français et en anglais</p>
       <a class="btn btn--solid" href="https://wa.me/33743627900" data-wa="مرحباً، أودّ حجز موعد مع الأستاذة إسراء صيام." target="_blank" rel="noopener">
         <svg aria-hidden="true"><use href="#i-wa"/></svg>تواصلوا معنا عبر واتساب
       </a>
@@ -277,90 +284,90 @@
   <section class="section rdv on-dark" id="rendez-vous">
     <div class="wrap">
       <div class="reveal">
-        <p class="eyebrow">Rendez-vous</p>
-        <h2>Parlons de <em>votre situation.</em></h2>
-        <p class="rdv-intro">Un premier échange permet de comprendre votre situation et de vous indiquer la marche à suivre. Choisissez un motif : votre demande est rédigée pour vous, il ne reste qu'à l'envoyer par WhatsApp ou par e-mail.</p>
+        <p class="eyebrow" data-i18n="c.band.eyebrow">Rendez-vous</p>
+        <h2 data-i18n="c.band.title">Parlons de <em>votre situation.</em></h2>
+        <p class="rdv-intro" data-i18n="r.intro">Un premier échange permet de comprendre votre situation et de vous indiquer la marche à suivre. Choisissez un motif : votre demande est rédigée pour vous, il ne reste qu'à l'envoyer par WhatsApp ou par e-mail.</p>
 
         <ul class="coords">
-          <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small>Téléphone</small><a href="tel:+33743627900">07 43 62 79 00</a></div></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><small>E-mail</small><a href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></div></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><small>Cabinet</small><a href="https://www.google.com/maps/search/?api=1&amp;query=20+rue+de+Longchamp+75116+Paris" target="_blank" rel="noopener">20 rue de Longchamp, 75116 Paris</a></div></li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><small>Consultations</small><address>Sur rendez-vous, au cabinet</address></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small data-i18n="r.phone">Téléphone</small><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><small data-i18n="r.email">E-mail</small><a class="ltr" href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><small data-i18n="r.office">Cabinet</small><a class="ltr" href="https://www.google.com/maps/search/?api=1&amp;query=20+rue+de+Longchamp+75116+Paris" target="_blank" rel="noopener">20 rue de Longchamp, 75116 Paris</a></div></li>
+          <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><small data-i18n="r.consult">Consultations</small><address data-i18n="r.consultVal">Sur rendez-vous, au cabinet</address></div></li>
         </ul>
 
         <div class="urgent">
-          <p><strong>Urgence pénale</strong>Garde à vue, déferrement, audience imminente : appelez directement le cabinet.</p>
-          <a class="btn btn--gold" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
+          <p data-i18n="r.urgent"><strong>Urgence pénale</strong>Garde à vue, déferrement, audience imminente : appelez directement le cabinet.</p>
+          <a class="btn btn--gold" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
         </div>
       </div>
 
       <form class="rdv-card reveal reveal-d1" id="rdv-form" novalidate>
-        <h3>Demande de rendez-vous</h3>
-        <p>Quelques secondes suffisent. Aucune donnée n'est enregistrée sur ce site.</p>
+        <h3 data-i18n="f.title">Demande de rendez-vous</h3>
+        <p data-i18n="f.sub">Quelques secondes suffisent. Aucune donnée n'est enregistrée sur ce site.</p>
 
         <fieldset>
-          <legend><span>1</span> Motif</legend>
+          <legend data-i18n="f.l1"><span>1</span> Motif</legend>
           <div class="chips">
-            <label class="chip"><input type="radio" name="motif" value="Défense pénale" data-key="penal"><span>Défense pénale</span></label>
-            <label class="chip"><input type="radio" name="motif" value="Droit des étrangers" data-key="etrangers"><span>Droit des étrangers</span></label>
-            <label class="chip"><input type="radio" name="motif" value="Droit du travail" data-key="travail"><span>Droit du travail</span></label>
-            <label class="chip"><input type="radio" name="motif" value="Droit de la famille" data-key="famille"><span>Droit de la famille</span></label>
-            <label class="chip"><input type="radio" name="motif" value="Art oratoire et rhétorique" data-key="oratoire"><span>Art oratoire</span></label>
-            <label class="chip"><input type="radio" name="motif" value="Communication et politique" data-key="communication"><span>Communication &amp; politique</span></label>
-            <label class="chip"><input type="radio" name="motif" value="Sensibilisation aux discriminations" data-key="discriminations"><span>Sensibilisation</span></label>
-            <label class="chip"><input type="radio" name="motif" value="Autre demande" data-key="autre"><span>Autre</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Défense pénale" data-key="penal"><span data-i18n="d1.h">Défense pénale</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Droit des étrangers" data-key="etrangers"><span data-i18n="d2.h">Droit des étrangers</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Droit du travail" data-key="travail"><span data-i18n="d3.h">Droit du travail</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Droit de la famille" data-key="famille"><span data-i18n="d4.h">Droit de la famille</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Art oratoire et rhétorique" data-key="oratoire"><span data-i18n="f.m.oratoire">Art oratoire</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Communication et politique" data-key="communication"><span data-i18n="f.m.communication">Communication &amp; politique</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Sensibilisation aux discriminations" data-key="discriminations"><span data-i18n="f.m.discriminations">Sensibilisation</span></label>
+            <label class="chip"><input type="radio" name="motif" value="Autre demande" data-key="autre"><span data-i18n="f.m.autre">Autre</span></label>
           </div>
         </fieldset>
 
         <fieldset>
-          <legend><span>2</span> Vous</legend>
+          <legend data-i18n="f.l2"><span>2</span> Vous</legend>
           <div class="fields">
             <div class="field">
-              <label for="rdv-nom">Nom et prénom</label>
-              <input id="rdv-nom" name="nom" type="text" autocomplete="name" placeholder="Votre nom">
+              <label for="rdv-nom" data-i18n="f.name">Nom et prénom</label>
+              <input id="rdv-nom" name="nom" type="text" autocomplete="name" placeholder="Votre nom" data-i18n-attr="placeholder:f.namePh">
             </div>
             <div class="field">
-              <label for="rdv-tel">Téléphone</label>
+              <label for="rdv-tel" data-i18n="r.phone">Téléphone</label>
               <input id="rdv-tel" name="tel" type="tel" autocomplete="tel" placeholder="06 00 00 00 00">
             </div>
             <div class="field">
-              <label for="rdv-dispo">Disponibilités</label>
+              <label for="rdv-dispo" data-i18n="f.dispo">Disponibilités</label>
               <select id="rdv-dispo" name="dispo">
-                <option value="">Indifférent</option>
-                <option>Dès que possible</option>
-                <option>En matinée</option>
-                <option>En début d'après-midi</option>
-                <option>En fin de journée</option>
+                <option value="" data-i18n="f.opt0">Indifférent</option>
+                <option value="asap" data-i18n="f.opt1">Dès que possible</option>
+                <option value="matin" data-i18n="f.opt2">En matinée</option>
+                <option value="apres-midi" data-i18n="f.opt3">En début d'après-midi</option>
+                <option value="soir" data-i18n="f.opt4">En fin de journée</option>
               </select>
             </div>
             <div class="field">
-              <span class="sr-only" id="rdv-langue-label">Langue du rendez-vous</span>
-              <label aria-hidden="true">Langue</label>
+              <span class="sr-only" id="rdv-langue-label" data-i18n="f.langueSr">Langue du rendez-vous</span>
+              <label aria-hidden="true" data-i18n="f.langue">Langue</label>
               <div class="chips" role="radiogroup" aria-labelledby="rdv-langue-label">
-                <label class="chip"><input type="radio" name="langue" value="français" checked><span>FR</span></label>
-                <label class="chip"><input type="radio" name="langue" value="arabe"><span lang="ar">العربية</span></label>
-                <label class="chip"><input type="radio" name="langue" value="anglais"><span>EN</span></label>
+                <label class="chip"><input type="radio" name="langue" value="fr" checked><span lang="fr">FR</span></label>
+                <label class="chip"><input type="radio" name="langue" value="ar"><span lang="ar">العربية</span></label>
+                <label class="chip"><input type="radio" name="langue" value="en"><span lang="en">EN</span></label>
               </div>
             </div>
             <div class="field field--full">
-              <label for="rdv-message">Quelques mots <span>facultatif</span></label>
-              <textarea id="rdv-message" name="message" rows="3" placeholder="Ex. : convocation reçue, refus de séjour, audience prévue le…"></textarea>
+              <label for="rdv-message" data-i18n="f.msg">Quelques mots <span>facultatif</span></label>
+              <textarea id="rdv-message" name="message" rows="3" placeholder="Ex. : convocation reçue, refus de séjour, audience prévue le…" data-i18n-attr="placeholder:f.msgPh"></textarea>
             </div>
           </div>
         </fieldset>
 
         <fieldset>
-          <legend><span>3</span> Envoyer</legend>
+          <legend data-i18n="f.l3"><span>3</span> Envoyer</legend>
           <div class="rdv-send">
-            <a class="btn btn--solid" data-send="whatsapp" href="https://wa.me/33743627900" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>Par WhatsApp</a>
-            <a class="btn btn--ghost" data-send="mail" href="mailto:contact@siamavocat.fr"><svg aria-hidden="true"><use href="#i-mail"/></svg>Par e-mail</a>
+            <a class="btn btn--solid" data-send="whatsapp" href="https://wa.me/33743627900" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="f.wa">Par WhatsApp</span></a>
+            <a class="btn btn--ghost" data-send="mail" href="mailto:contact@siamavocat.fr"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="f.mail">Par e-mail</span></a>
           </div>
         </fieldset>
 
-        <p class="rdv-legal"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg>Votre message s'ouvre dans WhatsApp ou dans votre messagerie, prêt à être envoyé. Pour préserver la confidentialité, réservez les détails de votre dossier au rendez-vous.</p>
+        <p class="rdv-legal"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg><span data-i18n="f.legal">Votre message s'ouvre dans WhatsApp ou dans votre messagerie, prêt à être envoyé. Pour préserver la confidentialité, réservez les détails de votre dossier au rendez-vous.</span></p>
 
         <details class="rdv-preview">
-          <summary>Aperçu du message</summary>
+          <summary data-i18n="f.preview">Aperçu du message</summary>
           <pre id="rdv-preview-text"></pre>
         </details>
       </form>
@@ -375,39 +382,39 @@
       <div>
         <div class="footer-brand">
           <img src="assets/img/embleme-or.png" alt="" width="270" height="360" loading="lazy">
-          <div><span class="footer-name">ESSRA SIAM</span><small>Avocate au Barreau de Paris</small></div>
+          <div><span class="footer-name" data-i18n="c.brandName">ESSRA SIAM</span><small data-i18n="c.footer.sub">Avocate au Barreau de Paris</small></div>
         </div>
         <p class="footer-ar" lang="ar" dir="rtl">مكتب المحامية إسراء صيام للمحاماة والاستشارات القانونية في خدمتكم</p>
       </div>
       <div>
-        <h4>Cabinet</h4>
+        <h4 data-i18n="r.office">Cabinet</h4>
         <ul>
-          <li>20 rue de Longchamp, 75116 Paris</li>
-          <li><a href="tel:+33743627900">07 43 62 79 00</a></li>
-          <li><a href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></li>
+          <li><span class="ltr">20 rue de Longchamp, 75116 Paris</span></li>
+          <li><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a></li>
+          <li><a class="ltr" href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></li>
         </ul>
       </div>
       <div>
-        <h4>Le site</h4>
+        <h4 data-i18n="c.footer.site">Le site</h4>
         <ul>
-          <li><a href="cabinet.html">Le cabinet</a></li>
-          <li><a href="domaines.html">Domaines d'intervention</a></li>
-          <li><a href="#rendez-vous">Prendre rendez-vous</a></li>
-          <li><a href="#ar" lang="ar">العربية</a></li>
+          <li><a href="cabinet.html" data-i18n="c.nav.cabinet">Le cabinet</a></li>
+          <li><a href="domaines.html" data-i18n="c.nav.domaines">Domaines d'intervention</a></li>
+          <li><a href="#rendez-vous" data-i18n="c.nav.rdv">Prendre rendez-vous</a></li>
+          <li><a href="mentions-legales.html" data-i18n="c.footer.legal">Mentions légales</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span data-year>2026</span> Essra Siam — Avocate au Barreau de Paris</span>
-      <nav aria-label="Informations légales"><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#donnees">Données personnelles</a></nav>
+      <span>© <span data-year>2026</span> <span data-i18n="c.footer.copy">Essra Siam — Avocate au Barreau de Paris</span></span>
+      <nav aria-label="Informations légales" data-i18n-attr="aria-label:c.footer.legal"><a href="mentions-legales.html" data-i18n="c.footer.legal">Mentions légales</a><a href="mentions-legales.html#donnees" data-i18n="c.footer.privacy">Données personnelles</a></nav>
     </div>
   </div>
 </footer>
 
-<nav class="mobile-bar" aria-label="Contact rapide">
-  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
-  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement,"><svg aria-hidden="true"><use href="#i-mail"/></svg>E-mail</a>
+<nav class="mobile-bar" aria-label="Contact rapide" data-i18n-attr="aria-label:c.mb.aria">
+  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
+  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." data-i18n-attr="data-wa:c.wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.mb.wa">WhatsApp</span></a>
+  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement," data-i18n-attr="data-mail-subject:msg.subject; data-mail-body:c.mailBody"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="c.mb.mail">E-mail</span></a>
 </nav>
 
 </body>

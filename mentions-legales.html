@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mentions légales — Maître Essra Siam, avocate au Barreau de Paris</title>
+  <title data-i18n="t.legal">Mentions légales — Maître Essra Siam, avocate au Barreau de Paris</title>
   <meta name="description" content="Mentions légales et politique de données personnelles du site de Maître Essra Siam, avocate au Barreau de Paris.">
   <!-- VERSION DÉMO : retirer la balise robots ci-dessous lors de la mise en ligne sur siamavocat.fr -->
   <meta name="robots" content="noindex, nofollow">
@@ -13,9 +13,10 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=Jost:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>(function(d){d.classList.add("js");try{var q=new URLSearchParams(location.search).get("lang"),l=q||localStorage.getItem("lang");if(l==="en"||l==="ar"){d.classList.add("i18n-wait");d.lang=l;d.dir=l==="ar"?"rtl":"ltr";setTimeout(function(){d.classList.remove("i18n-wait")},2500);}}catch(e){}})(document.documentElement);</script>
+  <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -26,67 +27,72 @@
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M3.6 20.4l1.2-4.3a8.6 8.6 0 1 1 3.2 3.1z"/><path d="M9.3 7.9c-.5 0-1 .5-1 1.3 0 2.5 3 5.6 5.8 5.6.9 0 1.3-.5 1.3-1l.1-.7-1.9-.9-.8.9a4.9 4.9 0 0 1-2.3-2.3l.8-.8-.8-2z"/></symbol>
 </svg>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
+<a class="skip-link" href="#contenu" data-i18n="c.skip">Aller au contenu</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil">
+    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil" data-i18n-attr="aria-label:c.brandAria">
       <img src="assets/img/embleme.png" alt="" width="270" height="360">
-      <span class="brand-text"><span class="brand-name">ESSRA SIAM</span><span class="brand-sub">Avocate à la Cour</span></span>
+      <span class="brand-text"><span class="brand-name" data-i18n="c.brandName">ESSRA SIAM</span><span class="brand-sub" data-i18n="c.brandSub">Avocate à la Cour</span></span>
     </a>
-    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="cabinet.html">Le cabinet</a>
-      <a href="domaines.html">Domaines d'intervention</a>
-      <a class="nav-ar" href="index.html#ar" lang="ar">العربية</a>
-      <a class="btn btn--solid" href="index.html#rendez-vous">Prendre rendez-vous</a>
-      <div class="nav-contact"><a href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr">E-mail</a></div>
+    <nav class="nav" id="nav" aria-label="Navigation principale" data-i18n-attr="aria-label:c.navAria">
+      <a href="cabinet.html" data-i18n="c.nav.cabinet">Le cabinet</a>
+      <a href="domaines.html" data-i18n="c.nav.domaines">Domaines d'intervention</a>
+      <a class="btn btn--solid" href="index.html#rendez-vous" data-i18n="c.nav.rdv">Prendre rendez-vous</a>
+      <div class="nav-contact"><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr" data-i18n="c.nav.email">E-mail</a></div>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Langue · Language · اللغة">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
 <main id="contenu">
   <section class="page-hero">
     <div class="wrap wrap--narrow">
-      <p class="breadcrumb"><a href="index.html">Accueil</a> &nbsp;/&nbsp; Mentions légales</p>
-      <p class="eyebrow">Informations légales</p>
-      <h1>Mentions <em>légales</em></h1>
+      <p class="breadcrumb" data-i18n="lg.bc"><a href="index.html">Accueil</a> &nbsp;/&nbsp; Mentions légales</p>
+      <p class="eyebrow" data-i18n="lg.eyebrow">Informations légales</p>
+      <h1 data-i18n="lg.h1">Mentions <em>légales</em></h1>
+      <p class="i18n-only lg-note" data-i18n="lg.note"></p>
     </div>
   </section>
 
   <section class="legal">
     <div class="wrap wrap--narrow">
-      <h2>Éditrice du site</h2>
+      <h2 data-i18n="lg.hEditor">Éditrice du site</h2>
       <dl>
-        <dt>Nom</dt><dd>Maître Essra Siam, avocate au Barreau de Paris, exerçant à titre individuel</dd>
-        <dt>Adresse</dt><dd>20 rue de Longchamp, 75116 Paris</dd>
-        <dt>Téléphone</dt><dd><a href="tel:+33743627900">07 43 62 79 00</a></dd>
-        <dt>E-mail</dt><dd><a href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></dd>
-        <dt>Toque</dt><dd><span class="todo">[à compléter]</span></dd>
-        <dt>SIRET</dt><dd><span class="todo">[à compléter]</span></dd>
-        <dt>TVA intracommunautaire</dt><dd><span class="todo">[à compléter]</span></dd>
-        <dt>Directrice de la publication</dt><dd>Essra Siam</dd>
+        <dt data-i18n="lg.dtName">Nom</dt><dd data-i18n="lg.ddName">Maître Essra Siam, avocate au Barreau de Paris, exerçant à titre individuel</dd>
+        <dt data-i18n="lg.dtAddress">Adresse</dt><dd><span class="ltr">20 rue de Longchamp, 75116 Paris</span></dd>
+        <dt data-i18n="r.phone">Téléphone</dt><dd><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a></dd>
+        <dt data-i18n="r.email">E-mail</dt><dd><a class="ltr" href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></dd>
+        <dt data-i18n="lg.dtToque">Toque</dt><dd><span class="todo" data-i18n="lg.todo">[à compléter]</span></dd>
+        <dt>SIRET</dt><dd><span class="todo" data-i18n="lg.todo">[à compléter]</span></dd>
+        <dt data-i18n="lg.dtTva">TVA intracommunautaire</dt><dd><span class="todo" data-i18n="lg.todo">[à compléter]</span></dd>
+        <dt data-i18n="lg.dtDirector">Directrice de la publication</dt><dd data-i18n="cb.sign">Essra Siam</dd>
       </dl>
 
-      <h2>Profession réglementée</h2>
-      <p>Titre professionnel : avocate, titre obtenu en France. Inscrite au Barreau de Paris (Ordre des avocats de Paris, 11 place Dauphine, 75001 Paris). L'avocate est soumise aux règles déontologiques de la profession, notamment le Règlement intérieur national de la profession d'avocat (RIN), consultable sur <a href="https://www.cnb.avocat.fr" target="_blank" rel="noopener">cnb.avocat.fr</a>.</p>
-      <p>Assurance de responsabilité civile professionnelle : <span class="todo">[assureur et contrat à compléter]</span>.</p>
+      <h2 data-i18n="lg.hProfession">Profession réglementée</h2>
+      <p data-i18n="lg.pProfession">Titre professionnel : avocate, titre obtenu en France. Inscrite au Barreau de Paris (Ordre des avocats de Paris, 11 place Dauphine, 75001 Paris). L'avocate est soumise aux règles déontologiques de la profession, notamment le Règlement intérieur national de la profession d'avocat (RIN), consultable sur <a href="https://www.cnb.avocat.fr" target="_blank" rel="noopener">cnb.avocat.fr</a>.</p>
+      <p data-i18n="lg.pInsurance">Assurance de responsabilité civile professionnelle : <span class="todo">[assureur et contrat à compléter]</span>.</p>
 
-      <h2>Médiation de la consommation</h2>
-      <p>Conformément au Code de la consommation, le client consommateur peut, en cas de litige, recourir gratuitement au Médiateur de la consommation de la profession d'avocat : <span class="todo">[coordonnées à vérifier — mediateur-consommation-avocat.fr]</span>.</p>
+      <h2 data-i18n="lg.hMediation">Médiation de la consommation</h2>
+      <p data-i18n="lg.pMediation">Conformément au Code de la consommation, le client consommateur peut, en cas de litige, recourir gratuitement au Médiateur de la consommation de la profession d'avocat : <span class="todo">[coordonnées à vérifier — mediateur-consommation-avocat.fr]</span>.</p>
 
-      <h2>Hébergement</h2>
-      <p><span class="todo">[Hébergeur définitif à compléter : raison sociale, adresse, téléphone]</span>. Version de démonstration hébergée par GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis).</p>
+      <h2 data-i18n="lg.hHosting">Hébergement</h2>
+      <p data-i18n="lg.pHosting"><span class="todo">[Hébergeur définitif à compléter : raison sociale, adresse, téléphone]</span>. Version de démonstration hébergée par GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis).</p>
 
-      <h2 id="donnees">Données personnelles</h2>
-      <p>Ce site ne comporte ni formulaire enregistrant des données, ni outil de mesure d'audience, ni cookie publicitaire. Le module de prise de rendez-vous se contente de préparer un message qui s'ouvre dans l'application WhatsApp ou dans la messagerie de l'internaute : aucune information n'est transmise au site ni conservée par lui.</p>
-      <p>Les messages reçus par téléphone, WhatsApp ou e-mail sont traités par Maître Essra Siam dans le seul but de répondre à la demande et, le cas échéant, d'assurer la défense des intérêts du client, dans le respect du secret professionnel et du Règlement général sur la protection des données (RGPD). Vous disposez d'un droit d'accès, de rectification et d'effacement de vos données, que vous pouvez exercer à l'adresse <a href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a>. Vous pouvez également introduire une réclamation auprès de la CNIL.</p>
+      <h2 id="donnees" data-i18n="lg.hData">Données personnelles</h2>
+      <p data-i18n="lg.pData1">Ce site ne comporte ni formulaire enregistrant des données, ni outil de mesure d'audience, ni cookie publicitaire. Le module de prise de rendez-vous se contente de préparer un message qui s'ouvre dans l'application WhatsApp ou dans la messagerie de l'internaute : aucune information n'est transmise au site ni conservée par lui. Seule la langue choisie est mémorisée dans votre navigateur.</p>
+      <p data-i18n="lg.pData2">Les messages reçus par téléphone, WhatsApp ou e-mail sont traités par Maître Essra Siam dans le seul but de répondre à la demande et, le cas échéant, d'assurer la défense des intérêts du client, dans le respect du secret professionnel et du Règlement général sur la protection des données (RGPD). Vous disposez d'un droit d'accès, de rectification et d'effacement de vos données, que vous pouvez exercer à l'adresse <a class="ltr" href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a>. Vous pouvez également introduire une réclamation auprès de la CNIL.</p>
 
-      <h2>Propriété intellectuelle</h2>
-      <p>L'ensemble des textes, photographies et éléments graphiques de ce site, dont l'emblème du cabinet, sont la propriété de Maître Essra Siam. Toute reproduction sans autorisation est interdite.</p>
+      <h2 data-i18n="lg.hIp">Propriété intellectuelle</h2>
+      <p data-i18n="lg.pIp">L'ensemble des textes, photographies et éléments graphiques de ce site, dont l'emblème du cabinet, sont la propriété de Maître Essra Siam. Toute reproduction sans autorisation est interdite.</p>
 
-      <h2>Avertissement</h2>
-      <p>Les informations publiées sur ce site sont générales. Elles ne constituent ni une consultation juridique, ni une offre de services personnalisée. Aucune relation avocat-client ne naît de la simple consultation du site ou de l'envoi d'un message.</p>
+      <h2 data-i18n="lg.hWarning">Avertissement</h2>
+      <p data-i18n="lg.pWarning">Les informations publiées sur ce site sont générales. Elles ne constituent ni une consultation juridique, ni une offre de services personnalisée. Aucune relation avocat-client ne naît de la simple consultation du site ou de l'envoi d'un message.</p>
     </div>
   </section>
 </main>
@@ -94,16 +100,16 @@
 <footer class="site-footer">
   <div class="wrap">
     <div class="footer-bottom" style="padding-top:0">
-      <span>© <span data-year>2026</span> Essra Siam — Avocate au Barreau de Paris</span>
-      <nav aria-label="Informations légales"><a href="index.html">Accueil</a><a href="cabinet.html">Le cabinet</a><a href="domaines.html">Domaines d'intervention</a></nav>
+      <span>© <span data-year>2026</span> <span data-i18n="c.footer.copy">Essra Siam — Avocate au Barreau de Paris</span></span>
+      <nav aria-label="Informations légales" data-i18n-attr="aria-label:c.footer.legal"><a href="index.html" data-i18n="c.home">Accueil</a><a href="cabinet.html" data-i18n="c.nav.cabinet">Le cabinet</a><a href="domaines.html" data-i18n="c.nav.domaines">Domaines d'intervention</a></nav>
     </div>
   </div>
 </footer>
 
-<nav class="mobile-bar" aria-label="Contact rapide">
-  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
-  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement,"><svg aria-hidden="true"><use href="#i-mail"/></svg>E-mail</a>
+<nav class="mobile-bar" aria-label="Contact rapide" data-i18n-attr="aria-label:c.mb.aria">
+  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
+  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." data-i18n-attr="data-wa:c.wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.mb.wa">WhatsApp</span></a>
+  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement," data-i18n-attr="data-mail-subject:msg.subject; data-mail-body:c.mailBody"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="c.mb.mail">E-mail</span></a>
 </nav>
 
 </body>

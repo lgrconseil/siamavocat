@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Domaines d'intervention — Défense pénale, droit des étrangers, travail, famille · Maître Essra Siam</title>
+  <title data-i18n="t.domaines">Domaines d'intervention — Défense pénale, droit des étrangers, travail, famille · Maître Essra Siam</title>
   <meta name="description" content="Garde à vue, comparution immédiate, application des peines, titres de séjour, OQTF, licenciement, divorce : les domaines d'intervention de Maître Essra Siam, avocate au Barreau de Paris.">
   <!-- VERSION DÉMO : retirer la balise robots ci-dessous lors de la mise en ligne sur siamavocat.fr -->
   <meta name="robots" content="noindex, nofollow">
@@ -18,9 +18,10 @@
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Sans+Arabic:wght@300;400;500&family=Jost:wght@300;400;500&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
-  <script>document.documentElement.classList.add("js");</script>
+  <script>(function(d){d.classList.add("js");try{var q=new URLSearchParams(location.search).get("lang"),l=q||localStorage.getItem("lang");if(l==="en"||l==="ar"){d.classList.add("i18n-wait");d.lang=l;d.dir=l==="ar"?"rtl":"ltr";setTimeout(function(){d.classList.remove("i18n-wait")},2500);}}catch(e){}})(document.documentElement);</script>
+  <script src="assets/js/i18n.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </head>
 <body>
@@ -39,22 +40,26 @@
   <symbol id="i-equal" viewBox="0 0 48 48"><circle cx="24" cy="24" r="17"/><path d="M15.5 20h17M15.5 28h17"/></symbol>
 </svg>
 
-<a class="skip-link" href="#contenu">Aller au contenu</a>
+<a class="skip-link" href="#contenu" data-i18n="c.skip">Aller au contenu</a>
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil">
+    <a class="brand" href="index.html" aria-label="Essra Siam, avocate à la Cour — accueil" data-i18n-attr="aria-label:c.brandAria">
       <img src="assets/img/embleme.png" alt="" width="270" height="360">
-      <span class="brand-text"><span class="brand-name">ESSRA SIAM</span><span class="brand-sub">Avocate à la Cour</span></span>
+      <span class="brand-text"><span class="brand-name" data-i18n="c.brandName">ESSRA SIAM</span><span class="brand-sub" data-i18n="c.brandSub">Avocate à la Cour</span></span>
     </a>
-    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
-    <nav class="nav" id="nav" aria-label="Navigation principale">
-      <a href="cabinet.html">Le cabinet</a>
-      <a href="domaines.html" aria-current="page">Domaines d'intervention</a>
-      <a class="nav-ar" href="index.html#ar" lang="ar">العربية</a>
-      <a class="btn btn--solid" href="index.html#rendez-vous">Prendre rendez-vous</a>
-      <div class="nav-contact"><a href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr">E-mail</a></div>
+    <nav class="nav" id="nav" aria-label="Navigation principale" data-i18n-attr="aria-label:c.navAria">
+      <a href="cabinet.html" data-i18n="c.nav.cabinet">Le cabinet</a>
+      <a href="domaines.html" aria-current="page" data-i18n="c.nav.domaines">Domaines d'intervention</a>
+      <a class="btn btn--solid" href="index.html#rendez-vous" data-i18n="c.nav.rdv">Prendre rendez-vous</a>
+      <div class="nav-contact"><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a><a href="mailto:contact@siamavocat.fr" data-i18n="c.nav.email">E-mail</a></div>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Langue · Language · اللغة">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
   </div>
 </header>
 
@@ -62,21 +67,21 @@
 
   <section class="page-hero">
     <div class="wrap">
-      <p class="breadcrumb reveal"><a href="index.html">Accueil</a> &nbsp;/&nbsp; Domaines d'intervention</p>
-      <p class="eyebrow reveal">Domaines d'intervention</p>
-      <h1 class="reveal reveal-d1">Du conseil <em>à l'audience.</em></h1>
-      <p class="lead reveal reveal-d2">Le cabinet assure aussi bien le conseil et la négociation que la défense devant les juridictions judiciaires et administratives.</p>
+      <p class="breadcrumb reveal" data-i18n="dm.bc"><a href="index.html">Accueil</a> &nbsp;/&nbsp; Domaines d'intervention</p>
+      <p class="eyebrow reveal" data-i18n="c.nav.domaines">Domaines d'intervention</p>
+      <h1 class="reveal reveal-d1" data-i18n="dm.h1">Du conseil <em>à l'audience.</em></h1>
+      <p class="lead reveal reveal-d2" data-i18n="dm.lead">Le cabinet assure aussi bien le conseil et la négociation que la défense devant les juridictions judiciaires et administratives.</p>
     </div>
   </section>
 
-  <nav class="subnav" aria-label="Domaines">
+  <nav class="subnav" aria-label="Domaines" data-i18n-attr="aria-label:c.nav.domaines">
     <div class="wrap">
       <ul>
-        <li><a href="#penal">Défense pénale</a></li>
-        <li><a href="#etrangers">Droit des étrangers</a></li>
-        <li><a href="#travail">Droit du travail</a></li>
-        <li><a href="#famille">Droit de la famille</a></li>
-        <li><a href="#au-dela">Au-delà du contentieux</a></li>
+        <li><a href="#penal" data-i18n="d1.h">Défense pénale</a></li>
+        <li><a href="#etrangers" data-i18n="d2.h">Droit des étrangers</a></li>
+        <li><a href="#travail" data-i18n="d3.h">Droit du travail</a></li>
+        <li><a href="#famille" data-i18n="d4.h">Droit de la famille</a></li>
+        <li><a href="#au-dela" data-i18n="d.beyond">Au-delà du contentieux</a></li>
       </ul>
     </div>
   </nav>
@@ -87,26 +92,26 @@
       <div class="practice-aside reveal">
         <svg class="icon" aria-hidden="true"><use href="#i-balance"/></svg>
         <span class="num">01</span>
-        <h2>Défense pénale &amp; exécution des peines</h2>
-        <a class="btn btn--solid" href="index.html?motif=penal#rendez-vous">Prendre rendez-vous <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <h2 data-i18n="dm.penalH">Défense pénale &amp; exécution des peines</h2>
+        <a class="btn btn--solid" href="index.html?motif=penal#rendez-vous"><span data-i18n="c.nav.rdv">Prendre rendez-vous</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="practice-body reveal reveal-d1">
-        <p class="lead">De la garde à vue à l'exécution de la peine, chaque étape de la procédure engage une liberté. Le cabinet vous assiste, que vous soyez mis en cause ou victime.</p>
-        <p style="margin-top:20px">Quatre années consacrées au travail législatif, de nombreuses visites en établissements pénitentiaires, un stage d'immersion à la maison d'arrêt de La Santé et plusieurs mois auprès des magistrats de la Direction des affaires criminelles et des grâces : la justice pénale est vue ici sous tous ses angles, y compris celui du juge.</p>
-        <h3>Le cabinet intervient notamment pour</h3>
+        <p class="lead" data-i18n="dm.penalLead">De la garde à vue à l'exécution de la peine, chaque étape de la procédure engage une liberté. Le cabinet vous assiste, que vous soyez mis en cause ou victime.</p>
+        <p class="body-intro" data-i18n="dm.penalP">Quatre années consacrées au travail législatif, de nombreuses visites en établissements pénitentiaires, un stage d'immersion à la maison d'arrêt de La Santé et plusieurs mois auprès des magistrats de la Direction des affaires criminelles et des grâces : la justice pénale est vue ici sous tous ses angles, y compris celui du juge.</p>
+        <h3 data-i18n="dm.list">Le cabinet intervient notamment pour</h3>
         <ul class="checklist">
-          <li>L'assistance en garde à vue et en audition libre</li>
-          <li>La comparution immédiate et le déferrement</li>
-          <li>L'instruction : mise en examen, détention provisoire, contrôle judiciaire</li>
-          <li>Les audiences devant le tribunal correctionnel et la cour d'appel</li>
-          <li>L'assistance des victimes et la constitution de partie civile</li>
-          <li>Les aménagements de peine devant le juge de l'application des peines</li>
-          <li>Le droit pénitentiaire : conditions de détention, procédures disciplinaires</li>
-          <li>La libération conditionnelle et la libération sous contrainte</li>
+          <li data-i18n="pen1">L'assistance en garde à vue et en audition libre</li>
+          <li data-i18n="pen2">La comparution immédiate et le déferrement</li>
+          <li data-i18n="pen3">L'instruction : mise en examen, détention provisoire, contrôle judiciaire</li>
+          <li data-i18n="pen4">Les audiences devant le tribunal correctionnel et la cour d'appel</li>
+          <li data-i18n="pen5">L'assistance des victimes et la constitution de partie civile</li>
+          <li data-i18n="pen6">Les aménagements de peine devant le juge de l'application des peines</li>
+          <li data-i18n="pen7">Le droit pénitentiaire : conditions de détention, procédures disciplinaires</li>
+          <li data-i18n="pen8">La libération conditionnelle et la libération sous contrainte</li>
         </ul>
         <div class="when">
-          <strong>Un proche est en garde à vue ?</strong>
-          <p>Contactez le cabinet sans attendre. La personne prévenue par les enquêteurs peut désigner un avocat ; la personne gardée à vue devra ensuite confirmer ce choix.</p>
+          <strong data-i18n="dm.penalWhenH">Un proche est en garde à vue ?</strong>
+          <p data-i18n="dm.penalWhenP">Contactez le cabinet sans attendre. La personne prévenue par les enquêteurs peut désigner un avocat ; la personne gardée à vue devra ensuite confirmer ce choix.</p>
         </div>
       </div>
     </div>
@@ -118,26 +123,26 @@
       <div class="practice-aside reveal">
         <svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>
         <span class="num">02</span>
-        <h2>Droit des étrangers</h2>
-        <a class="btn btn--solid" href="index.html?motif=etrangers#rendez-vous">Prendre rendez-vous <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <h2 data-i18n="d2.h">Droit des étrangers</h2>
+        <a class="btn btn--solid" href="index.html?motif=etrangers#rendez-vous"><span data-i18n="c.nav.rdv">Prendre rendez-vous</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="practice-body reveal reveal-d1">
-        <p class="lead">Les démarches liées au séjour engagent une vie entière : un travail, une famille, un avenir en France. Les délais y sont souvent très courts, les décisions lourdes de conséquences.</p>
-        <p style="margin-top:20px">Le cabinet accompagne ses clients dans leurs démarches auprès de la préfecture comme devant le tribunal administratif, en français, en arabe ou en anglais.</p>
-        <h3>Le cabinet intervient notamment pour</h3>
+        <p class="lead" data-i18n="dm.etrLead">Les démarches liées au séjour engagent une vie entière : un travail, une famille, un avenir en France. Les délais y sont souvent très courts, les décisions lourdes de conséquences.</p>
+        <p class="body-intro" data-i18n="dm.etrP">Le cabinet accompagne ses clients dans leurs démarches auprès de la préfecture comme devant le tribunal administratif, en français, en arabe ou en anglais.</p>
+        <h3 data-i18n="dm.list">Le cabinet intervient notamment pour</h3>
         <ul class="checklist">
-          <li>Les demandes et renouvellements de titres de séjour</li>
-          <li>Les refus de séjour et les obligations de quitter le territoire (OQTF)</li>
-          <li>Les recours devant le tribunal administratif et les référés</li>
-          <li>La rétention administrative et l'assignation à résidence</li>
-          <li>Le regroupement familial et les visas</li>
-          <li>Les autorisations de travail</li>
-          <li>La naturalisation et la nationalité française</li>
-          <li>Les interdictions de retour sur le territoire</li>
+          <li data-i18n="etr1">Les demandes et renouvellements de titres de séjour</li>
+          <li data-i18n="etr2">Les refus de séjour et les obligations de quitter le territoire (OQTF)</li>
+          <li data-i18n="etr3">Les recours devant le tribunal administratif et les référés</li>
+          <li data-i18n="etr4">La rétention administrative et l'assignation à résidence</li>
+          <li data-i18n="etr5">Le regroupement familial et les visas</li>
+          <li data-i18n="etr6">Les autorisations de travail</li>
+          <li data-i18n="etr7">La naturalisation et la nationalité française</li>
+          <li data-i18n="etr8">Les interdictions de retour sur le territoire</li>
         </ul>
         <div class="when">
-          <strong>Vous avez reçu une décision défavorable ?</strong>
-          <p>Consultez immédiatement : certains délais de recours ne sont que de quelques jours. Conservez le courrier, son enveloppe et notez la date à laquelle il vous a été remis.</p>
+          <strong data-i18n="dm.etrWhenH">Vous avez reçu une décision défavorable ?</strong>
+          <p data-i18n="dm.etrWhenP">Consultez immédiatement : certains délais de recours ne sont que de quelques jours. Conservez le courrier, son enveloppe et notez la date à laquelle il vous a été remis.</p>
         </div>
       </div>
     </div>
@@ -149,23 +154,23 @@
       <div class="practice-aside reveal">
         <svg class="icon" aria-hidden="true"><use href="#i-case"/></svg>
         <span class="num">03</span>
-        <h2>Droit du travail</h2>
-        <a class="btn btn--solid" href="index.html?motif=travail#rendez-vous">Prendre rendez-vous <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <h2 data-i18n="d3.h">Droit du travail</h2>
+        <a class="btn btn--solid" href="index.html?motif=travail#rendez-vous"><span data-i18n="c.nav.rdv">Prendre rendez-vous</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="practice-body reveal reveal-d1">
-        <p class="lead">Un conflit au travail touche bien plus que le contrat : il touche une situation, une réputation, parfois une santé. Le cabinet vous aide à faire valoir vos droits, par la négociation ou devant le conseil de prud'hommes.</p>
-        <h3>Le cabinet intervient notamment pour</h3>
+        <p class="lead" data-i18n="dm.travLead">Un conflit au travail touche bien plus que le contrat : il touche une situation, une réputation, parfois une santé. Le cabinet vous aide à faire valoir vos droits, par la négociation ou devant le conseil de prud'hommes.</p>
+        <h3 data-i18n="dm.list">Le cabinet intervient notamment pour</h3>
         <ul class="checklist">
-          <li>La contestation d'un licenciement</li>
-          <li>La rupture conventionnelle et la négociation d'un départ</li>
-          <li>Le harcèlement moral ou sexuel</li>
-          <li>Les discriminations au travail</li>
-          <li>Les rappels de salaire et d'heures supplémentaires</li>
-          <li>Les procédures devant le conseil de prud'hommes</li>
+          <li data-i18n="trav1">La contestation d'un licenciement</li>
+          <li data-i18n="trav2">La rupture conventionnelle et la négociation d'un départ</li>
+          <li data-i18n="trav3">Le harcèlement moral ou sexuel</li>
+          <li data-i18n="trav4">Les discriminations au travail</li>
+          <li data-i18n="trav5">Les rappels de salaire et d'heures supplémentaires</li>
+          <li data-i18n="trav6">Les procédures devant le conseil de prud'hommes</li>
         </ul>
         <div class="when">
-          <strong>Avant de signer, ou juste après un licenciement</strong>
-          <p>Un conseil avant de signer un document de rupture évite bien des regrets. Et les actions sont enfermées dans des délais : en principe douze mois pour contester un licenciement.</p>
+          <strong data-i18n="dm.travWhenH">Avant de signer, ou juste après un licenciement</strong>
+          <p data-i18n="dm.travWhenP">Un conseil avant de signer un document de rupture évite bien des regrets. Et les actions sont enfermées dans des délais : en principe douze mois pour contester un licenciement.</p>
         </div>
       </div>
     </div>
@@ -177,23 +182,23 @@
       <div class="practice-aside reveal">
         <svg class="icon" aria-hidden="true"><use href="#i-family"/></svg>
         <span class="num">04</span>
-        <h2>Droit de la famille</h2>
-        <a class="btn btn--solid" href="index.html?motif=famille#rendez-vous">Prendre rendez-vous <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <h2 data-i18n="d4.h">Droit de la famille</h2>
+        <a class="btn btn--solid" href="index.html?motif=famille#rendez-vous"><span data-i18n="c.nav.rdv">Prendre rendez-vous</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
       <div class="practice-body reveal reveal-d1">
-        <p class="lead">Lorsque la vie familiale se recompose, le droit doit protéger sans abîmer davantage. Le cabinet vous accompagne avec écoute et fermeté, en privilégiant les solutions apaisées lorsqu'elles sont possibles.</p>
-        <h3>Le cabinet intervient notamment pour</h3>
+        <p class="lead" data-i18n="dm.famLead">Lorsque la vie familiale se recompose, le droit doit protéger sans abîmer davantage. Le cabinet vous accompagne avec écoute et fermeté, en privilégiant les solutions apaisées lorsqu'elles sont possibles.</p>
+        <h3 data-i18n="dm.list">Le cabinet intervient notamment pour</h3>
         <ul class="checklist">
-          <li>Le divorce, amiable ou contentieux</li>
-          <li>La séparation des couples non mariés</li>
-          <li>L'autorité parentale, la résidence des enfants et le droit de visite</li>
-          <li>La pension alimentaire et la contribution à l'entretien des enfants</li>
-          <li>L'ordonnance de protection en cas de violences conjugales</li>
-          <li>Les situations familiales internationales</li>
+          <li data-i18n="fam1">Le divorce, amiable ou contentieux</li>
+          <li data-i18n="fam2">La séparation des couples non mariés</li>
+          <li data-i18n="fam3">L'autorité parentale, la résidence des enfants et le droit de visite</li>
+          <li data-i18n="fam4">La pension alimentaire et la contribution à l'entretien des enfants</li>
+          <li data-i18n="fam5">L'ordonnance de protection en cas de violences conjugales</li>
+          <li data-i18n="fam6">Les situations familiales internationales</li>
         </ul>
         <div class="when">
-          <strong>Avant toute décision importante</strong>
-          <p>Quitter le domicile, s'accorder sur la garde des enfants, signer une convention : un conseil préalable permet d'éviter des erreurs difficiles à corriger ensuite.</p>
+          <strong data-i18n="dm.famWhenH">Avant toute décision importante</strong>
+          <p data-i18n="dm.famWhenP">Quitter le domicile, s'accorder sur la garde des enfants, signer une convention : un conseil préalable permet d'éviter des erreurs difficiles à corriger ensuite.</p>
         </div>
       </div>
     </div>
@@ -203,45 +208,45 @@
   <section class="section" id="au-dela">
     <div class="wrap">
       <div class="section-head reveal">
-        <p class="eyebrow">Au-delà du contentieux</p>
-        <h2>La parole, la loi, <em>l'égalité.</em></h2>
-        <p>Le parcours de Maître Siam, entre le Sénat, l'art oratoire et l'engagement associatif, nourrit aussi des interventions hors du prétoire.</p>
+        <p class="eyebrow" data-i18n="d.beyond">Au-delà du contentieux</p>
+        <h2 data-i18n="dm.beyondH">La parole, la loi, <em>l'égalité.</em></h2>
+        <p data-i18n="dm.beyondP">Le parcours de Maître Siam, entre le Sénat, l'art oratoire et l'engagement associatif, nourrit aussi des interventions hors du prétoire.</p>
       </div>
       <div class="extras">
         <article class="extra reveal" id="oratoire">
           <svg class="icon" aria-hidden="true"><use href="#i-mic"/></svg>
-          <h3>Art oratoire &amp; rhétorique</h3>
-          <p>Formatrice en art oratoire, elle accompagne professionnels, étudiants et porteurs de projets dans la prise de parole en public, la maîtrise de la rhétorique et la rédaction de discours.</p>
-          <a class="link-arrow" href="index.html?motif=oratoire#rendez-vous">Prendre contact <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <h3 data-i18n="ex1h">Art oratoire &amp; rhétorique</h3>
+          <p data-i18n="ex1p">Formatrice en art oratoire, elle accompagne professionnels, étudiants et porteurs de projets dans la prise de parole en public, la maîtrise de la rhétorique et la rédaction de discours.</p>
+          <a class="link-arrow" href="index.html?motif=oratoire#rendez-vous"><span data-i18n="dm.contact">Prendre contact</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
         <article class="extra reveal reveal-d1" id="communication">
           <svg class="icon" aria-hidden="true"><use href="#i-columns"/></svg>
-          <h3>Communication &amp; politique</h3>
-          <p>Quatre années de collaboration parlementaire, au sein de la Commission des lois : une connaissance concrète du travail législatif, de la rédaction des textes et de la communication institutionnelle.</p>
-          <a class="link-arrow" href="index.html?motif=communication#rendez-vous">Prendre contact <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <h3 data-i18n="ex2h">Communication &amp; politique</h3>
+          <p data-i18n="ex2p">Quatre années de collaboration parlementaire, au sein de la Commission des lois : une connaissance concrète du travail législatif, de la rédaction des textes et de la communication institutionnelle.</p>
+          <a class="link-arrow" href="index.html?motif=communication#rendez-vous"><span data-i18n="dm.contact">Prendre contact</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
         <article class="extra reveal reveal-d2" id="discriminations">
           <svg class="icon" aria-hidden="true"><use href="#i-equal"/></svg>
-          <h3>Sensibilisation aux discriminations</h3>
-          <p>Interventions et formations auprès d'entreprises, d'associations et d'établissements : comprendre le cadre juridique, prévenir, et savoir réagir face aux discriminations.</p>
-          <a class="link-arrow" href="index.html?motif=discriminations#rendez-vous">Prendre contact <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <h3 data-i18n="ex3h">Sensibilisation aux discriminations</h3>
+          <p data-i18n="ex3p">Interventions et formations auprès d'entreprises, d'associations et d'établissements : comprendre le cadre juridique, prévenir, et savoir réagir face aux discriminations.</p>
+          <a class="link-arrow" href="index.html?motif=discriminations#rendez-vous"><span data-i18n="dm.contact">Prendre contact</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </article>
       </div>
-      <p class="deonto reveal">Les informations de cette page sont générales et ne constituent pas une consultation juridique. Chaque situation appelle une analyse individualisée.</p>
+      <p class="deonto reveal" data-i18n="dm.deonto">Les informations de cette page sont générales et ne constituent pas une consultation juridique. Chaque situation appelle une analyse individualisée.</p>
     </div>
   </section>
 
   <section class="contact-band on-dark">
     <div class="wrap">
       <div class="reveal">
-        <p class="eyebrow">Rendez-vous</p>
-        <h2>Parlons de <em>votre situation.</em></h2>
-        <p>Par téléphone, par WhatsApp ou par e-mail : choisissez ce qui vous est le plus simple.</p>
+        <p class="eyebrow" data-i18n="c.band.eyebrow">Rendez-vous</p>
+        <h2 data-i18n="c.band.title">Parlons de <em>votre situation.</em></h2>
+        <p data-i18n="c.band.text">Par téléphone, par WhatsApp ou par e-mail : choisissez ce qui vous est le plus simple.</p>
       </div>
       <div class="actions reveal reveal-d1">
-        <a class="btn btn--gold" href="index.html#rendez-vous">Préparer ma demande <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-        <a class="btn" href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-        <a class="btn" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
+        <a class="btn btn--gold" href="index.html#rendez-vous"><span data-i18n="c.band.prepare">Préparer ma demande</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn" href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." data-i18n-attr="data-wa:c.wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.mb.wa">WhatsApp</span></a>
+        <a class="btn" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
       </div>
     </div>
   </section>
@@ -254,39 +259,39 @@
       <div>
         <div class="footer-brand">
           <img src="assets/img/embleme-or.png" alt="" width="270" height="360" loading="lazy">
-          <div><span class="footer-name">ESSRA SIAM</span><small>Avocate au Barreau de Paris</small></div>
+          <div><span class="footer-name" data-i18n="c.brandName">ESSRA SIAM</span><small data-i18n="c.footer.sub">Avocate au Barreau de Paris</small></div>
         </div>
         <p class="footer-ar" lang="ar" dir="rtl">مكتب المحامية إسراء صيام للمحاماة والاستشارات القانونية في خدمتكم</p>
       </div>
       <div>
-        <h4>Cabinet</h4>
+        <h4 data-i18n="r.office">Cabinet</h4>
         <ul>
-          <li>20 rue de Longchamp, 75116 Paris</li>
-          <li><a href="tel:+33743627900">07 43 62 79 00</a></li>
-          <li><a href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></li>
+          <li><span class="ltr">20 rue de Longchamp, 75116 Paris</span></li>
+          <li><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a></li>
+          <li><a class="ltr" href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></li>
         </ul>
       </div>
       <div>
-        <h4>Le site</h4>
+        <h4 data-i18n="c.footer.site">Le site</h4>
         <ul>
-          <li><a href="cabinet.html">Le cabinet</a></li>
-          <li><a href="domaines.html">Domaines d'intervention</a></li>
-          <li><a href="index.html#rendez-vous">Prendre rendez-vous</a></li>
-          <li><a href="index.html#ar" lang="ar">العربية</a></li>
+          <li><a href="cabinet.html" data-i18n="c.nav.cabinet">Le cabinet</a></li>
+          <li><a href="domaines.html" data-i18n="c.nav.domaines">Domaines d'intervention</a></li>
+          <li><a href="index.html#rendez-vous" data-i18n="c.nav.rdv">Prendre rendez-vous</a></li>
+          <li><a href="mentions-legales.html" data-i18n="c.footer.legal">Mentions légales</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span data-year>2026</span> Essra Siam — Avocate au Barreau de Paris</span>
-      <nav aria-label="Informations légales"><a href="mentions-legales.html">Mentions légales</a><a href="mentions-legales.html#donnees">Données personnelles</a></nav>
+      <span>© <span data-year>2026</span> <span data-i18n="c.footer.copy">Essra Siam — Avocate au Barreau de Paris</span></span>
+      <nav aria-label="Informations légales" data-i18n-attr="aria-label:c.footer.legal"><a href="mentions-legales.html" data-i18n="c.footer.legal">Mentions légales</a><a href="mentions-legales.html#donnees" data-i18n="c.footer.privacy">Données personnelles</a></nav>
     </div>
   </div>
 </footer>
 
-<nav class="mobile-bar" aria-label="Contact rapide">
-  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg>Appeler</a>
-  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg>WhatsApp</a>
-  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement,"><svg aria-hidden="true"><use href="#i-mail"/></svg>E-mail</a>
+<nav class="mobile-bar" aria-label="Contact rapide" data-i18n-attr="aria-label:c.mb.aria">
+  <a href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
+  <a href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." data-i18n-attr="data-wa:c.wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span data-i18n="c.mb.wa">WhatsApp</span></a>
+  <a href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement," data-i18n-attr="data-mail-subject:msg.subject; data-mail-body:c.mailBody"><svg aria-hidden="true"><use href="#i-mail"/></svg><span data-i18n="c.mb.mail">E-mail</span></a>
 </nav>
 
 </body>
