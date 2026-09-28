@@ -42,7 +42,7 @@ python3 tools/build.py
 
 ### Pour Maître Siam
 
-Écrivez **depuis contact@siamavocat.fr** à **louki.g.richou+carnets@gmail.com** :
+Écrivez **depuis contact@siamavocat.fr** à **loukigeronimo.richou+carnets@gmail.com** :
 
 - **Objet** : le titre de l'article.
 - **Corps** : le texte. Une ligne vide sépare deux paragraphes.
@@ -71,8 +71,8 @@ La signature et l'historique de réponse sont retirés automatiquement. Les réc
 
 ### Fonctionnement et sécurité
 
-- La tâche `.github/workflows/carnets.yml` relève toutes les 15 minutes la boîte Gmail `louki.g.richou@gmail.com`, via IMAP et un mot de passe d'application.
-- Elle ne lit **que** les messages non lus adressés à `louki.g.richou+carnets@gmail.com` et envoyés par `contact@siamavocat.fr`. Les autres e-mails de la boîte ne sont ni lus ni modifiés.
+- La tâche `.github/workflows/carnets.yml` relève toutes les 15 minutes la boîte Gmail `loukigeronimo.richou@gmail.com`, via IMAP et un mot de passe d'application.
+- Elle ne lit **que** les messages non lus adressés à `loukigeronimo.richou+carnets@gmail.com` et envoyés par `contact@siamavocat.fr`. Les autres e-mails de la boîte ne sont ni lus ni modifiés.
 - Un message n'est publié que si Gmail atteste une **signature DKIM valide de siamavocat.fr**, c'est-à-dire que le message a réellement été envoyé depuis la messagerie du cabinet. Une adresse d'expéditeur imitée ne suffit pas.
 - Les messages traités sont marqués comme lus et rangés sous le libellé Gmail « Carnets ».
 
@@ -81,11 +81,11 @@ Secrets du dépôt (*Settings → Secrets and variables → Actions*) :
 | Secret | Valeur |
 | --- | --- |
 | `CARNETS_IMAP_HOST` | `imap.gmail.com` |
-| `CARNETS_IMAP_USER` | `louki.g.richou@gmail.com` |
+| `CARNETS_IMAP_USER` | `loukigeronimo.richou@gmail.com` |
 | `CARNETS_IMAP_PASSWORD` | mot de passe d'application Google (https://myaccount.google.com/apppasswords) |
-| `CARNETS_TO` | `louki.g.richou+carnets@gmail.com` |
+| `CARNETS_TO` | `loukigeronimo.richou+carnets@gmail.com` |
 | `CARNETS_ALLOWED` | `contact@siamavocat.fr` (plusieurs adresses possibles, séparées par des virgules) |
-| `CARNETS_SMTP_HOST` | *facultatif* : `smtp.gmail.com` pour envoyer à Maître Siam un accusé de réception avec le lien de l'article |
+| `CARNETS_SMTP_HOST` | `smtp.gmail.com` : Maître Siam reçoit un accusé de réception avec le lien de l'article |
 
 Une fois le site en ligne, ajouter la *variable* `CARNETS_SITE_URL` = `https://www.siamavocat.fr/`. La tâche peut aussi être lancée à la main depuis l'onglet *Actions*. GitHub suspend les tâches planifiées d'un dépôt resté sans activité pendant 60 jours : une relance depuis *Actions* les réactive.
 
