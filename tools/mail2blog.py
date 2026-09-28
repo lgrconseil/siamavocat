@@ -19,11 +19,19 @@ Lignes facultatives en tête du message (avant une ligne vide) :
 
 Variables d'environnement (secrets du dépôt GitHub) :
   CARNETS_IMAP_HOST, CARNETS_IMAP_USER, CARNETS_IMAP_PASSWORD
+                     boîte relevée (Gmail : imap.gmail.com + mot de passe d'application)
+  CARNETS_TO         adresse de dépôt, par exemple prenom.nom+carnets@gmail.com :
+                     seuls les messages adressés à celle-ci sont lus
   CARNETS_ALLOWED    adresses d'expédition autorisées, séparées par des virgules
+  CARNETS_AUTH_SERVER serveur de réception dont on croit la vérification (mx.google.com)
   CARNETS_CODE       facultatif : mot secret à placer dans l'objet
-  CARNETS_SMTP_HOST, CARNETS_SMTP_USER, CARNETS_SMTP_PASSWORD
-                     facultatif : accusé de réception envoyé à l'autrice
+  CARNETS_SMTP_HOST  facultatif : accusé de réception envoyé à l'autrice
+                     (smtp.gmail.com ; identifiants IMAP réutilisés par défaut)
   CARNETS_SITE_URL   adresse du site (par défaut https://www.siamavocat.fr/)
+
+Sécurité : un message n'est publié que si l'expéditeur figure dans CARNETS_ALLOWED
+ET si le serveur de réception atteste une signature DKIM valide du domaine de cet
+expéditeur (en-tête Authentication-Results le plus récent).
 
 Test en local, sans boîte e-mail :
   python3 tools/mail2blog.py --eml chemin/vers/message.eml
@@ -143,9 +151,16 @@ def sender_allowed(msg, allowed):
     addr = email.utils.parseaddr(str(msg.get("From", "")))[1].lower()
     if not allowed or addr not in allowed:
         return False, f"expéditeur non autorisé ({addr or 'inconnu'})"
-    auth = " ".join(str(h) for h in msg.get_all("Authentication-Results", [])).lower()
-    if "dmarc=fail" in auth or ("spf=fail" in auth and "dkim=fail" in auth):
-        return False, "authentification de l'expéditeur en échec"
+    domain = addr.rsplit("@", 1)[-1]
+    server = os.environ.get("CARNETS_AUTH_SERVER", "mx.google.com").lower()
+    # Seul l'en-tête le plus récent, ajouté par notre serveur de réception, fait foi
+    results = msg.get_all("Authentication-Results", [])
+    top = str(results[0]).lower() if results else ""
+    if not top.strip().startswith(server):
+        return False, "vérification d'authenticité absente"
+    signed = re.search(r"dkim=pass[^;]*header\.(?:i=@|d=)" + re.escape(domain) + r"\b", top)
+    if not signed:
+        return False, f"signature DKIM de {domain} absente ou invalide"
     return True, addr
 
 
@@ -228,8 +243,8 @@ def process(msg, allowed, code):
 
 def acknowledge(result=None, error=None, to=None, subject=""):
     host = os.environ.get("CARNETS_SMTP_HOST")
-    user = os.environ.get("CARNETS_SMTP_USER")
-    password = os.environ.get("CARNETS_SMTP_PASSWORD")
+    user = os.environ.get("CARNETS_SMTP_USER") or os.environ.get("CARNETS_IMAP_USER")
+    password = os.environ.get("CARNETS_SMTP_PASSWORD") or os.environ.get("CARNETS_IMAP_PASSWORD")
     if not (host and user and password and to):
         return
     ack = EmailMessage()
@@ -251,21 +266,37 @@ def acknowledge(result=None, error=None, to=None, subject=""):
         smtp.send_message(ack)
 
 
-def fetch_imap():
+def fetch_imap(allowed):
     host = os.environ.get("CARNETS_IMAP_HOST")
     user = os.environ.get("CARNETS_IMAP_USER")
     password = os.environ.get("CARNETS_IMAP_PASSWORD")
-    if not (host and user and password):
+    to = os.environ.get("CARNETS_TO", "").strip()
+    if not (host and user and password and allowed):
         print("Boîte des Carnets non configurée : rien à faire.")
         return
     box = imaplib.IMAP4_SSL(host)
     box.login(user, password)
     box.select("INBOX")
-    _, data = box.search(None, "UNSEEN")
-    for num in data[0].split():
-        _, raw = box.fetch(num, "(RFC822)")
-        box.store(num, "+FLAGS", "\\Seen")
+    gmail = "gmail" in host.lower()
+    nums = set()
+    for sender in sorted(allowed):
+        if gmail:
+            query = f"from:{sender} is:unread" + (f" deliveredto:{to}" if to else "")
+            _, data = box.search(None, "X-GM-RAW", f'"{query}"')
+        else:
+            criteria = ["UNSEEN", "FROM", f'"{sender}"'] + (["TO", f'"{to}"'] if to else [])
+            _, data = box.search(None, *criteria)
+        nums.update(data[0].split())
+    for num in sorted(nums, key=int):
+        # BODY.PEEK : seuls les messages traités sont marqués comme lus
+        _, raw = box.fetch(num, "(BODY.PEEK[])")
         yield email.message_from_bytes(raw[0][1], policy=email.policy.default)
+        box.store(num, "+FLAGS", "\\Seen")
+        if gmail:
+            try:
+                box.store(num, "+X-GM-LABELS", '"Carnets"')
+            except imaplib.IMAP4.error:
+                pass
     box.logout()
 
 
@@ -281,7 +312,7 @@ def main():
     if args.eml:
         messages = (email.message_from_bytes(pathlib.Path(p).read_bytes(), policy=email.policy.default) for p in args.eml)
     else:
-        messages = fetch_imap() or []
+        messages = fetch_imap(allowed)
 
     done = []
     for msg in messages:
@@ -293,7 +324,7 @@ def main():
             acknowledge(result=result, to=result["to"])
         else:
             print(f"✗ ignoré ({error}) : {msg.get('Subject', '')}")
-            if error and "non autorisé" not in error and "authentification" not in error:
+            if error and not any(w in error for w in ("non autorisé", "authenticité", "DKIM")):
                 acknowledge(error=error, to=sender, subject=str(msg.get("Subject", "")))
 
     out = os.environ.get("GITHUB_OUTPUT")

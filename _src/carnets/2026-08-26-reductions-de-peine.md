@@ -3,7 +3,7 @@ title: « Trois mois par an, c'est automatique » : plus maintenant
 slug: reductions-de-peine-plus-rien-d-automatique
 date: 2026-08-26
 category: Exécution des peines
-cover: assets/img/palais-lanterne.jpg
+cover: assets/img/carnets/reductions-de-peine-plus-rien-d-automatique.jpg
 exemple: oui
 ---
 Le téléphone a sonné un vendredi soir. Au bout du fil, une mère. Son fils est détenu depuis le printemps 2023. Au parloir, un codétenu lui a assuré qu'il sortirait « forcément » plus tôt : « Trois mois par an, c'est automatique, tout le monde le sait. »

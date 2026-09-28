@@ -5,7 +5,7 @@ name: Carnets par e-mail
 
 on:
   schedule:
-    - cron: "*/20 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -35,11 +35,10 @@ jobs:
           CARNETS_IMAP_HOST: ${{ secrets.CARNETS_IMAP_HOST }}
           CARNETS_IMAP_USER: ${{ secrets.CARNETS_IMAP_USER }}
           CARNETS_IMAP_PASSWORD: ${{ secrets.CARNETS_IMAP_PASSWORD }}
+          CARNETS_TO: ${{ secrets.CARNETS_TO }}
           CARNETS_ALLOWED: ${{ secrets.CARNETS_ALLOWED }}
           CARNETS_CODE: ${{ secrets.CARNETS_CODE }}
           CARNETS_SMTP_HOST: ${{ secrets.CARNETS_SMTP_HOST }}
-          CARNETS_SMTP_USER: ${{ secrets.CARNETS_SMTP_USER }}
-          CARNETS_SMTP_PASSWORD: ${{ secrets.CARNETS_SMTP_PASSWORD }}
           CARNETS_SITE_URL: ${{ vars.CARNETS_SITE_URL }}
         run: python tools/mail2blog.py
 

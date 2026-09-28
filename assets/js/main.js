@@ -164,16 +164,33 @@
       setTimeout(function () {
         doors.remove();
         root.classList.remove("doors-on", "doors-opening");
-      }, 1750);
+      }, 1150);
     };
-    setTimeout(function () { doors.classList.add("is-lit"); }, 650);
-    var doorTimer = setTimeout(openDoors, 1700);
+    setTimeout(function () { doors.classList.add("is-lit"); }, 250);
+    var doorTimer = setTimeout(openDoors, 650);
     doors.addEventListener("click", function () { clearTimeout(doorTimer); openDoors(); });
     document.addEventListener("keydown", function (e) {
       if (!opened && (e.key === "Escape" || e.key === "Enter" || e.key === " ")) { clearTimeout(doorTimer); openDoors(); }
     });
   } else {
     root.classList.remove("doors-on");
+  }
+
+  /* ---------- Fond : vidéo du cabinet en filigrane ---------- */
+
+  var bgVideo = document.querySelector(".site-bg video");
+  if (bgVideo) {
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (reduceMotion || saveData) {
+      bgVideo.removeAttribute("autoplay");
+      bgVideo.pause();
+    } else {
+      var playBg = function () { var p = bgVideo.play(); if (p && p.catch) p.catch(function () {}); };
+      playBg();
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) bgVideo.pause(); else playBg();
+      });
+    }
   }
 
   /* ---------- Éventail Art déco au clic ---------- */

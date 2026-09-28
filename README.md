@@ -42,11 +42,13 @@ python3 tools/build.py
 
 ### Pour Maître Siam
 
-Écrivez à l'adresse des Carnets (par exemple `carnets@siamavocat.fr`) **depuis votre adresse habituelle** :
+Écrivez **depuis contact@siamavocat.fr** à **louki.g.richou+carnets@gmail.com** :
 
 - **Objet** : le titre de l'article.
 - **Corps** : le texte. Une ligne vide sépare deux paragraphes.
 - **Photo** (facultatif) : la première image jointe devient la couverture.
+
+L'article est en ligne une quinzaine de minutes plus tard.
 
 Quelques repères de mise en forme, tous facultatifs :
 
@@ -65,33 +67,32 @@ Commandes dans l'objet :
 - Renvoyer un message **avec exactement le même titre** remplace l'article.
 - `[Supprimer] Mon titre` : retire l'article.
 
-L'article est en ligne une vingtaine de minutes plus tard. Si l'accusé de réception est activé, un e-mail de confirmation indique son adresse.
+La signature et l'historique de réponse sont retirés automatiquement. Les récits doivent rester anonymisés (noms, lieux, dates, circonstances).
 
-La signature et l'historique de réponse sont retirés automatiquement. Comme pour tout le site, les récits doivent rester anonymisés (noms, lieux, dates, circonstances).
+### Fonctionnement et sécurité
 
-### Mise en place (une seule fois)
+- La tâche `.github/workflows/carnets.yml` relève toutes les 15 minutes la boîte Gmail `louki.g.richou@gmail.com`, via IMAP et un mot de passe d'application.
+- Elle ne lit **que** les messages non lus adressés à `louki.g.richou+carnets@gmail.com` et envoyés par `contact@siamavocat.fr`. Les autres e-mails de la boîte ne sont ni lus ni modifiés.
+- Un message n'est publié que si Gmail atteste une **signature DKIM valide de siamavocat.fr**, c'est-à-dire que le message a réellement été envoyé depuis la messagerie du cabinet. Une adresse d'expéditeur imitée ne suffit pas.
+- Les messages traités sont marqués comme lus et rangés sous le libellé Gmail « Carnets ».
 
-1. **Boîte e-mail.** Chez IONOS, créer la boîte `carnets@siamavocat.fr`.
-2. **Secrets GitHub.** Dans le dépôt : *Settings → Secrets and variables → Actions*.
+Secrets du dépôt (*Settings → Secrets and variables → Actions*) :
 
-   | Secret | Valeur |
-   | --- | --- |
-   | `CARNETS_IMAP_HOST` | `imap.ionos.fr` |
-   | `CARNETS_IMAP_USER` | `carnets@siamavocat.fr` |
-   | `CARNETS_IMAP_PASSWORD` | mot de passe de la boîte |
-   | `CARNETS_ALLOWED` | adresse(s) de Maître Siam autorisée(s) à publier, séparées par des virgules |
-   | `CARNETS_CODE` | *facultatif* : un mot secret, à ajouter dans l'objet pour renforcer la sécurité |
-   | `CARNETS_SMTP_HOST`, `CARNETS_SMTP_USER`, `CARNETS_SMTP_PASSWORD` | *facultatif* : `smtp.ionos.fr` et les identifiants de la boîte, pour l'accusé de réception |
+| Secret | Valeur |
+| --- | --- |
+| `CARNETS_IMAP_HOST` | `imap.gmail.com` |
+| `CARNETS_IMAP_USER` | `louki.g.richou@gmail.com` |
+| `CARNETS_IMAP_PASSWORD` | mot de passe d'application Google (https://myaccount.google.com/apppasswords) |
+| `CARNETS_TO` | `louki.g.richou+carnets@gmail.com` |
+| `CARNETS_ALLOWED` | `contact@siamavocat.fr` (plusieurs adresses possibles, séparées par des virgules) |
+| `CARNETS_SMTP_HOST` | *facultatif* : `smtp.gmail.com` pour envoyer à Maître Siam un accusé de réception avec le lien de l'article |
 
-   Une fois le site en ligne, ajouter la *variable* `CARNETS_SITE_URL` = `https://www.siamavocat.fr/`.
-3. **Mise en route.** La tâche `.github/workflows/carnets.yml` relève la boîte toutes les 20 minutes, publie, reconstruit le site et le redéploie. On peut aussi la lancer à la main depuis l'onglet *Actions*.
-
-Seuls les messages venant d'une adresse autorisée, et non signalés comme usurpés par le serveur de réception, sont publiés. GitHub suspend les tâches planifiées d'un dépôt resté sans activité pendant 60 jours : un simple commit, ou une relance depuis *Actions*, les réactive.
+Une fois le site en ligne, ajouter la *variable* `CARNETS_SITE_URL` = `https://www.siamavocat.fr/`. La tâche peut aussi être lancée à la main depuis l'onglet *Actions*. GitHub suspend les tâches planifiées d'un dépôt resté sans activité pendant 60 jours : une relance depuis *Actions* les réactive.
 
 Test en local, sans boîte e-mail :
 
 ```bash
-CARNETS_ALLOWED=moi@exemple.fr python3 tools/mail2blog.py --eml message.eml && python3 tools/build.py
+CARNETS_ALLOWED=contact@siamavocat.fr python3 tools/mail2blog.py --eml message.eml && python3 tools/build.py
 ```
 
 ## Hébergement IONOS et nom de domaine
