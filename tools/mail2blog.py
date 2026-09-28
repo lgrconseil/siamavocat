@@ -147,10 +147,13 @@ def save_cover(data, slug):
 
 # ---------------------------------------------------------------- Contrôles
 
-def sender_allowed(msg, allowed):
+def sender_allowed(msg, allowed, sent_by_owner=False):
     addr = email.utils.parseaddr(str(msg.get("From", "")))[1].lower()
     if not allowed or addr not in allowed:
         return False, f"expéditeur non autorisé ({addr or 'inconnu'})"
+    if sent_by_owner:
+        # Message présent dans les « Messages envoyés » de la boîte relevée : il en est bien parti
+        return True, addr
     domain = addr.rsplit("@", 1)[-1]
     server = os.environ.get("CARNETS_AUTH_SERVER", "mx.google.com").lower()
     # Seul l'en-tête le plus récent, ajouté par notre serveur de réception, fait foi
@@ -174,9 +177,9 @@ def existing_post(slug):
     return None
 
 
-def process(msg, allowed, code):
+def process(msg, allowed, code, sent_by_owner=False):
     subject = str(msg.get("Subject", "")).strip()
-    ok, who = sender_allowed(msg, allowed)
+    ok, who = sender_allowed(msg, allowed, sent_by_owner)
     if not ok:
         return None, who
     if code:
@@ -249,6 +252,7 @@ def acknowledge(result=None, error=None, to=None, subject=""):
         return
     ack = EmailMessage()
     ack["From"], ack["To"] = user, to
+    ack["Auto-Submitted"] = "auto-replied"
     if result:
         url = f"{SITE}carnets/{result['slug']}.html"
         ack["Subject"] = f"Carnets — « {result['title']} » {result['action']}"
@@ -285,27 +289,48 @@ def fetch_imap(allowed):
         print(f"::warning::Connexion à la boîte des Carnets refusée ({exc}). "
               "Vérifier le secret CARNETS_IMAP_PASSWORD : il doit s'agir d'un mot de passe d'application Google.")
         return
-    box.select("INBOX")
     gmail = "gmail" in host.lower()
+    folder = "INBOX"
+    if gmail:
+        # « Tous les messages » : un e-mail déjà lu ou archivé est quand même trouvé
+        _, boxes = box.list()
+        for line in boxes or []:
+            if b"\\All" in line:
+                folder = line.decode().rsplit(' "/" ', 1)[-1]
+                break
+    box.select(folder)
     nums = set()
     for sender in sorted(allowed):
         if gmail:
-            query = f"from:{sender} is:unread" + (f" deliveredto:{to}" if to else "")
+            # Les messages déjà traités portent le libellé « Carnets »
+            query = f"from:{sender} -label:carnets" + (f" {{deliveredto:{to} to:{to}}}" if to else "")
             _, data = box.search(None, "X-GM-RAW", f'"{query}"')
         else:
             criteria = ["UNSEEN", "FROM", f'"{sender}"'] + (["TO", f'"{to}"'] if to else [])
             _, data = box.search(None, *criteria)
         nums.update(data[0].split())
     for num in sorted(nums, key=int):
-        # BODY.PEEK : seuls les messages traités sont marqués comme lus
+        # BODY.PEEK : la lecture ne modifie pas l'état « lu / non lu » du message
         _, raw = box.fetch(num, "(BODY.PEEK[])")
-        yield email.message_from_bytes(raw[0][1], policy=email.policy.default)
-        box.store(num, "+FLAGS", "\\Seen")
-        if gmail:
-            try:
+        msg = email.message_from_bytes(raw[0][1], policy=email.policy.default)
+        # Les accusés de réception du robot ne sont jamais relus comme des articles
+        if str(msg.get("Auto-Submitted", "no")).strip().lower() != "no":
+            if gmail:
                 box.store(num, "+X-GM-LABELS", '"Carnets"')
-            except imaplib.IMAP4.error:
-                pass
+            continue
+        labels = []
+        if gmail:
+            _, info = box.fetch(num, "(X-GM-LABELS)")
+            found = re.search(rb"X-GM-LABELS \(([^)]*)\)", info[0] if info and info[0] else b"")
+            labels = [l.strip(b'"').replace(b"\\\\", b"\\") for l in found.group(1).split()] if found else []
+        author = email.utils.parseaddr(str(msg.get("From", "")))[1].lower()
+        # Envoyé depuis la boîte relevée elle-même : Gmail l'a rangé dans « Messages envoyés »
+        sent_by_owner = author == user.lower() and b"\\Sent" in labels
+        yield msg, sent_by_owner
+        if gmail:
+            box.store(num, "+X-GM-LABELS", '"Carnets"')
+        else:
+            box.store(num, "+FLAGS", "\\Seen")
     box.logout()
 
 
@@ -319,13 +344,13 @@ def main():
     POSTS.mkdir(parents=True, exist_ok=True)
 
     if args.eml:
-        messages = (email.message_from_bytes(pathlib.Path(p).read_bytes(), policy=email.policy.default) for p in args.eml)
+        messages = ((email.message_from_bytes(pathlib.Path(p).read_bytes(), policy=email.policy.default), False) for p in args.eml)
     else:
         messages = fetch_imap(allowed)
 
     done = []
-    for msg in messages:
-        result, error = process(msg, allowed, code)
+    for msg, sent_by_owner in messages:
+        result, error = process(msg, allowed, code, sent_by_owner)
         sender = email.utils.parseaddr(str(msg.get("From", "")))[1]
         if result:
             print(f"✓ {result['action']} : {result['title']} → carnets/{result['slug']}.html")

@@ -309,7 +309,8 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height
   place-items: center;
   box-shadow: 0 18px 40px -22px rgba(21, 18, 15, 0.45);
 }
-.seal img { height: 76%; width: auto; }
+/* Le monogramme centré dans le médaillon (l'image fait 3:4) */
+.seal img { width: 54%; height: auto; margin-top: -4%; }
 
 /* ---------- Bandeau de repères ---------- */
 
@@ -1788,19 +1789,21 @@ html[dir="rtl"] .tour-step .link-arrow { align-self: flex-end; }
    V3 — fond du cabinet, portes rapides, visite agrandie, lisibilité
    ========================================================== */
 
-/* Fond : le porche du cabinet, en très grand et en transparence */
+/* Fond : la porte d'entrée du 20, en très grand et en transparence, immobile */
 .site-bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.site-bg video {
+.site-bg img {
   position: absolute;
-  inset: -4%;
-  width: 108%;
-  height: 108%;
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+  max-width: none;
   object-fit: cover;
+  object-position: 50% 62%;
   opacity: 0.1;
   filter: grayscale(1) sepia(0.35) contrast(1.15) blur(1.5px);
   mix-blend-mode: multiply;
 }
-.theme-parole .site-bg video { mix-blend-mode: screen; opacity: 0.07; filter: grayscale(1) contrast(1.1) blur(1.5px); }
+.theme-parole .site-bg img { mix-blend-mode: screen; opacity: 0.07; filter: grayscale(1) contrast(1.1) blur(1.5px); }
 
 /* Les sections claires laissent deviner le fond */
 .tour { background: transparent; }
@@ -1874,5 +1877,5 @@ main, .site-header { transition: transform 1.2s var(--ease); }
   .station-min { font-size: 0.86rem; }
   .parole-note, .post-anon, .deonto { font-size: 0.92rem; }
 }
-.site-bg video { opacity: 0.085; }
+.site-bg img { opacity: 0.085; }
 .carnets-hero .big-quote { max-width: 780px; }

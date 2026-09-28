@@ -50,6 +50,8 @@ python3 tools/build.py
 
 L'article est en ligne une quinzaine de minutes plus tard.
 
+Le même envoi fonctionne **depuis loukigeronimo.richou@gmail.com**, vers la même adresse `+carnets` : pratique pour publier un texte qu'elle a transmis autrement, ou pour un essai.
+
 Quelques repères de mise en forme, tous facultatifs :
 
 | Pour obtenir… | Écrire… |
@@ -72,9 +74,10 @@ La signature et l'historique de réponse sont retirés automatiquement. Les réc
 ### Fonctionnement et sécurité
 
 - La tâche `.github/workflows/carnets.yml` relève toutes les 15 minutes la boîte Gmail `loukigeronimo.richou@gmail.com`, via IMAP et un mot de passe d'application.
-- Elle ne lit **que** les messages non lus adressés à `loukigeronimo.richou+carnets@gmail.com` et envoyés par `contact@siamavocat.fr`. Les autres e-mails de la boîte ne sont ni lus ni modifiés.
-- Un message n'est publié que si Gmail atteste une **signature DKIM valide de siamavocat.fr**, c'est-à-dire que le message a réellement été envoyé depuis la messagerie du cabinet. Une adresse d'expéditeur imitée ne suffit pas.
-- Les messages traités sont marqués comme lus et rangés sous le libellé Gmail « Carnets ».
+- Elle ne lit **que** les messages adressés à `loukigeronimo.richou+carnets@gmail.com` et envoyés par une adresse de `CARNETS_ALLOWED`. Les autres e-mails de la boîte ne sont ni lus ni modifiés.
+- Un message de `contact@siamavocat.fr` n'est publié que si Gmail atteste une **signature DKIM valide de siamavocat.fr**, c'est-à-dire que le message a réellement été envoyé depuis la messagerie du cabinet. Une adresse d'expéditeur imitée ne suffit pas.
+- Un message de `loukigeronimo.richou@gmail.com` n'est publié que s'il figure dans les **Messages envoyés** de cette même boîte : il en est donc réellement parti. Un e-mail extérieur qui imiterait cette adresse n'y figure pas.
+- Les messages traités reçoivent le libellé Gmail « Carnets » et ne sont plus relus. Qu'ils aient déjà été lus ou archivés dans Gmail n'empêche pas leur publication, et leur état « lu / non lu » n'est pas modifié.
 
 Secrets du dépôt (*Settings → Secrets and variables → Actions*) :
 
@@ -84,8 +87,8 @@ Secrets du dépôt (*Settings → Secrets and variables → Actions*) :
 | `CARNETS_IMAP_USER` | `loukigeronimo.richou@gmail.com` |
 | `CARNETS_IMAP_PASSWORD` | mot de passe d'application Google (https://myaccount.google.com/apppasswords) |
 | `CARNETS_TO` | `loukigeronimo.richou+carnets@gmail.com` |
-| `CARNETS_ALLOWED` | `contact@siamavocat.fr` (plusieurs adresses possibles, séparées par des virgules) |
-| `CARNETS_SMTP_HOST` | `smtp.gmail.com` : Maître Siam reçoit un accusé de réception avec le lien de l'article |
+| `CARNETS_ALLOWED` | `contact@siamavocat.fr,loukigeronimo.richou@gmail.com` (adresses séparées par des virgules) |
+| `CARNETS_SMTP_HOST` | `smtp.gmail.com` : l'expéditeur reçoit un accusé de réception avec le lien de l'article |
 
 Une fois le site en ligne, ajouter la *variable* `CARNETS_SITE_URL` = `https://www.siamavocat.fr/`. La tâche peut aussi être lancée à la main depuis l'onglet *Actions*. GitHub suspend les tâches planifiées d'un dépôt resté sans activité pendant 60 jours : une relance depuis *Actions* les réactive.
 

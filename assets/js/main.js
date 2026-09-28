@@ -176,23 +176,6 @@
     root.classList.remove("doors-on");
   }
 
-  /* ---------- Fond : vidéo du cabinet en filigrane ---------- */
-
-  var bgVideo = document.querySelector(".site-bg video");
-  if (bgVideo) {
-    var saveData = navigator.connection && navigator.connection.saveData;
-    if (reduceMotion || saveData) {
-      bgVideo.removeAttribute("autoplay");
-      bgVideo.pause();
-    } else {
-      var playBg = function () { var p = bgVideo.play(); if (p && p.catch) p.catch(function () {}); };
-      playBg();
-      document.addEventListener("visibilitychange", function () {
-        if (document.hidden) bgVideo.pause(); else playBg();
-      });
-    }
-  }
-
   /* ---------- Éventail Art déco au clic ---------- */
 
   var burstSVG = (function () {
