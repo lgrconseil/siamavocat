@@ -1,0 +1,74 @@
+name: Carnets par e-mail
+
+# Relève régulièrement la boîte dédiée aux Carnets, publie les nouveaux articles
+# et redéploie le site. Sans secrets configurés, le travail s'arrête sans rien faire.
+
+on:
+  schedule:
+    - cron: "*/20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: carnets
+  cancel-in-progress: false
+
+jobs:
+  publier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer Pillow (photos de couverture)
+        run: pip install --quiet pillow
+
+      - name: Relever la boîte des Carnets
+        id: mail
+        env:
+          CARNETS_IMAP_HOST: ${{ secrets.CARNETS_IMAP_HOST }}
+          CARNETS_IMAP_USER: ${{ secrets.CARNETS_IMAP_USER }}
+          CARNETS_IMAP_PASSWORD: ${{ secrets.CARNETS_IMAP_PASSWORD }}
+          CARNETS_ALLOWED: ${{ secrets.CARNETS_ALLOWED }}
+          CARNETS_CODE: ${{ secrets.CARNETS_CODE }}
+          CARNETS_SMTP_HOST: ${{ secrets.CARNETS_SMTP_HOST }}
+          CARNETS_SMTP_USER: ${{ secrets.CARNETS_SMTP_USER }}
+          CARNETS_SMTP_PASSWORD: ${{ secrets.CARNETS_SMTP_PASSWORD }}
+          CARNETS_SITE_URL: ${{ vars.CARNETS_SITE_URL }}
+        run: python tools/mail2blog.py
+
+      - name: Reconstruire le site
+        if: steps.mail.outputs.changed == 'true'
+        run: python tools/build.py
+
+      - name: Enregistrer dans le dépôt
+        if: steps.mail.outputs.changed == 'true'
+        run: |
+          git config user.name "Carnets"
+          git config user.email "carnets@siamavocat.fr"
+          git add -A
+          git commit -m "Carnets : publication par e-mail"
+          git push
+
+      - name: Rafraîchir GitHub Pages
+        if: steps.mail.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api -X POST "repos/${{ github.repository }}/pages/builds" || true
+
+      - name: Déployer sur IONOS (SFTP)
+        if: steps.mail.outputs.changed == 'true' && env.SFTP_HOST != ''
+        env:
+          SFTP_HOST: ${{ secrets.IONOS_SFTP_HOST }}
+          SFTP_USER: ${{ secrets.IONOS_SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.IONOS_SFTP_PASSWORD }}
+          SFTP_DIR: ${{ vars.IONOS_SFTP_DIR || '/' }}
+        run: |
+          sudo apt-get install -y -qq lftp
+          lftp -u "$SFTP_USER,$SFTP_PASSWORD" "sftp://$SFTP_HOST" -e "set sftp:auto-confirm yes; mirror -R --delete --parallel=4 --exclude-glob .git* --exclude-glob .github/ --exclude-glob _src/ --exclude-glob tools/ ./ $SFTP_DIR; quit"
