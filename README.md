@@ -42,17 +42,13 @@ Pour modifier un texte : changer le français dans le HTML **et** les deux tradu
    Allow: /
    ```
 2. **Image de partage** : remplacer `https://lgrconseil.github.io/siamavocat/` par `https://www.siamavocat.fr/` dans les balises `og:image`.
-3. **Mentions légales** : compléter toque, SIRET, TVA, assurance RCP, médiateur et hébergeur.
-4. **Polices** : pour une conformité RGPD stricte, héberger les polices (Cinzel, Cormorant Garamond, Jost, Amiri) dans `assets/fonts/` plutôt que via Google Fonts.
+3. **Adresse** : les mentions légales reprennent l'adresse professionnelle inscrite au Barreau (11 B avenue Victor Hugo), le reste du site celle de la carte de visite (20 rue de Longchamp). Harmoniser si besoin.
+4. **Polices** : pour une conformité RGPD stricte, héberger les polices (Cinzel, Cormorant Garamond, Jost, Amiri, IBM Plex Sans Arabic) dans `assets/fonts/` plutôt que via Google Fonts.
 5. **WhatsApp** : vérifier que le 07 43 62 79 00 est bien associé à un compte WhatsApp (idéalement WhatsApp Business, avec un message d'absence).
 
-## Nom de domaine
+## Hébergement IONOS
 
-Le site peut être servi par n'importe quel hébergement statique (OVH, Netlify, Vercel, GitHub Pages…). Avec GitHub Pages :
-
-1. Ajouter un fichier `CNAME` contenant `www.siamavocat.fr`.
-2. Chez le registrar : un enregistrement `CNAME` `www` → `lgrconseil.github.io`, et pour le domaine nu des enregistrements `A` vers `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
-3. Dans les réglages Pages du dépôt, activer « Enforce HTTPS ».
+Le site est entièrement statique : il suffit de déposer le contenu du dossier (sans `.git`) à la racine de l'espace web IONOS, par SFTP ou via le gestionnaire de fichiers, puis de rattacher le domaine `siamavocat.fr` à cet espace et d'activer le certificat SSL dans l'espace client IONOS.
 
 ## Aperçu local
 

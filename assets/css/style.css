@@ -1103,3 +1103,5 @@ html[dir="rtl"] .step-num { direction: ltr; text-align: right; }
 @media (max-width: 380px) {
   .brand-sub { display: none; }
 }
+
+.legal a, .legal dd { overflow-wrap: anywhere; }
