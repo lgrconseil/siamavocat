@@ -278,7 +278,13 @@ def fetch_imap(allowed):
         print("Boîte des Carnets non configurée : rien à faire.")
         return
     box = imaplib.IMAP4_SSL(host)
-    box.login(user, password)
+    try:
+        box.login(user, password)
+    except imaplib.IMAP4.error as exc:
+        # Avertissement visible dans l'onglet Actions, sans échec répété toutes les 15 minutes
+        print(f"::warning::Connexion à la boîte des Carnets refusée ({exc}). "
+              "Vérifier le secret CARNETS_IMAP_PASSWORD : il doit s'agir d'un mot de passe d'application Google.")
+        return
     box.select("INBOX")
     gmail = "gmail" in host.lower()
     nums = set()
