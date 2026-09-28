@@ -1,0 +1,23 @@
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="{{root}}index.html" aria-label="Essra Siam, avocate à la Cour — accueil" data-i18n-attr="aria-label:c.brandAria">
+      <img class="brand-logo" src="{{root}}assets/img/embleme.png" alt="" width="270" height="360">
+      <img class="brand-logo brand-logo--light" src="{{root}}assets/img/embleme-or.png" alt="" width="270" height="360">
+      <span class="brand-text"><span class="brand-name" data-i18n="c.brandName">ESSRA SIAM</span><span class="brand-sub" data-i18n="c.brandSub">Avocate à la Cour</span></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Navigation principale" data-i18n-attr="aria-label:c.navAria">
+      <a href="{{root}}cabinet.html"{{cur_cabinet}} data-i18n="c.nav.cabinet">Le cabinet</a>
+      <a href="{{root}}domaines.html"{{cur_domaines}} data-i18n="c.nav.domaines">Domaines</a>
+      <a href="{{root}}carnets.html"{{cur_carnets}} data-i18n="c.nav.carnets">Carnets</a>
+      <a class="nav-parole" href="{{root}}parole.html"{{cur_parole}}><span data-i18n="c.nav.parole">Art oratoire</span></a>
+      <button class="btn btn--solid nav-cta" type="button" data-sheet-open><span data-i18n="c.nav.rdv">Prendre rendez-vous</span></button>
+    </nav>
+    <div class="lang-switch" role="group" aria-label="Langue · Language · اللغة">
+      <button type="button" data-lang="fr" lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="ar" lang="ar" aria-pressed="false">عربي</button>
+    </div>
+    <button class="btn btn--solid header-cta" type="button" data-sheet-open><span data-i18n="c.nav.rdvShort">Rendez-vous</span></button>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav"><span></span><span></span><span></span></button>
+  </div>
+</header>

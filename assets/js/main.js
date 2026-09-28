@@ -3,11 +3,15 @@
   "use strict";
 
   var PHONE = "33743627900";
+  var PHONE_DISPLAY = "07 43 62 79 00";
   var EMAIL = "contact@siamavocat.fr";
+  var CABINET = [48.865005, 2.2910657];
   var LANGS = ["fr", "en", "ar"];
   var DICT = window.I18N || {};
   var root = document.documentElement;
   var current = "fr";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   /* ---------- Traduction ---------- */
 
@@ -24,10 +28,10 @@
     }).filter(function (p) { return p[0] && p[1]; });
   };
 
-  /* Le texte français d'origine est mémorisé pour pouvoir y revenir */
   var originals = [];
   document.querySelectorAll("[data-i18n]").forEach(function (el) {
-    originals.push({ el: el, key: el.getAttribute("data-i18n"), html: el.innerHTML });
+    var key = el.getAttribute("data-i18n");
+    if (key) originals.push({ el: el, key: key, html: el.innerHTML });
   });
   var attrOriginals = [];
   document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
@@ -36,9 +40,7 @@
     });
   });
 
-  var storeLang = function (lang) {
-    try { localStorage.setItem("lang", lang); } catch (e) { /* navigation privée */ }
-  };
+  var store = function (key, value) { try { localStorage.setItem(key, value); } catch (e) { /* navigation privée */ } };
   var readLang = function () {
     var q = new URLSearchParams(window.location.search).get("lang");
     if (LANGS.indexOf(q) > -1) return q;
@@ -47,25 +49,22 @@
   };
 
   var hooks = [];
-
   var applyLang = function (lang, save) {
     current = LANGS.indexOf(lang) > -1 ? lang : "fr";
     var d = DICT[current] || {};
     var translate = current !== "fr";
-
     originals.forEach(function (o) {
       o.el.innerHTML = translate && d[o.key] != null ? d[o.key] : o.html;
     });
     attrOriginals.forEach(function (o) {
       o.el.setAttribute(o.attr, translate && d[o.key] != null ? d[o.key] : o.value);
     });
-
     root.lang = current;
     root.dir = current === "ar" ? "rtl" : "ltr";
     document.querySelectorAll(".lang-switch [data-lang]").forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === current));
     });
-    if (save) storeLang(current);
+    if (save) store("lang", current);
     hooks.forEach(function (fn) { fn(current); });
     root.classList.remove("i18n-wait");
   };
@@ -76,6 +75,49 @@
       if (lang !== current) applyLang(lang, true);
     });
   });
+
+  /* Dates des carnets dans la langue du site */
+  hooks.push(function (lang) {
+    var fmt;
+    try { fmt = new Intl.DateTimeFormat(lang === "ar" ? "ar-u-nu-latn" : lang, { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return; }
+    document.querySelectorAll("time[data-date]").forEach(function (el) {
+      var d = new Date(el.getAttribute("datetime") + "T12:00:00");
+      if (!isNaN(d)) el.textContent = fmt.format(d);
+    });
+    document.querySelectorAll(".post-langnote").forEach(function (el) {
+      var post = document.querySelector("[data-post-lang]");
+      var postLang = post ? post.getAttribute("data-post-lang") : lang;
+      el.textContent = t("post.in." + postLang);
+      el.hidden = postLang === lang || !el.textContent;
+    });
+  });
+
+  /* ---------- Petites notifications ---------- */
+
+  var toastEl = document.getElementById("toast");
+  var toastTimer;
+  var toast = function (msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add("is-visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("is-visible"); }, 2600);
+  };
+  var copy = function (text, msg) {
+    var done = function () { toast(msg); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, function () { toast(text); });
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); done(); } catch (e) { toast(text); }
+      ta.remove();
+    }
+  };
 
   /* ---------- Liens WhatsApp / e-mail ---------- */
 
@@ -88,25 +130,83 @@
     if (body) q.push("body=" + encodeURIComponent(body.replace(/\n/g, "\r\n")));
     return "mailto:" + EMAIL + (q.length ? "?" + q.join("&") : "");
   };
-  var refreshLinks = function () {
-    document.querySelectorAll("[data-wa]").forEach(function (a) {
-      a.href = waLink(a.getAttribute("data-wa"));
+  hooks.push(function () {
+    document.querySelectorAll("[data-wa]").forEach(function (a) { a.href = waLink(a.getAttribute("data-wa")); });
+    document.querySelectorAll("[data-wa-tpl]").forEach(function (a) {
+      a.href = waLink(t(a.getAttribute("data-wa-tpl")).replace("{title}", a.getAttribute("data-wa-arg") || ""));
     });
     document.querySelectorAll("[data-mail-subject]").forEach(function (a) {
       a.href = mailLink(a.getAttribute("data-mail-subject"), a.getAttribute("data-mail-body") || "");
     });
-  };
-  hooks.push(refreshLinks);
+  });
 
-  /* ---------- En-tête ---------- */
+  /* Appeler : le téléphone compose, l'ordinateur copie le numéro */
+  document.querySelectorAll("[data-smart-call]").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (!finePointer) return;
+      e.preventDefault();
+      copy(PHONE_DISPLAY, t("c.copied").replace("{n}", PHONE_DISPLAY));
+    });
+  });
+
+  /* ---------- Portes d'entrée (première visite de l'accueil) ---------- */
+
+  var doors = document.getElementById("doors");
+  if (doors && !root.classList.contains("doors-on")) doors.remove();
+  if (doors && root.classList.contains("doors-on")) {
+    var opened = false;
+    var openDoors = function () {
+      if (opened) return;
+      opened = true;
+      store("siam.doors", "1");
+      doors.classList.add("is-opening");
+      root.classList.add("doors-opening");
+      setTimeout(function () {
+        doors.remove();
+        root.classList.remove("doors-on", "doors-opening");
+      }, 1750);
+    };
+    setTimeout(function () { doors.classList.add("is-lit"); }, 650);
+    var doorTimer = setTimeout(openDoors, 1700);
+    doors.addEventListener("click", function () { clearTimeout(doorTimer); openDoors(); });
+    document.addEventListener("keydown", function (e) {
+      if (!opened && (e.key === "Escape" || e.key === "Enter" || e.key === " ")) { clearTimeout(doorTimer); openDoors(); }
+    });
+  } else {
+    root.classList.remove("doors-on");
+  }
+
+  /* ---------- Éventail Art déco au clic ---------- */
+
+  var burstSVG = (function () {
+    var rays = "";
+    for (var i = 0; i < 24; i++) {
+      var a = (i * 15) * Math.PI / 180;
+      var r1 = i % 2 ? 22 : 14;
+      rays += '<line x1="' + (50 + r1 * Math.cos(a)).toFixed(1) + '" y1="' + (50 + r1 * Math.sin(a)).toFixed(1) +
+        '" x2="' + (50 + 48 * Math.cos(a)).toFixed(1) + '" y2="' + (50 + 48 * Math.sin(a)).toFixed(1) + '"/>';
+    }
+    return '<svg viewBox="0 0 100 100" aria-hidden="true">' + rays +
+      '<circle cx="50" cy="50" r="30" stroke-dasharray="1.5 3.5"/><circle cx="50" cy="50" r="10"/></svg>';
+  })();
+  if (!reduceMotion) {
+    document.addEventListener("pointerdown", function (e) {
+      var host = e.target.closest(".btn, .filter");
+      if (!host) return;
+      var r = host.getBoundingClientRect();
+      var b = document.createElement("span");
+      b.className = "deco-burst";
+      b.innerHTML = burstSVG;
+      b.style.left = (e.clientX - r.left) + "px";
+      b.style.top = (e.clientY - r.top) + "px";
+      host.appendChild(b);
+      setTimeout(function () { b.remove(); }, 850);
+    });
+  }
+
+  /* ---------- En-tête et menu ---------- */
 
   var header = document.querySelector(".site-header");
-  var onScroll = function () {
-    if (header) header.classList.toggle("is-scrolled", window.scrollY > 24);
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-
   var toggle = document.querySelector(".menu-toggle");
   var nav = document.getElementById("nav");
   var setMenu = function (open) {
@@ -117,17 +217,40 @@
     }
   };
   if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      setMenu(!document.body.classList.contains("menu-open"));
-    });
-    nav.addEventListener("click", function (e) {
-      if (e.target.closest("a")) setMenu(false);
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") setMenu(false);
-    });
+    toggle.addEventListener("click", function () { setMenu(!document.body.classList.contains("menu-open")); });
+    nav.addEventListener("click", function (e) { if (e.target.closest("a, button")) setMenu(false); });
     hooks.push(function () { setMenu(document.body.classList.contains("menu-open")); });
   }
+
+  /* ---------- Fiche de contact ---------- */
+
+  var sheet = document.getElementById("sheet");
+  var lastFocus = null;
+  var openSheet = function () {
+    if (!sheet) return;
+    lastFocus = document.activeElement;
+    sheet.hidden = false;
+    document.body.classList.add("sheet-open");
+    requestAnimationFrame(function () {
+      sheet.classList.add("is-open");
+      var first = sheet.querySelector(".sheet-action");
+      if (first) first.focus({ preventScroll: true });
+    });
+  };
+  var closeSheet = function () {
+    if (!sheet || sheet.hidden) return;
+    sheet.classList.remove("is-open");
+    document.body.classList.remove("sheet-open");
+    setTimeout(function () { sheet.hidden = true; }, 380);
+    if (lastFocus) lastFocus.focus({ preventScroll: true });
+  };
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-sheet-open]")) { e.preventDefault(); openSheet(); return; }
+    if (e.target.closest("[data-sheet-close]")) closeSheet();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { closeSheet(); setMenu(false); }
+  });
 
   /* ---------- Apparition au défilement ---------- */
 
@@ -135,15 +258,79 @@
   if ("IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-in");
-          io.unobserve(entry.target);
-        }
+        if (entry.isIntersecting) { entry.target.classList.add("is-in"); io.unobserve(entry.target); }
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
     reveals.forEach(function (el) { io.observe(el); });
   } else {
     reveals.forEach(function (el) { el.classList.add("is-in"); });
+  }
+
+  /* ---------- Défilement : en-tête et filigranes en parallaxe ---------- */
+
+  var parallax = reduceMotion ? [] : Array.prototype.slice.call(document.querySelectorAll("[data-parallax]"));
+  var ticking = false;
+  var onScroll = function () {
+    if (header) header.classList.toggle("is-scrolled", window.scrollY > 24);
+    if (ticking || !parallax.length) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      var vh = window.innerHeight;
+      parallax.forEach(function (el) {
+        var box = el.parentElement.getBoundingClientRect();
+        if (box.bottom < -200 || box.top > vh + 200) return;
+        var f = parseFloat(el.getAttribute("data-parallax")) || 0.1;
+        el.style.transform = "translate3d(0," + ((box.top + box.height / 2 - vh / 2) * -f).toFixed(1) + "px,0)";
+      });
+      ticking = false;
+    });
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- Visite du cabinet ---------- */
+
+  var tour = document.querySelector(".tour");
+  if (tour && "IntersectionObserver" in window) {
+    var layers = tour.querySelectorAll(".tour-layer");
+    var dots = tour.querySelectorAll(".tour-dots li");
+    var steps = tour.querySelectorAll(".tour-step");
+    var setStep = function (i) {
+      steps.forEach(function (s, k) { s.classList.toggle("is-active", k === i); });
+      dots.forEach(function (d, k) { d.classList.toggle("is-active", k === i); });
+      layers.forEach(function (l) {
+        var on = Number(l.getAttribute("data-step")) === i;
+        l.classList.toggle("is-active", on);
+        if (l.tagName === "VIDEO") {
+          if (on) { l.preload = "auto"; var p = l.play(); if (p && p.catch) p.catch(function () {}); } else { l.pause(); }
+        }
+      });
+    };
+    layers.forEach(function (l) {
+      if (l.tagName !== "VIDEO") return;
+      l.addEventListener("canplay", function () {
+        if (l.classList.contains("is-active") && l.paused) { var p = l.play(); if (p && p.catch) p.catch(function () {}); }
+      });
+    });
+    var stepObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setStep(Number(entry.target.getAttribute("data-step")));
+      });
+    }, { rootMargin: "-45% 0px -45% 0px" });
+    steps.forEach(function (s) { stepObserver.observe(s); });
+
+    /* Sur mobile, la vidéo du porche joue quand elle est visible */
+    var thumbVideos = tour.querySelectorAll(".tour-thumb video");
+    var videoObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var v = entry.target;
+        if (entry.isIntersecting && v.offsetParent !== null && !reduceMotion) {
+          v.preload = "auto";
+          var p = v.play(); if (p && p.catch) p.catch(function () {});
+        } else { v.pause(); }
+      });
+    }, { threshold: 0.35 });
+    thumbVideos.forEach(function (v) { videoObserver.observe(v); });
   }
 
   /* ---------- Sous-navigation des domaines ---------- */
@@ -169,6 +356,164 @@
     });
   }
 
+  /* ---------- Carnets : filtres et partage ---------- */
+
+  var filters = document.querySelectorAll(".carnets-filters .filter");
+  if (filters.length) {
+    var cards = document.querySelectorAll("#carnets-grid .carnet-card");
+    var empty = document.querySelector(".carnets-empty");
+    filters.forEach(function (f) {
+      f.addEventListener("click", function () {
+        var cat = f.getAttribute("data-filter");
+        filters.forEach(function (x) { x.classList.toggle("is-active", x === f); });
+        var shown = 0;
+        cards.forEach(function (c) {
+          var on = cat === "*" || c.getAttribute("data-cat") === cat;
+          c.classList.toggle("is-hidden", !on);
+          if (on) { shown++; c.classList.add("is-in"); }
+        });
+        if (empty) empty.hidden = shown > 0;
+      });
+    });
+  }
+  document.querySelectorAll("[data-share]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var data = { title: document.title, url: window.location.href };
+      if (navigator.share) { navigator.share(data).catch(function () {}); }
+      else { copy(window.location.href, t("c.linkCopied")); }
+    });
+  });
+
+  /* ---------- Accès : liste des stations et plan interactif ---------- */
+
+  var accesData = document.getElementById("acces-data");
+  var stationsList = document.getElementById("stations");
+  if (accesData && stationsList) {
+    var data = JSON.parse(accesData.textContent);
+    var mode = "all";
+    var map = null;
+    var markers = [];
+    var badge = function (l) {
+      var cls = /^(M\d|RA|RC)$/.test(l) ? "ln--" + l : "ln--bus";
+      var label = l.charAt(0) === "M" ? l.slice(1) : (l === "RA" ? "A" : (l === "RC" ? "C" : l));
+      return '<span class="ln ' + cls + '">' + label + "</span>";
+    };
+    var modeLabel = function (m) { return m === "rer" ? "RER" : t(m === "bus" ? "ac.bus" : "ac.metro"); };
+    var walk = function (s) { return "≈ " + s.min + " " + t("ac.walk"); };
+    var walkUrl = function (s) {
+      return "https://www.google.com/maps/dir/?api=1&origin=" + s.at[0] + "," + s.at[1] +
+        "&destination=" + CABINET[0] + "," + CABINET[1] + "&travelmode=walking";
+    };
+    var popup = function (s) {
+      return '<div class="lines">' + s.lines.map(badge).join("") + "</div><strong>" + s.name + "</strong>" +
+        modeLabel(s.mode) + " · " + walk(s) + '<br><a href="' + walkUrl(s) + '" target="_blank" rel="noopener">' + t("ac.walkRoute") + "</a>";
+    };
+    var renderList = function () {
+      stationsList.innerHTML = data.stations.map(function (s, i) {
+        return '<li><button type="button" class="station' + (mode !== "all" && s.mode !== mode ? " is-hidden" : "") +
+          '" data-i="' + i + '"><span class="lines">' + s.lines.map(badge).join("") + '</span><span class="station-name">' +
+          s.name + "<small>" + modeLabel(s.mode) + '</small></span><span class="station-min">' + walk(s) + "</span></button></li>";
+      }).join("");
+    };
+    var applyMode = function () {
+      stationsList.querySelectorAll(".station").forEach(function (b) {
+        var s = data.stations[Number(b.getAttribute("data-i"))];
+        b.classList.toggle("is-hidden", mode !== "all" && s.mode !== mode);
+      });
+      if (map) {
+        markers.forEach(function (m) {
+          var on = mode === "all" ? m.station.mode !== "bus" || m.focused : m.station.mode === mode;
+          if (on && !map.hasLayer(m.marker)) m.marker.addTo(map);
+          if (!on && map.hasLayer(m.marker)) map.removeLayer(m.marker);
+        });
+      }
+    };
+    renderList();
+    hooks.push(function () {
+      renderList();
+      applyMode();
+      markers.forEach(function (m) { m.marker.setPopupContent(popup(m.station)); });
+    });
+    document.querySelectorAll(".acces-filters .filter").forEach(function (f) {
+      f.addEventListener("click", function () {
+        mode = f.getAttribute("data-mode");
+        document.querySelectorAll(".acces-filters .filter").forEach(function (x) { x.classList.toggle("is-active", x === f); });
+        applyMode();
+      });
+    });
+    stationsList.addEventListener("click", function (e) {
+      var b = e.target.closest(".station");
+      if (!b) return;
+      var i = Number(b.getAttribute("data-i"));
+      stationsList.querySelectorAll(".station").forEach(function (x) { x.classList.toggle("is-active", x === b); });
+      if (!map) return;
+      var m = markers[i];
+      markers.forEach(function (x) { x.focused = x === m; });
+      applyMode();
+      map.flyTo(m.station.at, 17, { duration: reduceMotion ? 0 : 0.8 });
+      m.marker.openPopup();
+      if (window.innerWidth < 900) document.getElementById("map").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+    });
+
+    /* Le plan (Leaflet + OpenStreetMap) ne se charge qu'à l'approche de la section */
+    var loadMap = function () {
+      var css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+      document.head.appendChild(css);
+      var js = document.createElement("script");
+      js.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+      js.onload = function () {
+        var L = window.L;
+        var el = document.getElementById("map");
+        el.innerHTML = "";
+        map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true }).setView(CABINET, 16);
+        L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          maxZoom: 19,
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>'
+        }).addTo(map);
+        var logo = document.querySelector(".footer-brand img");
+        var cabIcon = L.divIcon({ className: "", html: '<div class="pin-cabinet"><img src="' + (logo ? logo.getAttribute("src") : "") + '" alt=""></div>', iconSize: [56, 56], iconAnchor: [28, 28] });
+        L.marker(CABINET, { icon: cabIcon, zIndexOffset: 1000, keyboard: false })
+          .addTo(map)
+          .bindPopup(function () { return "<strong>" + t("ac.cabinet") + '</strong><span class="ltr">20 rue de Longchamp, 75116 Paris</span>'; });
+        markers = data.stations.map(function (s) {
+          var icon = L.divIcon({ className: "", html: '<div class="pin-station">' + s.lines.map(badge).join("") + "</div>", iconSize: null, iconAnchor: [12, 12] });
+          var marker = L.marker(s.at, { icon: icon, title: s.name }).bindPopup(popup(s));
+          return { marker: marker, station: s };
+        });
+        applyMode();
+        var bounds = L.latLngBounds([CABINET].concat(data.stations.filter(function (s) { return s.min <= 6; }).map(function (s) { return s.at; })));
+        map.fitBounds(bounds.pad(0.35));
+      };
+      js.onerror = function () {
+        var el = document.getElementById("map");
+        el.innerHTML = '<iframe title="Plan" style="border:0;width:100%;height:100%" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=2.2830,48.8605,2.2990,48.8695&amp;layer=mapnik&amp;marker=' + CABINET[0] + "," + CABINET[1] + '"></iframe>';
+      };
+      document.head.appendChild(js);
+    };
+    var mapEl = document.getElementById("map");
+    if ("IntersectionObserver" in window) {
+      var mapObserver = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { mapObserver.disconnect(); loadMap(); }
+      }, { rootMargin: "400px 0px" });
+      mapObserver.observe(mapEl);
+    } else {
+      loadMap();
+    }
+
+    /* Itinéraire : l'application de l'appareil en premier */
+    var ua = navigator.userAgent;
+    var apple = /iPhone|iPad|iPod|Macintosh/.test(ua);
+    var btnApple = document.querySelector("[data-maps='apple']");
+    var btnGoogle = document.querySelector("[data-maps='google']");
+    if (!apple && btnApple && btnGoogle) {
+      btnApple.classList.replace("btn--solid", "btn--ghost");
+      btnGoogle.classList.replace("btn--ghost", "btn--solid");
+      btnGoogle.parentNode.insertBefore(btnGoogle, btnApple);
+    }
+  }
+
   /* ---------- Prise de rendez-vous : message prêt pour WhatsApp ou e-mail ---------- */
 
   var form = document.getElementById("rdv-form");
@@ -177,15 +522,11 @@
     var btnMail = form.querySelector("[data-send='mail']");
     var preview = document.getElementById("rdv-preview-text");
     var langueTouched = false;
-
     var value = function (name) {
       var el = form.elements[name];
       return el && el.value ? el.value.trim() : "";
     };
-    var checked = function (name) {
-      return form.querySelector("input[name='" + name + "']:checked");
-    };
-
+    var checked = function (name) { return form.querySelector("input[name='" + name + "']:checked"); };
     var build = function () {
       var motifEl = checked("motif");
       var langueEl = checked("langue");
@@ -196,7 +537,6 @@
       var motif = motifEl ? t("motif." + motifEl.getAttribute("data-key")) : "";
       var dispo = dispoEl && dispoEl.value ? dispoEl.options[dispoEl.selectedIndex].text : "";
       var langue = langueEl ? langueEl.value : current;
-
       var sep = current === "fr" ? " : " : ": ";
       var details = [];
       if (motif) details.push(t("msg.motif") + sep + motif);
@@ -204,35 +544,25 @@
       if (tel) details.push(t("msg.tel") + sep + tel);
       if (dispo) details.push(t("msg.dispo") + sep + dispo);
       if (langue !== current) details.push(t("msg.langue") + sep + t("lang." + langue));
-
       var lines = [t("msg.hello"), "", t("msg.intro")];
       if (details.length) lines.push("", details.join("\n"));
       if (msg) lines.push("", msg);
       lines.push("", t("msg.bye") + (nom ? "\n" + nom : ""));
-
       var body = lines.join("\n");
       var subject = t("msg.subject") + (motif ? " — " + motif : "") + (nom ? " — " + nom : "");
-
       if (btnWa) btnWa.href = waLink(body);
       if (btnMail) btnMail.href = mailLink(subject, body);
       if (preview) preview.textContent = body;
     };
-
-    /* Motif pré-sélectionné depuis une page de domaine : ?motif=etrangers */
     var wanted = new URLSearchParams(window.location.search).get("motif");
     if (wanted) {
       var chip = form.querySelector("input[name='motif'][data-key='" + wanted + "']");
       if (chip) chip.checked = true;
     }
-
-    form.addEventListener("change", function (e) {
-      if (e.target.name === "langue") langueTouched = true;
-    });
+    form.addEventListener("change", function (e) { if (e.target.name === "langue") langueTouched = true; });
     form.addEventListener("input", build);
     form.addEventListener("change", build);
     form.addEventListener("submit", function (e) { e.preventDefault(); });
-
-    /* La langue du rendez-vous suit la langue du site, tant que l'internaute ne l'a pas choisie */
     hooks.push(function (lang) {
       if (!langueTouched) {
         var match = form.querySelector("input[name='langue'][value='" + lang + "']");
@@ -243,9 +573,7 @@
   }
 
   /* Année du pied de page */
-  document.querySelectorAll("[data-year]").forEach(function (el) {
-    el.textContent = new Date().getFullYear();
-  });
+  document.querySelectorAll("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 
   applyLang(readLang(), new URLSearchParams(window.location.search).has("lang"));
 })();
