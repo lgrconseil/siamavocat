@@ -451,7 +451,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height
   pointer-events: none;
 }
 .frame img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; position: relative; }
-.about-media .frame img { object-position: 62% 40%; }
+.about-media .frame img { object-position: 50% 30%; }
 .about-inset {
   position: absolute;
   inset-inline-end: -26px;
@@ -1362,23 +1362,6 @@ html[dir="rtl"] .filigree--door { left: auto; right: 0; -webkit-mask-image: line
 
 /* ---------- Visite du cabinet ---------- */
 
-.tour { background: var(--paper); }
-.tour-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: clamp(40px, 7vw, 110px); }
-.tour-stage { position: sticky; top: 104px; height: calc(100vh - 150px); min-height: 460px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; }
-.arch--tour { max-width: 420px; margin: 0 auto; }
-.arch--tour .arch-inner { background: var(--ink); }
-.tour-layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.06); transition: opacity 1.1s var(--ease), transform 7s linear; }
-.tour-layer.is-active { opacity: 1; transform: scale(1); }
-.tour-dots { display: flex; gap: 10px; }
-.tour-dots li { width: 26px; height: 1px; background: var(--line); transition: background 0.4s, width 0.4s var(--ease); }
-.tour-dots li.is-active { background: var(--gold); width: 44px; }
-.tour-step { min-height: 72vh; display: flex; flex-direction: column; justify-content: center; opacity: 0.32; transition: opacity 0.7s var(--ease); }
-.tour-step.is-active { opacity: 1; }
-.tour-num { font-family: var(--roman); font-size: 1rem; letter-spacing: 0.2em; color: var(--gold); }
-.tour-step h3 { font-size: clamp(2rem, 3.4vw, 2.8rem); font-style: italic; font-weight: 500; margin-top: 10px; }
-.tour-step p { font-family: var(--serif); font-size: clamp(1.25rem, 1.9vw, 1.55rem); line-height: 1.5; color: var(--ink-2); margin-top: 16px; max-width: 30ch; }
-.tour-step .link-arrow { margin-top: 30px; align-self: flex-start; }
-.tour-thumb { display: none; }
 
 /* ---------- Bandeau « Art oratoire » (univers bleu nuit) ---------- */
 
@@ -1680,11 +1663,9 @@ body.theme-parole::after { mix-blend-mode: soft-light; opacity: 0.18; }
 .about-text > p { margin-top: 18px; }
 
 html[lang="ar"] .punch-quote p, html[lang="ar"] .big-quote p, html[lang="ar"] .hero-quote p, html[lang="ar"] blockquote.pull p { line-height: 1.6 !important; }
-html[lang="ar"] .tour-step p { font-family: var(--sans); font-size: 1.15rem; line-height: 1.9; }
 html[lang="ar"] .punch::before { content: "»"; }
 html[lang="ar"] .post-body > ul li { padding: 8px 22px 8px 0; }
 html[lang="ar"] .post-body > ul li::before { left: auto; right: 0; }
-html[dir="rtl"] .tour-step .link-arrow { align-self: flex-end; }
 
 /* ---------- Responsive v2 ---------- */
 
@@ -1721,13 +1702,6 @@ html[dir="rtl"] .tour-step .link-arrow { align-self: flex-end; }
 }
 
 @media (max-width: 900px) {
-  .tour-grid { grid-template-columns: 1fr; }
-  .tour-stage { display: none; }
-  .tour-step { min-height: 0; opacity: 1; padding-bottom: 54px; }
-  .tour-thumb { display: block; margin-bottom: 22px; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 999px 999px 0 0; position: relative; }
-  .tour-thumb::after { content: ""; position: absolute; inset: 8px; border: 1px solid rgba(246, 241, 232, 0.6); border-radius: 999px 999px 0 0; pointer-events: none; }
-  .tour-thumb img, .tour-thumb video { width: 100%; height: 100%; object-fit: cover; }
-  .tour-step:nth-child(1) .tour-thumb img { object-position: 50% 62%; }
   .parole-band .wrap, .parole-band--slim .wrap, .parole-hero .wrap, .parole-project .wrap, .who-grid { grid-template-columns: 1fr; }
   .parole-hero .hero-media { order: -1; }
   .arch--navy { max-width: 300px; margin: 0 auto; }
@@ -1760,7 +1734,7 @@ html[dir="rtl"] .tour-step .link-arrow { align-self: flex-end; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tour-layer, .door, main, .site-header { transition: none !important; }
+  .door, main, .site-header { transition: none !important; }
   .pin-cabinet::after, .deco-burst { animation: none; display: none; }
 }
 
@@ -1806,7 +1780,6 @@ html[dir="rtl"] .tour-step .link-arrow { align-self: flex-end; }
 .theme-parole .site-bg img { mix-blend-mode: screen; opacity: 0.07; filter: grayscale(1) contrast(1.1) blur(1.5px); }
 
 /* Les sections claires laissent deviner le fond */
-.tour { background: transparent; }
 .section--deep, .quote-light { background: rgba(237, 228, 211, 0.78); }
 .section--card { background: rgba(251, 248, 242, 0.8); }
 .facts { background: rgba(237, 228, 211, 0.82); }
@@ -1833,9 +1806,6 @@ html.doors-on .doors { background: transparent; }
 main, .site-header { transition: transform 1.2s var(--ease); }
 
 /* Visite du cabinet, en plus grand */
-.tour-grid { grid-template-columns: 1.2fr 0.8fr; gap: clamp(36px, 5vw, 80px); }
-.tour-stage { top: 92px; height: calc(100vh - 116px); }
-.arch--tour { max-width: none; width: min(100%, calc((100vh - 190px) * 0.87)); aspect-ratio: 4 / 4.6; }
 
 /* Micro en fond de la citation de l'espace Art oratoire */
 .parole-quote { background: var(--navy-0) url("../img/illustrations/micro.jpg") center 40% / cover no-repeat; }
@@ -1854,7 +1824,6 @@ main, .site-header { transition: transform 1.2s var(--ease); }
 
 /* Lisibilité sur téléphone */
 @media (max-width: 900px) {
-  .tour-thumb { aspect-ratio: 4 / 4.4; }
 }
 @media (max-width: 600px) {
   body { font-size: 16.5px; }
@@ -1873,7 +1842,6 @@ main, .site-header { transition: transform 1.2s var(--ease); }
   .sheet-action small { font-size: 0.86rem; }
   .site-footer { font-size: 0.92rem; }
   .footer-bottom, .breadcrumb { font-size: 0.84rem; }
-  .tour-step p { font-size: 1.3rem; }
   .station-min { font-size: 0.86rem; }
   .parole-note, .post-anon, .deonto { font-size: 0.92rem; }
 }
@@ -1916,4 +1884,22 @@ html[lang="ar"] .reach-label { letter-spacing: 0; font-size: 0.9rem; }
 html[lang="ar"] .reach-value { font-family: "Cormorant Garamond", serif; }
 @media (max-width: 900px) {
   .reach { bottom: calc(80px + env(safe-area-inset-bottom)); }
+}
+
+/* ==========================================================
+   Le cabinet : l'entrée du 20, rue de Longchamp
+   ========================================================== */
+
+.entree-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(36px, 6vw, 96px); }
+.entree h2 { font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.05; margin-top: 14px; }
+.entree-sub { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem, 2vw, 1.6rem); color: var(--ink-2); margin-top: 18px; }
+.entree .link-arrow { margin-top: 30px; }
+.arch--entree { width: min(100%, 440px, calc((100vh - 170px) * 0.62)); aspect-ratio: 392 / 640; margin-inline: auto; }
+.arch--entree .arch-inner { background: var(--ink); }
+.arch--entree video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+html[lang="ar"] .entree-sub { font-family: var(--sans); font-style: normal; font-size: 1.2rem; }
+@media (max-width: 900px) {
+  .entree-grid { grid-template-columns: 1fr; text-align: center; }
+  .entree .link-arrow { justify-content: center; }
+  .arch--entree { width: min(100%, 340px); }
 }

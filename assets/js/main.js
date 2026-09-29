@@ -371,49 +371,23 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---------- Visite du cabinet ---------- */
+  /* ---------- Le cabinet : la vidéo de l'entrée joue quand elle est visible ---------- */
 
-  var tour = document.querySelector(".tour");
-  if (tour && "IntersectionObserver" in window) {
-    var layers = tour.querySelectorAll(".tour-layer");
-    var dots = tour.querySelectorAll(".tour-dots li");
-    var steps = tour.querySelectorAll(".tour-step");
-    var setStep = function (i) {
-      steps.forEach(function (s, k) { s.classList.toggle("is-active", k === i); });
-      dots.forEach(function (d, k) { d.classList.toggle("is-active", k === i); });
-      layers.forEach(function (l) {
-        var on = Number(l.getAttribute("data-step")) === i;
-        l.classList.toggle("is-active", on);
-        if (l.tagName === "VIDEO") {
-          if (on) { l.preload = "auto"; var p = l.play(); if (p && p.catch) p.catch(function () {}); } else { l.pause(); }
-        }
-      });
+  var entree = document.querySelector(".entree video");
+  if (entree && "IntersectionObserver" in window && !reduceMotion) {
+    var entreeVisible = false;
+    var playEntree = function () {
+      if (!entreeVisible || document.hidden || !entree.paused) return;
+      var p = entree.play(); if (p && p.catch) p.catch(function () {});
     };
-    layers.forEach(function (l) {
-      if (l.tagName !== "VIDEO") return;
-      l.addEventListener("canplay", function () {
-        if (l.classList.contains("is-active") && l.paused) { var p = l.play(); if (p && p.catch) p.catch(function () {}); }
-      });
-    });
-    var stepObserver = new IntersectionObserver(function (entries) {
+    entree.addEventListener("canplay", playEntree);
+    document.addEventListener("visibilitychange", playEntree);
+    new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) setStep(Number(entry.target.getAttribute("data-step")));
+        entreeVisible = entry.isIntersecting;
+        if (entreeVisible) { entree.preload = "auto"; playEntree(); } else { entree.pause(); }
       });
-    }, { rootMargin: "-45% 0px -45% 0px" });
-    steps.forEach(function (s) { stepObserver.observe(s); });
-
-    /* Sur mobile, la vidéo du porche joue quand elle est visible */
-    var thumbVideos = tour.querySelectorAll(".tour-thumb video");
-    var videoObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        var v = entry.target;
-        if (entry.isIntersecting && v.offsetParent !== null && !reduceMotion) {
-          v.preload = "auto";
-          var p = v.play(); if (p && p.catch) p.catch(function () {});
-        } else { v.pause(); }
-      });
-    }, { threshold: 0.35 });
-    thumbVideos.forEach(function (v) { videoObserver.observe(v); });
+    }, { threshold: 0.3 }).observe(entree);
   }
 
   /* ---------- Sous-navigation des domaines ---------- */
