@@ -137,7 +137,7 @@ window.I18N = {
     "h.f4": "<strong>20 rue de Longchamp</strong>Paris 16<sup>th</sup>",
     "k.alt3": "The practice's waiting lounge",
     "k.sub": "Paris 16<sup>th</sup>. Come in, I'll be expecting you.",
-    "k.videoAlt": "The entrance of 20 rue de Longchamp",
+    "k.videoAlt": "From the street to the office: the door of 20 rue de Longchamp, the porch, the reception and the office",
     "p1.quote": "A lawyer does not defend a client better by speaking louder. A lawyer defends a client better by knowing the case inside out.",
     "m.eyebrow": "How I work",
     "m.title": "A <em>personal</em>, responsive defence.",
@@ -419,6 +419,11 @@ window.I18N = {
 
     /* Mentions légales */
     "lg.eyebrow": "Legal information",
+    "t.e404": "Page not found — Maître Essra Siam, lawyer at the Paris Bar",
+    "e404.eyebrow": "Page not found",
+    "e404.h1": "This door <em>leads nowhere.</em>",
+    "e404.p": "The page you are looking for does not exist or has moved. The practice, however, still awaits you at 20 rue de Longchamp.",
+    "e404.home": "Back to the home page",
     "lg.h1": "Legal <em>notice</em>",
     "lg.note": "This translation is provided for information only. The French version is the only legally binding one.",
     "lg.hEditor": "Publisher",
@@ -548,7 +553,7 @@ window.I18N = {
     "h.f4": "<strong>شارع لونشان</strong>باريس، الدائرة 16",
     "k.alt3": "صالة الاستقبال في المكتب",
     "k.sub": "باريس، الدائرة السادسة عشرة. تفضّلوا بالدخول، أنا في انتظاركم.",
-    "k.videoAlt": "مدخل المبنى في شارع لونشان",
+    "k.videoAlt": "من الشارع إلى المكتب: باب المبنى في شارع لونشان، والرواق، والاستقبال، والمكتب",
     "p1.quote": "المحامي لا يدافع عن موكله بشكل أفضل حين يرفع صوته، بل حين يعرف ملفه معرفةً تامة.",
     "m.eyebrow": "طريقتي في العمل",
     "m.title": "دفاعٌ <em>شخصي</em> وسريع الاستجابة.",
@@ -832,6 +837,11 @@ window.I18N = {
 
     /* Mentions légales */
     "lg.eyebrow": "معلومات قانونية",
+    "t.e404": "الصفحة غير موجودة — الأستاذة إسراء صيام، محامية لدى هيئة المحامين في باريس",
+    "e404.eyebrow": "الصفحة غير موجودة",
+    "e404.h1": "هذا الباب <em>لا يؤدي إلى أي مكان.</em>",
+    "e404.p": "الصفحة التي تبحثون عنها غير موجودة أو تغيّر عنوانها. أما المكتب، فما زال في انتظاركم في شارع لونشان.",
+    "e404.home": "العودة إلى الصفحة الرئيسية",
     "lg.h1": "الإشعار <em>القانوني</em>",
     "lg.note": "هذه الترجمة مقدَّمة لأغراض إعلامية فقط، والنسخة الفرنسية هي وحدها المعتمدة قانونياً.",
     "lg.hEditor": "ناشرة الموقع",

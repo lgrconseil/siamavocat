@@ -371,23 +371,45 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  /* ---------- Le cabinet : la vidéo de l'entrée joue quand elle est visible ---------- */
+  /* ---------- Le cabinet : de la rue au bureau, en fondu et en boucle ---------- */
 
-  var entree = document.querySelector(".entree video");
-  if (entree && "IntersectionObserver" in window && !reduceMotion) {
-    var entreeVisible = false;
-    var playEntree = function () {
-      if (!entreeVisible || document.hidden || !entree.paused) return;
-      var p = entree.play(); if (p && p.catch) p.catch(function () {});
+  var loop = document.querySelector(".entree-loop");
+  if (loop && "IntersectionObserver" in window && !reduceMotion) {
+    var layers = loop.querySelectorAll(".entree-layer");
+    var porche = loop.querySelector("video");
+    var HOLD = 3200;
+    var at = 0, loopTimer = null, loopVisible = false, loaded = false;
+    var schedule = function () {
+      clearTimeout(loopTimer);
+      if (!loopVisible || document.hidden) {
+        if (porche) porche.pause();
+        return;
+      }
+      if (layers[at] === porche) {
+        var p = porche.play();
+        if (p && p.catch) p.catch(function () { loopTimer = setTimeout(advance, HOLD); });
+        loopTimer = setTimeout(advance, 12000); // au cas où la vidéo ne signale pas sa fin
+      } else {
+        loopTimer = setTimeout(advance, HOLD);
+      }
     };
-    entree.addEventListener("canplay", playEntree);
-    document.addEventListener("visibilitychange", playEntree);
+    var advance = function () {
+      var prev = layers[at];
+      at = (at + 1) % layers.length;
+      layers[at].classList.add("is-active");
+      prev.classList.remove("is-active");
+      if (prev === porche) setTimeout(function () { porche.pause(); porche.currentTime = 0; }, 1300);
+      schedule();
+    };
+    if (porche) porche.addEventListener("ended", function () { if (layers[at] === porche) advance(); });
+    document.addEventListener("visibilitychange", schedule);
     new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        entreeVisible = entry.isIntersecting;
-        if (entreeVisible) { entree.preload = "auto"; playEntree(); } else { entree.pause(); }
+        loopVisible = entry.isIntersecting;
+        if (loopVisible && !loaded && porche) { loaded = true; porche.preload = "auto"; porche.load(); }
+        schedule();
       });
-    }, { threshold: 0.3 }).observe(entree);
+    }, { threshold: 0.3 }).observe(loop);
   }
 
   /* ---------- Sous-navigation des domaines ---------- */

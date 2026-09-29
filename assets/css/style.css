@@ -1896,7 +1896,10 @@ html[lang="ar"] .reach-value { font-family: "Cormorant Garamond", serif; }
 .entree .link-arrow { margin-top: 30px; }
 .arch--entree { width: min(100%, 440px, calc((100vh - 170px) * 0.62)); aspect-ratio: 392 / 640; margin-inline: auto; }
 .arch--entree .arch-inner { background: var(--ink); }
-.arch--entree video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
+.entree-layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s var(--ease); }
+.entree-layer.is-active { opacity: 1; }
+video.entree-layer { object-position: 50% 60%; }
+.entree-layer--bureau { object-position: 58% 50%; }
 html[lang="ar"] .entree-sub { font-family: var(--sans); font-style: normal; font-size: 1.2rem; }
 @media (max-width: 900px) {
   .entree-grid { grid-template-columns: 1fr; text-align: center; }

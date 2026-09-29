@@ -17,6 +17,7 @@ import unicodedata
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 SRC = ROOT / "_src"
 SITE = "https://www.siamavocat.fr/"
+REDIRECTS = {"home": "index.html", "about": "cabinet.html", "contact": "index.html#rendez-vous"}
 
 MONTHS_FR = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet",
              "août", "septembre", "octobre", "novembre", "décembre"]
@@ -200,7 +201,7 @@ def page_ctx(meta, root):
         "titleKey": meta.get("titleKey", ""),
         "desc": html.escape(meta.get("desc", "")),
         "canonical": SITE + meta.get("path", ""),
-        "ogimage": "https://lgrconseil.github.io/siamavocat/assets/img/og-image.jpg",
+        "ogimage": SITE + "assets/img/og-image.jpg",
         "body_class": meta.get("bodyClass", ""),
         "rdv": "#rendez-vous" if meta.get("active") == "home" else root + "index.html#rendez-vous",
         "acces": "#acces" if meta.get("active") == "home" else root + "index.html#acces",
@@ -224,7 +225,8 @@ def build():
         m = re.match(r"^<!--meta\s+(\{.*?\})\s*-->\s*\n", raw, re.S)
         meta = json.loads(m.group(1)) if m else {}
         body = raw[m.end():] if m else raw
-        ctx = page_ctx(meta, "")
+        # « root » : chemins absolus pour la page 404, servie à n'importe quelle profondeur
+        ctx = page_ctx(meta, meta.get("root", ""))
         ctx["carnets_latest"] = "\n".join(card(p, "") for p in public[:3])
         ctx["carnets_all"] = "\n".join(card(p, "") for p in public)
         ctx["carnets_filters"] = filters(public)
@@ -263,6 +265,18 @@ def build():
         out = typo_fr(render(PARTIALS["layout"].replace("{{content}}", tpl), ctx))
         (out_dir / f"{post['slug']}.html").write_text(out, encoding="utf-8")
         written.append(f"carnets/{post['slug']}.html" + (" (brouillon)" if post["draft"] else ""))
+
+    # Anciennes adresses du site (Squarespace) : les liens et favoris continuent de fonctionner
+    for old, new in REDIRECTS.items():
+        (ROOT / f"{old}.html").write_text(
+            '<!doctype html>\n<html lang="fr"><head><meta charset="utf-8">'
+            '<meta name="robots" content="noindex">'
+            f'<title>Maître Essra Siam — Avocate au Barreau de Paris</title>'
+            f'<link rel="canonical" href="{SITE}{new.split("#")[0]}">'
+            f'<meta http-equiv="refresh" content="0; url={new}">'
+            f'<script>location.replace("{new}")</script>'
+            '</head><body style="background:#f6f1e8"></body></html>\n', encoding="utf-8")
+        written.append(f"{old}.html → {new}")
     return written
 
 

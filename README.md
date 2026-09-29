@@ -107,10 +107,9 @@ Pour que les articles envoyés par e-mail arrivent aussi chez IONOS, ajouter les
 ## Avant la mise en ligne sur siamavocat.fr
 
 1. **Indexation.** Supprimer la balise `<meta name="robots" content="noindex, nofollow">` de `_src/partials/head.html`, puis remplacer `robots.txt` par `User-agent: *` / `Allow: /`.
-2. **Image de partage.** Remplacer `https://lgrconseil.github.io/siamavocat/` par `https://www.siamavocat.fr/` dans `tools/build.py` (variable `ogimage`).
-3. **Carnets d'exemple.** Les trois articles marqués `exemple: oui` sont des textes de démonstration : à remplacer par de vrais récits, ou à valider puis retirer la ligne `exemple: oui`.
-4. **Polices.** Pour une conformité RGPD stricte, héberger les polices dans `assets/fonts/` plutôt que via Google Fonts.
-5. **WhatsApp.** Vérifier que le 07 43 62 79 00 est bien associé à un compte WhatsApp, idéalement WhatsApp Business.
+2. **Carnets d'exemple.** Les trois articles marqués `exemple: oui` sont des textes de démonstration : à remplacer par de vrais récits, ou à valider puis retirer la ligne `exemple: oui`.
+3. **Polices.** Pour une conformité RGPD stricte, héberger les polices dans `assets/fonts/` plutôt que via Google Fonts.
+4. **WhatsApp.** Vérifier que le 07 43 62 79 00 est bien associé à un compte WhatsApp, idéalement WhatsApp Business.
 
 ## Aperçu local
 
