@@ -103,10 +103,9 @@
     clearTimeout(toastTimer);
     toastTimer = setTimeout(function () { toastEl.classList.remove("is-visible"); }, 2600);
   };
-  var copy = function (text, msg) {
-    var done = function () { toast(msg); };
+  var copyText = function (text, ok, fail) {
     if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(done, function () { toast(text); });
+      navigator.clipboard.writeText(text).then(ok, fail);
     } else {
       var ta = document.createElement("textarea");
       ta.value = text;
@@ -114,9 +113,14 @@
       ta.style.opacity = "0";
       document.body.appendChild(ta);
       ta.select();
-      try { document.execCommand("copy"); done(); } catch (e) { toast(text); }
+      var done = false;
+      try { done = document.execCommand("copy"); } catch (e) {}
       ta.remove();
+      (done ? ok : fail)();
     }
+  };
+  var copy = function (text, msg) {
+    copyText(text, function () { toast(msg); }, function () { toast(text); });
   };
 
   /* ---------- Liens WhatsApp / e-mail ---------- */
@@ -140,13 +144,92 @@
     });
   });
 
-  /* Appeler : le téléphone compose, l'ordinateur copie le numéro */
-  document.querySelectorAll("[data-smart-call]").forEach(function (a) {
-    a.addEventListener("click", function (e) {
-      if (!finePointer) return;
-      e.preventDefault();
-      copy(PHONE_DISPLAY, t("c.copied").replace("{n}", PHONE_DISPLAY));
-    });
+  /* ---------- Appeler, écrire : l'application de l'appareil, sinon le numéro ou l'adresse en clair ---------- */
+
+  var reach = document.getElementById("reach");
+  var node = function (tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  };
+  var withIcon = function (n, icon, label) {
+    n.innerHTML = '<svg aria-hidden="true"><use href="#' + icon + '"/></svg>';
+    n.appendChild(node("span", "", label));
+    return n;
+  };
+  var closeReach = function () {
+    if (!reach || reach.hidden) return;
+    reach.classList.remove("is-open");
+    setTimeout(function () { if (!reach.classList.contains("is-open")) reach.hidden = true; }, 320);
+  };
+  var openReach = function (link, focus) {
+    if (!reach) return null;
+    var phone = link.protocol === "tel:";
+    var value = phone ? PHONE_DISPLAY : EMAIL;
+    var body = reach.querySelector(".reach-body");
+    body.textContent = "";
+    var label = node("p", "reach-label", t(phone ? "reach.phone" : "reach.mail"));
+    label.id = "reach-label";
+    body.appendChild(label);
+    body.appendChild(node("p", "reach-value ltr", value));
+    body.appendChild(node("p", "reach-hint", t(phone ? "reach.hintPhone" : "reach.hintMail")));
+    var status = node("p", "reach-status");
+    status.setAttribute("aria-live", "polite");
+    var copied = function () { status.textContent = t("reach.copied"); };
+    var actions = node("div", "reach-actions");
+    var copyBtn = withIcon(node("button", "btn btn--solid"), "i-copy", t("reach.copy"));
+    copyBtn.type = "button";
+    copyBtn.addEventListener("click", function () { copyText(value, copied, function () {}); });
+    actions.appendChild(copyBtn);
+    var out = function (href, icon, text) {
+      var a = withIcon(node("a", "btn btn--ghost"), icon, text);
+      a.href = href;
+      a.target = "_blank";
+      a.rel = "noopener";
+      actions.appendChild(a);
+    };
+    if (phone) {
+      out(waLink(""), "i-wa", t("c.mb.wa") || "WhatsApp");
+    } else {
+      // Messagerie en ligne : même objet et même texte que le mailto
+      var u = new URL(link.href);
+      var su = encodeURIComponent(u.searchParams.get("subject") || "");
+      var bd = encodeURIComponent(u.searchParams.get("body") || "");
+      var to = encodeURIComponent(EMAIL);
+      out("https://mail.google.com/mail/?view=cm&fs=1&to=" + to + "&su=" + su + "&body=" + bd, "i-mail", "Gmail");
+      out("https://outlook.live.com/mail/0/deeplink/compose?to=" + to + "&subject=" + su + "&body=" + bd, "i-mail", "Outlook");
+    }
+    body.appendChild(actions);
+    body.appendChild(status);
+    reach.hidden = false;
+    requestAnimationFrame(function () { reach.classList.add("is-open"); });
+    if (focus) copyBtn.focus({ preventScroll: true });
+    return copied;
+  };
+  hooks.push(closeReach);
+
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest('a[href^="tel:"], a[href^="mailto:"]');
+    if (reach && !reach.hidden && !e.target.closest("#reach") && !a) closeReach();
+    if (!a || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var value = a.protocol === "tel:" ? PHONE_DISPLAY : EMAIL;
+    if (finePointer) {
+      // Ordinateur : l'application s'ouvre si elle existe, et le numéro ou l'adresse restent affichés, copiés
+      var copied = openReach(a, e.detail === 0);
+      copyText(value, copied || function () {}, function () {});
+      return;
+    }
+    // Téléphone, tablette : l'application s'ouvre ; si rien ne se passe, affichage en clair
+    var left = false;
+    var mark = function () { left = true; };
+    window.addEventListener("blur", mark);
+    document.addEventListener("visibilitychange", mark);
+    setTimeout(function () {
+      window.removeEventListener("blur", mark);
+      document.removeEventListener("visibilitychange", mark);
+      if (!left && !document.hidden) openReach(a, false);
+    }, 1500);
   });
 
   /* ---------- Portes d'entrée (première visite de l'accueil) ---------- */
@@ -249,7 +332,7 @@
     if (e.target.closest("[data-sheet-close]")) closeSheet();
   });
   document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") { closeSheet(); setMenu(false); }
+    if (e.key === "Escape") { closeReach(); closeSheet(); setMenu(false); }
   });
 
   /* ---------- Apparition au défilement ---------- */

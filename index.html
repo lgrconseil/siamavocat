@@ -452,7 +452,7 @@
       <p class="rdv-intro" data-i18n="r.intro">Un premier échange me permet de comprendre votre situation et de vous indiquer la marche à suivre. Choisissez un motif : votre demande est rédigée pour vous, il ne reste qu'à l'envoyer.</p>
 
       <ul class="coords">
-        <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small data-i18n="r.phone">Téléphone</small><a class="ltr" href="tel:+33743627900" data-smart-call>07 43 62 79 00</a></div></li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg><div><small data-i18n="r.phone">Téléphone</small><a class="ltr" href="tel:+33743627900">07 43 62 79 00</a></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg><div><small data-i18n="r.email">E-mail</small><a class="ltr" href="mailto:contact@siamavocat.fr">contact@siamavocat.fr</a></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg><div><small data-i18n="r.office">Cabinet</small><a class="ltr" href="#acces">20 rue de Longchamp, 75116 Paris</a></div></li>
         <li><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg><div><small data-i18n="r.consult">Consultations</small><address data-i18n="r.consultVal">Sur rendez-vous, au cabinet</address></div></li>
@@ -460,7 +460,7 @@
 
       <div class="urgent">
         <p data-i18n="r.urgent"><strong>Urgence pénale</strong>Garde à vue, déferrement, audience imminente : appelez-moi directement.</p>
-        <a class="btn btn--gold" href="tel:+33743627900" data-smart-call><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
+        <a class="btn btn--gold" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span data-i18n="c.mb.call">Appeler</span></a>
       </div>
     </div>
 
@@ -581,7 +581,7 @@
     <h2 id="sheet-title" data-i18n="sheet.title">Comment souhaitez-vous <em>me joindre ?</em></h2>
     <p class="sheet-intro" data-i18n="sheet.intro">Je vous réponds personnellement. Choisissez simplement le moyen qui vous convient.</p>
     <div class="sheet-actions">
-      <a class="sheet-action" href="tel:+33743627900" data-smart-call><svg aria-hidden="true"><use href="#i-phone"/></svg><span><strong data-i18n="sheet.call">Appeler</strong><small class="ltr">07 43 62 79 00</small></span></a>
+      <a class="sheet-action" href="tel:+33743627900"><svg aria-hidden="true"><use href="#i-phone"/></svg><span><strong data-i18n="sheet.call">Appeler</strong><small class="ltr">07 43 62 79 00</small></span></a>
       <a class="sheet-action" href="https://wa.me/33743627900" data-wa="Bonjour Maître Siam, je souhaiterais prendre rendez-vous." data-i18n-attr="data-wa:c.wa" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span><strong data-i18n="c.mb.wa">WhatsApp</strong><small data-i18n="sheet.waSub">Un message prêt à envoyer</small></span></a>
       <a class="sheet-action" href="mailto:contact@siamavocat.fr" data-mail-subject="Demande de rendez-vous" data-mail-body="Bonjour Maître Siam,&#10;&#10;Je souhaiterais prendre rendez-vous avec vous.&#10;&#10;Bien cordialement," data-i18n-attr="data-mail-subject:msg.subject; data-mail-body:c.mailBody"><svg aria-hidden="true"><use href="#i-mail"/></svg><span><strong data-i18n="sheet.mail">E-mail</strong><small class="ltr">contact@siamavocat.fr</small></span></a>
       <a class="sheet-action" href="#rendez-vous" data-sheet-close><svg aria-hidden="true"><use href="#i-feather"/></svg><span><strong data-i18n="sheet.form">Préparer ma demande</strong><small data-i18n="sheet.formSub">Motif, disponibilités, langue</small></span></a>
@@ -599,5 +599,9 @@
 </nav>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="reach" id="reach" role="dialog" aria-modal="false" aria-labelledby="reach-label" hidden>
+  <button class="reach-close" type="button" aria-label="Fermer" data-i18n-attr="aria-label:c.close"><svg aria-hidden="true"><use href="#i-close"/></svg></button>
+  <div class="reach-body"></div>
+</div>
 </body>
 </html>
