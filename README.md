@@ -98,11 +98,16 @@ Test en local, sans boîte e-mail :
 CARNETS_ALLOWED=contact@siamavocat.fr python3 tools/mail2blog.py --eml message.eml && python3 tools/build.py
 ```
 
-## Hébergement IONOS et nom de domaine
+## Hébergement et nom de domaine
 
-Le site est statique. Il suffit de déposer le contenu du dossier à la racine de l'espace web IONOS, sans `.git`, `.github`, `_src` ni `tools`. On passe par SFTP ou par le gestionnaire de fichiers, puis on active le certificat SSL.
+- **Site** : GitHub Pages (gratuit), publié à chaque modification de `main`, y compris par le robot des Carnets. Adresse : www.siamavocat.fr (fichier `CNAME`, réglé au moment de la bascule).
+- **Nom de domaine** : siamavocat.fr, transféré de Squarespace vers OVHcloud (environ 9 € TTC par an).
+- **DNS** : Cloudflare (gratuit). Les lignes de la messagerie Google Workspace (`MX`, `TXT v=spf1`, `TXT google._domainkey`) ne doivent jamais être supprimées.
+- **Lignes du site** : 4 lignes `A` sur `@` vers 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, et un `CNAME www` vers `lgrconseil.github.io`, en mode proxy Cloudflare (SSL « Full »).
+- **Page 404** : `404.html` utilise des chemins absolus (`/assets/…`), puisqu'elle peut être servie à n'importe quelle profondeur.
+- **Anciennes adresses** Squarespace (`/home`, `/about`, `/contact`) : redirigées par `tools/build.py` (liste `REDIRECTS`).
 
-Pour que les articles envoyés par e-mail arrivent aussi chez IONOS, ajouter les secrets `IONOS_SFTP_HOST`, `IONOS_SFTP_USER` et `IONOS_SFTP_PASSWORD`, et au besoin la variable `IONOS_SFTP_DIR`. La tâche des Carnets pousse alors le site par SFTP après chaque publication.
+Autre hébergeur possible : le site est statique. Il suffit de déposer le contenu du dossier, sans `.git`, `.github`, `_src` ni `tools`. Pour que les Carnets suivent, ajouter les secrets `IONOS_SFTP_HOST`, `IONOS_SFTP_USER` et `IONOS_SFTP_PASSWORD` (et au besoin la variable `IONOS_SFTP_DIR`) : la tâche des Carnets pousse alors le site par SFTP après chaque publication. Mettre à jour l'hébergeur dans les mentions légales.
 
 ## Avant la mise en ligne sur siamavocat.fr
 
