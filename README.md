@@ -109,12 +109,11 @@ CARNETS_ALLOWED=contact@siamavocat.fr python3 tools/mail2blog.py --eml message.e
 
 Autre hébergeur possible : le site est statique. Il suffit de déposer le contenu du dossier, sans `.git`, `.github`, `_src` ni `tools`. Pour que les Carnets suivent, ajouter les secrets `IONOS_SFTP_HOST`, `IONOS_SFTP_USER` et `IONOS_SFTP_PASSWORD` (et au besoin la variable `IONOS_SFTP_DIR`) : la tâche des Carnets pousse alors le site par SFTP après chaque publication. Mettre à jour l'hébergeur dans les mentions légales.
 
-## Avant la mise en ligne sur siamavocat.fr
+## Après la mise en ligne sur siamavocat.fr
 
-1. **Indexation.** Supprimer la balise `<meta name="robots" content="noindex, nofollow">` de `_src/partials/head.html`, puis remplacer `robots.txt` par `User-agent: *` / `Allow: /`.
-2. **Carnets d'exemple.** Les trois articles marqués `exemple: oui` sont des textes de démonstration : à remplacer par de vrais récits, ou à valider puis retirer la ligne `exemple: oui`.
-3. **Polices.** Pour une conformité RGPD stricte, héberger les polices dans `assets/fonts/` plutôt que via Google Fonts.
-4. **WhatsApp.** Vérifier que le 07 43 62 79 00 est bien associé à un compte WhatsApp, idéalement WhatsApp Business.
+1. **Carnets d'exemple.** Les trois articles marqués `exemple: oui` sont des textes de démonstration : à remplacer par de vrais récits, ou à valider puis retirer la ligne `exemple: oui`.
+2. **Polices.** Pour une conformité RGPD stricte, héberger les polices dans `assets/fonts/` plutôt que via Google Fonts.
+3. **WhatsApp.** Vérifier que le 07 43 62 79 00 est bien associé à un compte WhatsApp, idéalement WhatsApp Business.
 
 ## Aperçu local
 
