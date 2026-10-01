@@ -1,0 +1,31 @@
+name: Point du soir siamavocat.fr
+
+# Chaque soir (20 h, heure de Paris en été), un e-mail résume le transfert du domaine.
+# La tâche se désactive d'elle-même une fois le site en ligne en HTTPS.
+on:
+  schedule:
+    - cron: "0 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  actions: write
+
+jobs:
+  point:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Vérifier et envoyer le point du soir
+        id: veille
+        env:
+          CARNETS_IMAP_USER: ${{ secrets.CARNETS_IMAP_USER }}
+          CARNETS_IMAP_PASSWORD: ${{ secrets.CARNETS_IMAP_PASSWORD }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/veille_domaine.py
+      - name: Arrêter la veille une fois le site en ligne
+        if: steps.veille.outputs.done == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow disable veille-domaine.yml --repo "$GITHUB_REPOSITORY"
