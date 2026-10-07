@@ -5,6 +5,8 @@ name: Point du soir siamavocat.fr
 on:
   schedule:
     - cron: "0 18 * * *"
+    # Point supplémentaire le matin du 8 octobre (7 h à Paris), au lendemain de l'échéance du transfert
+    - cron: "0 5 8 10 *"
   workflow_dispatch:
 
 permissions:
