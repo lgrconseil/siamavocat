@@ -103,7 +103,8 @@ CARNETS_ALLOWED=contact@siamavocat.fr python3 tools/mail2blog.py --eml message.e
 - **Site** : GitHub Pages (gratuit), publié à chaque modification de `main`, y compris par le robot des Carnets. Adresse : www.siamavocat.fr (fichier `CNAME`, réglé au moment de la bascule).
 - **Nom de domaine** : siamavocat.fr, transféré de Squarespace vers OVHcloud (environ 9 € TTC par an).
 - **DNS** : Cloudflare (gratuit). Les lignes de la messagerie Google Workspace (`MX`, `TXT v=spf1`, `TXT google._domainkey`) ne doivent jamais être supprimées.
-- **Lignes du site** : 4 lignes `A` sur `@` vers 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, et un `CNAME www` vers `lgrconseil.github.io`, en mode proxy Cloudflare (SSL « Full »).
+- **Lignes du site** : 4 lignes `A` sur `@` vers 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153, et un `CNAME www` vers `lgrconseil.github.io`, en « DNS only » (nuage gris) : le certificat HTTPS est délivré par GitHub Pages.
+- **Zone de secours** : la zone DNS d'OVHcloud contient les mêmes lignes ; elle ne sert que si les serveurs DNS du domaine repassent sur ceux d'OVHcloud.
 - **Page 404** : `404.html` utilise des chemins absolus (`/assets/…`), puisqu'elle peut être servie à n'importe quelle profondeur.
 - **Anciennes adresses** Squarespace (`/home`, `/about`, `/contact`) : redirigées par `tools/build.py` (liste `REDIRECTS`).
 
