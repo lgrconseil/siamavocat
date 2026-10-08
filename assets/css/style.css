@@ -1415,7 +1415,6 @@ html[dir="rtl"] .filigree--door { left: auto; right: 0; -webkit-mask-image: line
 .carnet-body .more svg { width: 16px; height: 16px; stroke: var(--gold-deep); fill: none; stroke-width: 1.4; transition: transform 0.4s var(--ease); }
 .carnet-card:hover .more svg { transform: translateX(6px); }
 html[dir="rtl"] .carnet-card:hover .more svg { transform: scaleX(-1) translateX(6px); }
-.sample-pill { border: 1px dashed var(--gold); padding: 3px 8px 2px; font-size: 0.6rem; letter-spacing: 0.14em; color: var(--gold-deep); }
 .carnets-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 34px; }
 .filter {
   position: relative;

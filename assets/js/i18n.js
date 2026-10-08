@@ -400,7 +400,6 @@ window.I18N = {
     /* Carnets */
     "post.all": "All entries",
     "post.read": "Read",
-    "post.sample": "Sample text",
     "post.min": "min read",
     "post.lawBox": "The legal point",
     "post.anon": "Names, places and circumstances have been changed to protect the anonymity of those involved.",
@@ -818,7 +817,6 @@ window.I18N = {
     /* Carnets */
     "post.all": "جميع الدفاتر",
     "post.read": "اقرأوا",
-    "post.sample": "نص تجريبي",
     "post.min": "دقائق قراءة",
     "post.lawBox": "النقطة القانونية",
     "post.anon": "غُيّرت الأسماء والأماكن والظروف حفاظاً على هوية الأشخاص.",

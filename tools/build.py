@@ -149,7 +149,6 @@ def parse_post(path):
     meta.setdefault("category", "Carnet")
     meta["slug"] = meta.get("slug") or slugify(meta["title"]) or path.stem
     meta["draft"] = meta.get("draft", "").lower() in ("oui", "yes", "true", "1")
-    meta["sample"] = meta.get("exemple", "").lower() in ("oui", "yes", "true", "1")
     meta["body"] = body
     words = len(re.findall(r"\w+", body))
     meta["minutes"] = max(1, round(words / 210))
@@ -167,13 +166,12 @@ def lang_attrs(lang):
 def card(post, root, extra_class=""):
     cover = post.get("cover") or "assets/img/palais-plaque.jpg"
     cat_slug = slugify(post["category"])
-    sample = ' <span class="sample-pill" data-i18n="post.sample">Texte d\'exemple</span>' if post["sample"] else ""
     la = lang_attrs(post["lang"])
     return f"""<article class="carnet-card reveal{extra_class}" data-cat="{cat_slug}">
   <a class="carnet-link" href="{root}carnets/{post['slug']}.html">
     <figure class="carnet-cover"><img src="{root}{cover}" alt="" width="900" height="1200" loading="lazy"></figure>
     <div class="carnet-body">
-      <p class="carnet-meta"><span class="carnet-cat" data-i18n="cat.{cat_slug}">{html.escape(post['category'])}</span><span class="dot">·</span><time datetime="{post['date']}" data-date>{date_fr(post['date'])}</time>{sample}</p>
+      <p class="carnet-meta"><span class="carnet-cat" data-i18n="cat.{cat_slug}">{html.escape(post['category'])}</span><span class="dot">·</span><time datetime="{post['date']}" data-date>{date_fr(post['date'])}</time></p>
       <h3{la}>{html.escape(post['title'])}</h3>
       <p class="carnet-excerpt"{la}>{html.escape(post['excerpt'])}</p>
       <span class="more"><span data-i18n="post.read">Lire le carnet</span> <svg class="arrow" aria-hidden="true"><use href="#i-arrow"/></svg></span>
@@ -266,7 +264,7 @@ def build():
     for i, post in enumerate(posts):
         meta = {"title": f"{post['title']} — Carnets de Maître Essra Siam", "desc": post["excerpt"],
                 "path": f"carnets/{post['slug']}.html", "active": "carnets",
-                "noindex": post["sample"] or post["draft"]}
+                "noindex": post["draft"]}
         ctx = page_ctx(meta, "../")
         cat_slug = slugify(post["category"])
         others = [p for p in public if p["slug"] != post["slug"]][:2]
@@ -283,7 +281,6 @@ def build():
             "post_cover": post.get("cover") or "assets/img/palais-plaque.jpg",
             "post_excerpt": html.escape(post["excerpt"]),
             "post_content": markdown(post["body"], post["lang"] != "ar"),
-            "post_sample": '<span class="sample-pill" data-i18n="post.sample">Texte d\'exemple</span>' if post["sample"] else "",
             "post_wa": html.escape(f"Bonjour Maître Siam, je viens de lire votre carnet « {post['title']} » et je souhaiterais vous consulter.", quote=True),
             "post_more": "\n".join(card(p, "../") for p in others),
             "post_jsonld": post_jsonld(post),
@@ -295,7 +292,7 @@ def build():
     # Plan du site et robots.txt : pages publiques et carnets validés uniquement
     urls = [SITE + ("" if name == "index.html" else name) for name in written
             if name.endswith(".html") and "/" not in name and name != "404.html"]
-    urls += [f"{SITE}carnets/{p['slug']}.html" for p in public if not p["sample"]]
+    urls += [f"{SITE}carnets/{p['slug']}.html" for p in public]
     lastmod = {f"{SITE}carnets/{p['slug']}.html": p["date"] for p in public}
     items = "".join(f"  <url><loc>{u}</loc>" + (f"<lastmod>{lastmod[u]}</lastmod>" if u in lastmod else "") + "</url>\n"
                     for u in urls)

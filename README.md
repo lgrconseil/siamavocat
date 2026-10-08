@@ -112,9 +112,8 @@ Autre hébergeur possible : le site est statique. Il suffit de déposer le conte
 
 ## Après la mise en ligne sur siamavocat.fr
 
-1. **Carnets d'exemple.** Les trois articles marqués `exemple: oui` sont des textes de démonstration : à remplacer par de vrais récits, ou à valider puis retirer la ligne `exemple: oui`.
-2. **Polices.** Pour une conformité RGPD stricte, héberger les polices dans `assets/fonts/` plutôt que via Google Fonts.
-3. **WhatsApp.** Vérifier que le 07 43 62 79 00 est bien associé à un compte WhatsApp, idéalement WhatsApp Business.
+1. **Polices.** Pour une conformité RGPD stricte, héberger les polices dans `assets/fonts/` plutôt que via Google Fonts.
+2. **WhatsApp.** Vérifier que le 07 43 62 79 00 est bien associé à un compte WhatsApp, idéalement WhatsApp Business.
 
 ## Aperçu local
 

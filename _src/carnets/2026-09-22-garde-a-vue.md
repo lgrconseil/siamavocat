@@ -4,7 +4,6 @@ slug: garde-a-vue-trois-heures-du-matin
 date: 2026-09-22
 category: Garde à vue
 cover: assets/img/carnets/garde-a-vue-trois-heures-du-matin.jpg
-exemple: oui
 ---
 Le téléphone vibre sur la table de nuit. Trois heures du matin. Une voix de femme, essoufflée : son fils de vingt ans vient d'être placé en garde à vue après une bagarre à la sortie d'un bar. Les policiers l'ont appelée pour la prévenir. Elle ne sait pas ce qu'il a fait, ni même s'il a fait quelque chose. Elle me demande seulement : « Est-ce que vous pouvez y aller ? »
 
