@@ -294,7 +294,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height
   background: var(--paper-deep);
 }
 .arch-inner img { width: 100%; height: 100%; object-fit: cover; }
-.hero .arch-inner img { object-position: 50% 28%; }
+.hero .arch-inner img { object-position: 50% 50%; }
 
 .seal {
   position: absolute;
@@ -406,7 +406,7 @@ h3 { font-family: var(--serif); font-weight: 600; font-size: 1.7rem; line-height
   padding-block: clamp(110px, 14vw, 180px);
   color: var(--paper);
   text-align: center;
-  background: #1a1511 url("../img/palais-lanterne.jpg") center 32% / cover no-repeat;
+  background: #1a1511 url("../img/palais-plaque.jpg") center 45% / cover no-repeat;
   isolation: isolate;
 }
 .quote::before {

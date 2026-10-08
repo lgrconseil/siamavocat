@@ -165,7 +165,7 @@ def lang_attrs(lang):
 
 
 def card(post, root, extra_class=""):
-    cover = post.get("cover") or "assets/img/palais-lanterne.jpg"
+    cover = post.get("cover") or "assets/img/palais-plaque.jpg"
     cat_slug = slugify(post["category"])
     sample = ' <span class="sample-pill" data-i18n="post.sample">Texte d\'exemple</span>' if post["sample"] else ""
     la = lang_attrs(post["lang"])
@@ -255,7 +255,7 @@ def build():
             "post_category": html.escape(post["category"]),
             "post_catslug": cat_slug,
             "post_minutes": post["minutes"],
-            "post_cover": post.get("cover") or "assets/img/palais-lanterne.jpg",
+            "post_cover": post.get("cover") or "assets/img/palais-plaque.jpg",
             "post_excerpt": html.escape(post["excerpt"]),
             "post_content": markdown(post["body"], post["lang"] != "ar"),
             "post_sample": '<span class="sample-pill" data-i18n="post.sample">Texte d\'exemple</span>' if post["sample"] else "",
