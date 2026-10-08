@@ -194,6 +194,29 @@ def filters(posts):
 
 # ---------------------------------------------------------------- Pages
 
+def post_jsonld(post):
+    """Données structurées d'un carnet (schema.org BlogPosting)."""
+    url = f"{SITE}carnets/{post['slug']}.html"
+    data = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": post["title"],
+        "description": post["excerpt"],
+        "datePublished": post["date"],
+        "inLanguage": "ar" if post["lang"] == "ar" else "fr-FR",
+        "articleSection": post["category"],
+        "image": SITE + (post.get("cover") or "assets/img/palais-plaque.jpg"),
+        "mainEntityOfPage": url,
+        "url": url,
+        "author": {"@type": "Person", "name": "Essra Siam", "jobTitle": "Avocate au Barreau de Paris",
+                   "url": SITE + "cabinet.html"},
+        "publisher": {"@type": "Attorney", "name": "Cabinet Essra Siam", "url": SITE,
+                      "logo": {"@type": "ImageObject", "url": SITE + "assets/img/embleme.png"}},
+    }
+    text = json.dumps(data, ensure_ascii=False, indent=1).replace("</", "<\\/")
+    return f'<script type="application/ld+json">\n{text}\n</script>'
+
+
 def page_ctx(meta, root):
     ctx = {
         "root": root,
@@ -206,6 +229,7 @@ def page_ctx(meta, root):
         "rdv": "#rendez-vous" if meta.get("active") == "home" else root + "index.html#rendez-vous",
         "acces": "#acces" if meta.get("active") == "home" else root + "index.html#acces",
         "year": datetime.date.today().year,
+        "robots_meta": '\n  <meta name="robots" content="noindex">' if meta.get("noindex") else "",
     }
     for key in ("home", "cabinet", "domaines", "carnets", "parole"):
         ctx["cur_" + key] = ' aria-current="page"' if meta.get("active") == key else ""
@@ -241,7 +265,8 @@ def build():
     tpl = read(SRC / "templates" / "post.html")
     for i, post in enumerate(posts):
         meta = {"title": f"{post['title']} — Carnets de Maître Essra Siam", "desc": post["excerpt"],
-                "path": f"carnets/{post['slug']}.html", "active": "carnets"}
+                "path": f"carnets/{post['slug']}.html", "active": "carnets",
+                "noindex": post["sample"] or post["draft"]}
         ctx = page_ctx(meta, "../")
         cat_slug = slugify(post["category"])
         others = [p for p in public if p["slug"] != post["slug"]][:2]
@@ -261,10 +286,24 @@ def build():
             "post_sample": '<span class="sample-pill" data-i18n="post.sample">Texte d\'exemple</span>' if post["sample"] else "",
             "post_wa": html.escape(f"Bonjour Maître Siam, je viens de lire votre carnet « {post['title']} » et je souhaiterais vous consulter.", quote=True),
             "post_more": "\n".join(card(p, "../") for p in others),
+            "post_jsonld": post_jsonld(post),
         })
         out = typo_fr(render(PARTIALS["layout"].replace("{{content}}", tpl), ctx))
         (out_dir / f"{post['slug']}.html").write_text(out, encoding="utf-8")
         written.append(f"carnets/{post['slug']}.html" + (" (brouillon)" if post["draft"] else ""))
+
+    # Plan du site et robots.txt : pages publiques et carnets validés uniquement
+    urls = [SITE + ("" if name == "index.html" else name) for name in written
+            if name.endswith(".html") and "/" not in name and name != "404.html"]
+    urls += [f"{SITE}carnets/{p['slug']}.html" for p in public if not p["sample"]]
+    lastmod = {f"{SITE}carnets/{p['slug']}.html": p["date"] for p in public}
+    items = "".join(f"  <url><loc>{u}</loc>" + (f"<lastmod>{lastmod[u]}</lastmod>" if u in lastmod else "") + "</url>\n"
+                    for u in urls)
+    (ROOT / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n'
+                                      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                                      f"{items}</urlset>\n", encoding="utf-8")
+    (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE}sitemap.xml\n", encoding="utf-8")
+    written.append(f"sitemap.xml ({len(urls)} adresses)")
 
     # Anciennes adresses du site (Squarespace) : les liens et favoris continuent de fonctionner
     for old, new in REDIRECTS.items():

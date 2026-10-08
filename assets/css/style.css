@@ -1906,3 +1906,24 @@ html[lang="ar"] .entree-sub { font-family: var(--sans); font-style: normal; font
   .entree .link-arrow { justify-content: center; }
   .arch--entree { width: min(100%, 340px); }
 }
+
+/* « En quelques mots » : un seul portrait, en grand */
+.about .wrap:has(.about-media--solo) { grid-template-columns: 1fr 1fr; }
+.about-media--solo { padding-block: 18px; }
+.about-media--solo .frame img { object-position: 50% 35%; }
+@media (max-width: 900px) {
+  .about-media--solo { max-width: 480px; }
+}
+
+/* ==========================================================
+   Petits écrans : aucun bloc ne dépasse de l'écran
+   ========================================================== */
+
+/* Les colonnes de grille peuvent rétrécir sous la largeur de leur contenu */
+.wrap > * { min-width: 0; }
+h1, h2, h3, .big-quote p, .eyebrow { overflow-wrap: break-word; }
+@media (max-width: 600px) {
+  /* Les boutons passent sur deux lignes plutôt que de déborder */
+  .btn { white-space: normal; text-align: center; line-height: 1.4; }
+  .eyebrow { letter-spacing: 0.2em; }
+}
